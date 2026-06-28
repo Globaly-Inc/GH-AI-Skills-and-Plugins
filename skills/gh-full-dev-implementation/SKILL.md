@@ -29,6 +29,18 @@ When ambiguous, state your interpretation and ask the user to confirm before pro
 
 ---
 
+## Reference files (load when relevant)
+
+| Reference | When to use |
+|-----------|------------|
+| `references/feature-builder.md` | Adding pages, routes, hooks, components, or navigation |
+| `references/migration-workflow.md` | Any database schema change |
+| `references/rls-auditor.md` | New tables, policy review, or IMPROVE mode security audit |
+| `references/edge-function.md` | Creating or modifying a Supabase Edge Function |
+| `references/saas-feature-implementer.md` | Full end-to-end feature touching 2+ layers |
+
+---
+
 ## Stack reference (always in scope)
 
 | Layer | Technology | Key rules |
