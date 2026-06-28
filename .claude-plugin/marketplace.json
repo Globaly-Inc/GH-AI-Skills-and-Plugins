@@ -13,7 +13,7 @@
     {
       "name": "globaly-skills",
       "source": "./",
-      "description": "All Globaly company skills in one plugin — brainstorming, product deep-research, PRD generation, architecture docs, and the Globaly design system. Auto-syncs on each session.",
+      "description": "All Globaly company skills in one plugin — brainstorming, product deep-research, PRD generation, architecture docs, the Globaly design system, and full-dev implementation. Auto-syncs on each session.",
       "version": "0.4.0",
       "author": {
         "name": "Globaly Inc",
