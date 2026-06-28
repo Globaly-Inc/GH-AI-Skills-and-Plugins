@@ -1,6 +1,6 @@
 {
   "name": "globaly-skills",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "All Globaly company skills in one plugin — product discovery, research synthesis, engineering code review, and devops deploy checks. Auto-syncs on each session.",
   "author": {
     "name": "Globaly Inc",
