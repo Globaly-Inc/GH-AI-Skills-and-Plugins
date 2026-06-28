@@ -1,9 +1,9 @@
 ---
-name: gh-deep-research
+name: gh-product-deep-research
 description: Deep product research for GlobalyHub projects — runs AFTER a brainstorming doc to analyze product-market fit, competitor products and their weaknesses (mined from real user reviews/Reddit), and whether to fit an existing market category or create a new one. Fans out parallel research agents across multiple AI models/engines (Claude subagents, exa+firecrawl, Gemini Deep Research), verifies findings with a counter-review team, and produces ONE consolidated, cited markdown report. Use when the user says "deep research", "product research", "market research", "competitor analysis", "PMF", "validate the market", or wants research after brainstorming.
 ---
 
-# GH-Deep-Research
+# GH-Product-Deep-Research
 
 A disciplined, multi-engine product-research pipeline. It takes a finished **brainstorming doc** and turns it
 into one consolidated, evidence-backed market+competitor report: where the product fits, who the competitors
