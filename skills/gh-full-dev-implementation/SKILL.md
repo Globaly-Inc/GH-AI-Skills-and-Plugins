@@ -38,6 +38,7 @@ When ambiguous, state your interpretation and ask the user to confirm before pro
 | `references/rls-auditor.md` | New tables, policy review, or IMPROVE mode security audit |
 | `references/edge-function.md` | Creating or modifying a Supabase Edge Function |
 | `references/saas-feature-implementer.md` | Full end-to-end feature touching 2+ layers |
+| `references/ponytail.md` | Laziness discipline — ladder, YAGNI for tests, root-cause fixes, `ponytail:` comments |
 
 ---
 
@@ -68,15 +69,24 @@ When ambiguous, state your interpretation and ask the user to confirm before pro
 
 ### Phase 2 — Tracer bullet
 
-Establish a working end-to-end path through the smallest possible vertical slice:
+Before writing a single line, run the **ponytail ladder** (see `references/ponytail.md`):
+1. Does this behavior need to exist at all? (YAGNI — skip and say so if not)
+2. Already in the codebase? (`grep -r "<concept>" src/` before writing)
+3. Stdlib / React / Supabase client does it? Use it.
+4. Already-installed dependency covers it? Use it.
+5. Only then: write the minimum code.
 
-1. Write **one** failing test that describes the observable behavior of that slice.
+Then establish a working end-to-end path through the smallest possible vertical slice:
+
+1. Write **one** failing test — the smallest thing that fails if this logic breaks.
    Test through public interfaces, not implementation details.
    Prefer `vitest` + `@testing-library/react` for components/hooks.
+   Trivial one-liners (format helpers, constants, style props) need no test. YAGNI applies to tests too.
 2. Write the minimum code to make that test pass.
 3. Run the test: `npx vitest run <test-file>`.
 4. Refactor only if duplication or clarity demands it — no speculative cleanup.
-5. Commit the tracer bullet before expanding.
+5. Mark any deliberate simplification with a `ponytail:` comment naming the ceiling and upgrade path.
+6. Commit the tracer bullet before expanding.
 
 ### Phase 3 — Incremental TDD loop
 
@@ -103,8 +113,12 @@ misses regressions until it's too late. Every 5 cycles is the balance.
 
 Rules:
 - One behavior per cycle. Do not batch.
-- No implementation without a test first.
+- No implementation without a test first — unless the code is a trivial one-liner (YAGNI for tests).
+- Run the ponytail ladder before each cycle's implementation step. If a higher rung holds, take it.
 - Do not anticipate future requirements during implementation.
+- No unrequested abstractions: no interface with one implementation, no helper extracted from a single call site.
+- Mark deliberate simplifications with `// ponytail: <ceiling> — <upgrade path>`.
+- Bug fix = root cause. `grep -r "<fn>" src/` before touching any shared function.
 
 ### Phase 4 — Quality gates
 
