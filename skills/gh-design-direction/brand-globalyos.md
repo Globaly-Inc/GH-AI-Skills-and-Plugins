@@ -2,7 +2,33 @@
 
 **Project:** GlobalyOS — internal HR, ops, and AI operating system for organizations  
 **Repo path:** `globalyhub/GlobalyOS`  
-**Stack note:** PWA + native app (Capacitor) aware — safe-area insets and touch interactions apply
+**Stack note:** PWA + native app (Capacitor) aware — safe-area insets and touch interactions apply  
+**Design system brand:** `data-brand="globalyos"` — purple `#6820E4`
+
+---
+
+## Design system token mapping
+
+GlobalyOS maps Tailwind/shadcn CSS variables to the Globaly Design System semantic tokens. When both exist, prefer the design system token for surfaces, foreground text, borders, and shadows; use the Tailwind token for component variants wired to shadcn primitives.
+
+| Design system token | GlobalyOS equivalent |
+|--------------------|----------------------|
+| `--brand-primary-default` | `--primary` (`hsl(262 83% 58%)`) |
+| `--brand-primary-hover` | `--primary-dark` (`hsl(262 83% 48%)`) |
+| `--brand-primary-subtle` | `--primary-light` (`hsl(262 83% 92%)`) |
+| `--brand-accent-default` | `--accent` (`hsl(280 85% 60%)`) |
+| `--surface-page` | `--background` (`hsl(270 30% 98%)`) |
+| `--surface-card` | `--card` (`hsl(0 0% 100%)`) |
+| `--surface-panel` | `--muted` (`hsl(270 30% 92%)`) |
+| `--fg-primary` | `--foreground` |
+| `--fg-muted` | `--muted-foreground` |
+| `--border-default` | `--border` (`hsl(270 25% 91%)`) |
+| `--border-focus` | `--ring` (`hsl(262 83% 58%)`) |
+| `--border-error` | `--destructive` |
+
+Typography semantic classes (`.t-h1`, `.t-body`, etc.) from the design system are available alongside Tailwind type utilities — use the semantic class when it covers the case exactly.
+
+**GlobalyOS custom purple scale:** `--color-gos-purple-{50–950}` CSS custom properties are available for fine-grained purple tints beyond the semantic tokens.
 
 ---
 
