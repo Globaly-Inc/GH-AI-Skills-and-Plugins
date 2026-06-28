@@ -19,8 +19,10 @@ plus a **version bump** — the bump is what tells everyone's machine an update 
    (e.g. "Use when the user says 'deploy check', 'go/no-go'…").
 3. Write the body: when to use, the process/steps, the expected output. Keep it focused.
    Supporting files (examples, templates) go in `skills/<skill-name>/references/`.
-4. Organize by business function via a clear name prefix when helpful
-   (`product-…`, `research-…`, `eng-…`, `devops-…`).
+4. **Naming convention:** All custom GlobalyHub skills must be prefixed `gh-`
+   followed by a lowercase-kebab-case descriptor, e.g. `gh-prd-generator`, `gh-research-synthesis`.
+   The directory name must match the `name:` field exactly.
+   Legacy skills without the prefix are grandfathered; do not rename them.
 
 ## Bump the version (required for sync)
 

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Brand" name="Logo Lockups" subtitle="Globaly main full logo · white wordmark · full-color · red app icon" viewport="700x340" -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: #fff; padding: 20px; }
+  .label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #94A3B8; margin-bottom: 10px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+  .logo-card { border-radius: 10px; padding: 16px; display: flex; align-items: center; justify-content: center; min-height: 72px; }
+  .logo-card img { max-height: 36px; max-width: 100%; object-fit: contain; }
+  .caption { font-size: 10px; color: #94A3B8; text-align: center; margin-top: 6px; }
+  .logo-wrap { display: flex; flex-direction: column; }
+</style>
+</head>
+<body>
+  <div class="label">Logo Lockups</div>
+  <div class="grid">
+    <div class="logo-wrap">
+      <div class="logo-card" style="background:#7F1D1D;">
+        <img src="../assets/logos/globaly-app-white-full.png" alt="Globalyapp white wordmark">
+      </div>
+      <span class="caption">Globalyapp · White on Maroon</span>
+    </div>
+    <div class="logo-wrap">
+      <div class="logo-card" style="background:#fff; border:1px solid #E2E8F0;">
+        <img src="../assets/logos/globaly-main-full.png" alt="Globaly main full logo">
+      </div>
+      <span class="caption">Globaly · Main full logo on Light</span>
+    </div>
+    <div class="logo-wrap">
+      <div class="logo-card" style="background:#fff; border:1px solid #E2E8F0;">
+        <img src="../assets/logos/globaly-red-icon.png" alt="Globaly red icon" style="max-height:48px;">
+      </div>
+      <span class="caption">App Icon · Red gradient</span>
+    </div>
+  </div>
+</body>
+</html>

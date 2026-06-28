@@ -1,0 +1,36 @@
+<!-- @dsCard group="Components" name="Card" subtitle="Surface card · stat metric card · section header" viewport="700x260" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #F8FAFC; padding: 20px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { Card, StatCard, SectionHeader, Button } = window.GlobalyDesignSystem_c92b6a;
+  const icon = <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M13 10V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v4"/><path d="M1 10h14"/></svg>;
+  function Demo() {
+    return (
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12 }}>
+        <StatCard title="Applications" value="24" change="↑ 3 this week" accent="#7F1D1D" icon={icon} />
+        <StatCard title="In Review" value="7" change="2 need action" changeType="neutral" accent="#2563EB" icon={icon} />
+        <Card>
+          <SectionHeader title="Recent" subtitle="Last 7 days" />
+          <p style={{ fontSize: 13, color: '#64748B', margin: 0 }}>Card body content goes here.</p>
+        </Card>
+      </div>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script>
+</body>
+</html>

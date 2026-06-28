@@ -1,7 +1,7 @@
 {
   "name": "globaly-skills",
-  "version": "0.3.0",
-  "description": "All Globaly company skills in one plugin — product discovery, research synthesis, engineering code review, and devops deploy checks. Auto-syncs on each session.",
+  "version": "0.4.0",
+  "description": "All Globaly company skills in one plugin — brainstorming, product deep-research, PRD generation, architecture docs, and the Globaly design system. Auto-syncs on each session.",
   "author": {
     "name": "Globaly Inc",
     "email": "amit@globalyhub.com",

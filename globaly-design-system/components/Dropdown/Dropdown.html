@@ -1,0 +1,36 @@
+<!-- @dsCard group="Components" name="Dropdown" subtitle="Click-to-open menu · icons · danger item · dividers" viewport="700x260" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #fff; padding: 24px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { Dropdown, Button } = window.GlobalyDesignSystem_c92b6a;
+  const mk = d => <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">{d}</svg>;
+  function Demo() {
+    const items = [
+      { label: 'View details', icon: mk(<><path d="M1 7.5s2.5-4.5 6.5-4.5S14 7.5 14 7.5s-2.5 4.5-6.5 4.5S1 7.5 1 7.5z"/><circle cx="7.5" cy="7.5" r="1.8"/></>) },
+      { label: 'Edit', icon: mk(<path d="M10 2l3 3-7 7H3v-3z"/>) },
+      { label: 'Duplicate', icon: mk(<><rect x="4" y="4" width="8" height="8" rx="1.5"/><path d="M2 9V3a1 1 0 0 1 1-1h6"/></>) },
+      { divider: true },
+      { label: 'Delete', danger: true, icon: mk(<><polyline points="2 4 13 4"/><path d="M5 4V2.5h5V4M4 4l.7 9h5.6L11 4"/></>) },
+    ];
+    return (
+      <Dropdown trigger={<Button variant="outline" size="md">Actions ▾</Button>} items={items} />
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script>
+</body>
+</html>

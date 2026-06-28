@@ -1,0 +1,33 @@
+<!-- @dsCard group="Components" name="Toast" subtitle="Light semantic toasts + dark snackbar with action" viewport="700x280" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #F8FAFC; padding: 24px; }
+  .stack { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { Toast, Snackbar } = window.GlobalyDesignSystem_c92b6a;
+  function Demo() {
+    return (
+      <div className="stack">
+        <Toast variant="success" title="Visa approved" message="Maria Silva's student visa is ready to download." onClose={() => {}} />
+        <Toast variant="error" title="Upload failed" message="The file exceeds the 20 MB limit." onClose={() => {}} />
+        <Snackbar message="Application moved to Archived" onAction={() => {}} actionLabel="Undo" onClose={() => {}} />
+      </div>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Colors" name="Semantic Colors" subtitle="Foreground text tokens + Error / Success / Warning / Info state palettes" viewport="700x270" -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: #fff; padding: 20px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .state-card { border-radius: 8px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; }
+  .state-title { font-size: 11px; font-weight: 600; }
+  .state-sub { font-size: 10px; opacity: .7; }
+  .swatches { display: flex; gap: 4px; margin-top: 6px; }
+  .sw { height: 20px; flex: 1; border-radius: 4px; border: 1px solid rgba(0,0,0,.06); }
+  .sw-label { font-size: 8px; text-align: center; margin-top: 2px; }
+  .row { margin-bottom: 4px; }
+  .section-label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #94A3B8; margin-bottom: 8px; }
+  .fg-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+  .fg-chip { display: flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 6px; border: 1px solid #E2E8F0; }
+  .fg-dot { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(0,0,0,.06); }
+  .fg-name { font-size: 10px; color: #475569; }
+</style>
+</head>
+<body>
+  <div class="section-label">Foreground / Text</div>
+  <div class="fg-row">
+    <div class="fg-chip"><div class="fg-dot" style="background:#0F172A;"></div><span class="fg-name">Display</span></div>
+    <div class="fg-chip"><div class="fg-dot" style="background:#1E293B;"></div><span class="fg-name">Primary</span></div>
+    <div class="fg-chip"><div class="fg-dot" style="background:#475569;"></div><span class="fg-name">Secondary</span></div>
+    <div class="fg-chip"><div class="fg-dot" style="background:#64748B;"></div><span class="fg-name">Muted</span></div>
+    <div class="fg-chip"><div class="fg-dot" style="background:#94A3B8;"></div><span class="fg-name">Subtle</span></div>
+    <div class="fg-chip"><div class="fg-dot" style="background:#CBD5E1;"></div><span class="fg-name">Disabled</span></div>
+    <div class="fg-chip"><div class="fg-dot" style="background:#7F1D1D;"></div><span class="fg-name">Brand</span></div>
+  </div>
+  <div class="section-label">Semantic States</div>
+  <div class="grid">
+    <div class="state-card" style="background:#FEE2E2; border: 1px solid #FECACA;">
+      <span class="state-title" style="color:#991B1B;">Error</span>
+      <div class="swatches">
+        <div><div class="sw" style="background:#FEE2E2;"></div><div class="sw-label" style="color:#991B1B;">bg</div></div>
+        <div><div class="sw" style="background:#DC2626;"></div><div class="sw-label" style="color:#991B1B;">border</div></div>
+        <div><div class="sw" style="background:#991B1B;"></div><div class="sw-label" style="color:#991B1B;">text</div></div>
+      </div>
+    </div>
+    <div class="state-card" style="background:#DCFCE7; border: 1px solid #BBF7D0;">
+      <span class="state-title" style="color:#15803D;">Success</span>
+      <div class="swatches">
+        <div><div class="sw" style="background:#DCFCE7;"></div><div class="sw-label" style="color:#15803D;">bg</div></div>
+        <div><div class="sw" style="background:#16A34A;"></div><div class="sw-label" style="color:#15803D;">border</div></div>
+        <div><div class="sw" style="background:#15803D;"></div><div class="sw-label" style="color:#15803D;">text</div></div>
+      </div>
+    </div>
+    <div class="state-card" style="background:#FEF3C7; border: 1px solid #FDE68A;">
+      <span class="state-title" style="color:#92400E;">Warning</span>
+      <div class="swatches">
+        <div><div class="sw" style="background:#FEF3C7;"></div><div class="sw-label" style="color:#92400E;">bg</div></div>
+        <div><div class="sw" style="background:#D97706;"></div><div class="sw-label" style="color:#92400E;">border</div></div>
+        <div><div class="sw" style="background:#92400E;"></div><div class="sw-label" style="color:#92400E;">text</div></div>
+      </div>
+    </div>
+    <div class="state-card" style="background:#DBEAFE; border: 1px solid #BFDBFE;">
+      <span class="state-title" style="color:#1E40AF;">Info</span>
+      <div class="swatches">
+        <div><div class="sw" style="background:#DBEAFE;"></div><div class="sw-label" style="color:#1E40AF;">bg</div></div>
+        <div><div class="sw" style="background:#2563EB;"></div><div class="sw-label" style="color:#1E40AF;">border</div></div>
+        <div><div class="sw" style="background:#1E40AF;"></div><div class="sw-label" style="color:#1E40AF;">text</div></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

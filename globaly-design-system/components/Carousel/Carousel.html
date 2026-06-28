@@ -1,0 +1,38 @@
+<!-- @dsCard group="Components" name="Carousel" subtitle="Sliding carousel · prev/next · dot indicators" viewport="700x300" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #fff; padding: 24px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { Carousel } = window.GlobalyDesignSystem_c92b6a;
+  const slide = (bg, title, sub) => (
+    <div style={{ height: '100%', background: bg, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 32, color: '#fff' }}>
+      <div style={{ fontSize: 22, fontWeight: 700 }}>{title}</div>
+      <div style={{ fontSize: 14, opacity: 0.85, marginTop: 6 }}>{sub}</div>
+    </div>
+  );
+  function Demo() {
+    return (
+      <Carousel autoplay slides={[
+        slide('#7F1D1D', 'Welcome to Globalyapp', 'Manage applications with confidence.'),
+        slide('#6820E4', 'GlobalyOS', 'Run your business operations in one place.'),
+        slide('#2563EB', 'GlobalyPay', 'Collect and track application fees.'),
+      ]} />
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script>
+</body>
+</html>

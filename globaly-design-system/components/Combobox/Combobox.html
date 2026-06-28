@@ -1,0 +1,33 @@
+<!-- @dsCard group="Components" name="Combobox" subtitle="Searchable single-select with type-to-filter" viewport="700x320" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #fff; padding: 24px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { Combobox } = window.GlobalyDesignSystem_c92b6a;
+  function Demo() {
+    const [v, setV] = React.useState('br');
+    const opts = [
+      { value: 'br', label: 'Brazil' }, { value: 'ng', label: 'Nigeria' },
+      { value: 'cn', label: 'China' }, { value: 'mx', label: 'Mexico' },
+      { value: 'in', label: 'India' }, { value: 'jp', label: 'Japan' },
+      { value: 'ae', label: 'United Arab Emirates' }, { value: 'sk', label: 'Slovakia' },
+    ];
+    return <Combobox options={opts} value={v} onChange={setV} placeholder="Select country" />;
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script>
+</body>
+</html>

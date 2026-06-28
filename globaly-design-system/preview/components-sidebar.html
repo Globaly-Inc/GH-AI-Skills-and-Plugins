@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" name="Sidebar Navigation" subtitle="Desktop sidebar with nav groups, section labels, dividers, user footer" viewport="700x220" -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #fff; padding: 20px; display: flex; gap: 20px; }
+
+  .sidebar {
+    width: 220px; flex-shrink: 0;
+    background: #F1F5F9; border-radius: 12px;
+    padding: 16px; display: flex; flex-direction: column; gap: 4px;
+  }
+  .logo-area {
+    height: 36px; border-radius: 8px; background: #7F1D1D;
+    margin-bottom: 12px; display: flex; align-items: center;
+    padding: 0 10px; gap: 8px;
+  }
+  .logo-icon { width: 20px; height: 20px; background: rgba(255,255,255,.25); border-radius: 50%; }
+  .logo-text { font-size: 13px; font-weight: 700; color: #fff; }
+  .nav-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 10px; border-radius: 6px;
+    font-size: 14px; color: #475569; cursor: pointer;
+    transition: background .12s;
+  }
+  .nav-item:hover { background: rgba(0,0,0,.04); }
+  .nav-item.active { background: #fff; color: #7F1D1D; font-weight: 600;
+    box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+  .nav-icon { width: 16px; height: 16px; opacity: .6; }
+  .nav-item.active .nav-icon { opacity: 1; }
+  .section-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px; color: #94A3B8; padding: 8px 10px 4px;
+  }
+  .divider { height: 1px; background: #E2E8F0; margin: 6px 0; }
+  .user-row { display: flex; align-items: center; gap: 8px; padding: 6px 10px; margin-top: auto; }
+  .avatar { width: 28px; height: 28px; border-radius: 50%; background: #7F1D1D; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #fff; flex-shrink: 0; }
+  .user-name { font-size: 12px; font-weight: 500; color: #334155; }
+  .user-role { font-size: 10px; color: #94A3B8; }
+
+  .content { flex: 1; }
+  .page-title { font-size: 18px; font-weight: 700; color: #1E293B; margin-bottom: 4px; }
+  .page-sub   { font-size: 13px; color: #64748B; margin-bottom: 16px; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 10px; padding: 14px; }
+  .card-title { font-size: 11px; font-weight: 600; color: #64748B; margin-bottom: 4px; text-transform: uppercase; letter-spacing: .04em; }
+  .card-value { font-size: 22px; font-weight: 700; color: #1E293B; }
+  .card-change { font-size: 11px; color: #16A34A; margin-top: 2px; }
+
+  svg path, svg rect, svg circle, svg polyline, svg line { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+</style>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="logo-area">
+      <div class="logo-icon"></div>
+      <span class="logo-text">Globalyapp</span>
+    </div>
+    <div class="nav-item active">
+      <svg class="nav-icon" viewBox="0 0 16 16"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
+      Dashboard
+    </div>
+    <div class="nav-item">
+      <svg class="nav-icon" viewBox="0 0 16 16"><path d="M8 1a7 7 0 1 1 0 14A7 7 0 0 1 8 1z"/><path d="M8 5v4l2.5 2.5"/></svg>
+      Applications
+    </div>
+    <div class="nav-item">
+      <svg class="nav-icon" viewBox="0 0 16 16"><path d="M2 4h12M2 8h8M2 12h10"/></svg>
+      Documents
+    </div>
+    <div class="nav-item">
+      <svg class="nav-icon" viewBox="0 0 16 16"><path d="M13 6a5 5 0 1 1-10 0 5 5 0 0 1 10 0zM15 15l-3.5-3.5"/></svg>
+      Search
+    </div>
+    <div class="divider"></div>
+    <div class="section-title">Reports</div>
+    <div class="nav-item">
+      <svg class="nav-icon" viewBox="0 0 16 16"><rect x="1" y="1" width="14" height="14" rx="2"/><path d="M4 10l3-4 3 3 2-3"/></svg>
+      Month to Date
+    </div>
+    <div class="nav-item">
+      <svg class="nav-icon" viewBox="0 0 16 16"><path d="M1 8h14M1 4h14M1 12h14"/></svg>
+      Year to Date
+    </div>
+    <div class="divider"></div>
+    <div class="user-row">
+      <div class="avatar">JD</div>
+      <div>
+        <div class="user-name">Jane Doe</div>
+        <div class="user-role">Agent</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="page-title">Dashboard</div>
+    <div class="page-sub">Welcome back, Jane</div>
+    <div class="cards">
+      <div class="card"><div class="card-title">Applications</div><div class="card-value">24</div><div class="card-change">↑ 3 this week</div></div>
+      <div class="card"><div class="card-title">Pending</div><div class="card-value">7</div><div class="card-change" style="color:#D97706;">2 need action</div></div>
+      <div class="card"><div class="card-title">Approved</div><div class="card-value">15</div><div class="card-change">↑ 5 this month</div></div>
+    </div>
+  </div>
+</body>
+</html>

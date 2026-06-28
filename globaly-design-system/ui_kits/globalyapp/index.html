@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<!-- @dsCard group="UI Kit — Globalyapp" name="Globalyapp UI Kit" subtitle="Interactive dashboard prototype — sidebar nav, applications, documents, forms" viewport="1280x780" -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Globalyapp — UI Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<script type="text/babel" src="Sidebar.jsx"></script>
+<script type="text/babel" src="TopBar.jsx"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body, #root { height: 100%; }
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #F8FAFC;
+    color: #1E293B;
+    -webkit-font-smoothing: antialiased;
+  }
+  input::placeholder { color: #94A3B8; }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 99px; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { text-align: left; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+// Components from the compiled design-system bundle
+const {
+  Button, IconButton, Badge, StatusBadge, Chip, Tag,
+  Input, Textarea, Field, SearchInput, Select,
+  Card, StatCard, SectionHeader,
+} = window.GlobalyDesignSystem_c92b6a;
+
+// ─── Data ───────────────────────────────────────────────────
+const APPLICATIONS = [
+  { id: 'APP-001', name: 'Maria Silva',      type: 'Student Visa',    country: 'Brazil',     status: 'In Review',  date: 'May 20, 2026', agent: 'Jane Doe' },
+  { id: 'APP-002', name: 'James Okafor',     type: 'Work Permit',     country: 'Nigeria',    status: 'Approved',   date: 'May 18, 2026', agent: 'Jane Doe' },
+  { id: 'APP-003', name: 'Li Wei',           type: 'Visitor Visa',    country: 'China',      status: 'Pending',    date: 'May 17, 2026', agent: 'Tom Kip' },
+  { id: 'APP-004', name: 'Ana Reyes',        type: 'Student Visa',    country: 'Mexico',     status: 'Draft',      date: 'May 15, 2026', agent: 'Jane Doe' },
+  { id: 'APP-005', name: 'Ahmed Al-Rashid',  type: 'Business Visa',   country: 'UAE',        status: 'Approved',   date: 'May 14, 2026', agent: 'Sara M.' },
+  { id: 'APP-006', name: 'Priya Nair',       type: 'Permanent Res.',  country: 'India',      status: 'Rejected',   date: 'May 12, 2026', agent: 'Jane Doe' },
+  { id: 'APP-007', name: 'Tomás Kovač',      type: 'Student Visa',    country: 'Slovakia',   status: 'In Review',  date: 'May 11, 2026', agent: 'Tom Kip' },
+  { id: 'APP-008', name: 'Yuki Tanaka',      type: 'Work Permit',     country: 'Japan',      status: 'Pending',    date: 'May 10, 2026', agent: 'Sara M.' },
+];
+
+const DOCUMENTS = [
+  { id: 1, name: 'Passport — Maria Silva',       type: 'Identity',   size: '2.4 MB', uploaded: 'May 20', status: 'Verified' },
+  { id: 2, name: 'Bank Statement Q1 2026',       type: 'Financial',  size: '1.1 MB', uploaded: 'May 19', status: 'Pending' },
+  { id: 3, name: 'Enrollment Letter — UC Davis', type: 'Education',  size: '0.8 MB', uploaded: 'May 18', status: 'Verified' },
+  { id: 4, name: 'Medical Certificate',          type: 'Health',     size: '3.2 MB', uploaded: 'May 17', status: 'Pending' },
+  { id: 5, name: 'Employment Contract',          type: 'Work',       size: '1.5 MB', uploaded: 'May 16', status: 'Rejected' },
+];
+
+// ─── Icon helpers ────────────────────────────────────────────
+const Ico = ({ d, size = 16, ...p }) => (
+  <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} fill="none"
+       stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" {...p}>
+    <path d={d}/>
+  </svg>
+);
+
+// ─── Screens ─────────────────────────────────────────────────
+function DashboardScreen({ onNavigate }) {
+  return (
+    <div>
+      <TopBar
+        title="Dashboard"
+        subtitle="Welcome back, Jane · Monday, May 25 2026"
+        actions={<Button size="sm" onClick={() => onNavigate('new-application')}>+ New Application</Button>}
+      />
+
+      {/* Stats row */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 14, marginBottom: 28 }}>
+        <StatCard title="Total Applications" value="24"
+          change="↑ 3 this week" changeType="positive"
+          accent="#7F1D1D"
+          icon={<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M13 10V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v4"/><path d="M1 10h14"/></svg>}
+        />
+        <StatCard title="In Review" value="7"
+          change="2 need action" changeType="neutral"
+          accent="#2563EB"
+          icon={<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="8" cy="8" r="6.5"/><path d="M8 5v3.5l2 2"/></svg>}
+        />
+        <StatCard title="Approved" value="15"
+          change="↑ 5 this month" changeType="positive"
+          accent="#16A34A"
+          icon={<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="2 8 6 12 14 4"/></svg>}
+        />
+        <StatCard title="Rejected" value="2"
+          change="Same as last month" changeType="neutral"
+          accent="#DC2626"
+          icon={<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="3" x2="13" y2="13"/><line x1="13" y1="3" x2="3" y2="13"/></svg>}
+        />
+      </div>
+
+      {/* Recent applications */}
+      <Card>
+        <SectionHeader
+          title="Recent Applications"
+          subtitle="Your last 5 submissions"
+          actions={
+            <Button variant="ghost" size="sm" onClick={() => onNavigate('applications')}>
+              View all →
+            </Button>
+          }
+        />
+        <ApplicationTable rows={APPLICATIONS.slice(0,5)} onNavigate={onNavigate} compact />
+      </Card>
+    </div>
+  );
+}
+
+function ApplicationTable({ rows, compact = false, onNavigate }) {
+  const thStyle = {
+    fontSize: 11, fontWeight: 700, color: '#94A3B8',
+    textTransform: 'uppercase', letterSpacing: '0.05em',
+    padding: compact ? '6px 10px' : '10px 12px',
+    borderBottom: '1px solid #F1F5F9',
+  };
+  const tdStyle = {
+    fontSize: 13, color: '#334155', padding: compact ? '9px 10px' : '12px 12px',
+    borderBottom: '1px solid #F8FAFC',
+    fontFamily: "'Plus Jakarta Sans', sans-serif",
+  };
+  return (
+    <div style={{ overflowX: 'auto' }}>
+      <table>
+        <thead>
+          <tr>
+            <th style={thStyle}>ID</th>
+            <th style={thStyle}>Applicant</th>
+            <th style={thStyle}>Type</th>
+            {!compact && <th style={thStyle}>Country</th>}
+            <th style={thStyle}>Status</th>
+            <th style={thStyle}>Date</th>
+            {!compact && <th style={thStyle}>Agent</th>}
+            <th style={thStyle}></th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map(row => (
+            <tr key={row.id} style={{ cursor: 'pointer' }}
+              onMouseEnter={e => e.currentTarget.style.background = '#FAFAFA'}
+              onMouseLeave={e => e.currentTarget.style.background = ''}
+            >
+              <td style={{...tdStyle, color:'#94A3B8', fontSize:12, fontFamily:"'Inter',monospace"}}>{row.id}</td>
+              <td style={tdStyle}><span style={{fontWeight:500}}>{row.name}</span></td>
+              <td style={{...tdStyle, color:'#64748B'}}>{row.type}</td>
+              {!compact && <td style={tdStyle}>{row.country}</td>}
+              <td style={tdStyle}><StatusBadge status={row.status} /></td>
+              <td style={{...tdStyle, color:'#94A3B8', fontSize:12}}>{row.date}</td>
+              {!compact && <td style={{...tdStyle, color:'#64748B'}}>{row.agent}</td>}
+              <td style={tdStyle}>
+                <Button variant="ghost" size="xs" onClick={() => onNavigate && onNavigate('applications')}>
+                  View
+                </Button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function ApplicationsScreen({ onNavigate }) {
+  const [search, setSearch] = React.useState('');
+  const [statusFilter, setStatusFilter] = React.useState('');
+
+  const filtered = APPLICATIONS.filter(a => {
+    const q = search.toLowerCase();
+    const matchSearch = !q || a.name.toLowerCase().includes(q) || a.id.toLowerCase().includes(q) || a.type.toLowerCase().includes(q);
+    const matchStatus = !statusFilter || a.status === statusFilter;
+    return matchSearch && matchStatus;
+  });
+
+  return (
+    <div>
+      <TopBar
+        title="Applications"
+        subtitle={`${APPLICATIONS.length} total · ${APPLICATIONS.filter(a=>a.status==='In Review').length} in review`}
+        actions={<Button size="sm" onClick={() => onNavigate('new-application')}>+ New Application</Button>}
+      />
+
+      {/* Filters */}
+      <div style={{ display: 'flex', gap: 10, marginBottom: 20, alignItems: 'center', flexWrap: 'wrap' }}>
+        <SearchInput
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+          placeholder="Search by name, ID or type…"
+          style={{ flex: '1 1 200px', maxWidth: 320 }}
+        />
+        <Select
+          value={statusFilter}
+          onChange={e => setStatusFilter(e.target.value)}
+          placeholder="All statuses"
+          options={[
+            { value: 'In Review', label: 'In Review' },
+            { value: 'Approved',  label: 'Approved' },
+            { value: 'Pending',   label: 'Pending' },
+            { value: 'Draft',     label: 'Draft' },
+            { value: 'Rejected',  label: 'Rejected' },
+          ]}
+          style={{ width: 160 }}
+        />
+        {(search || statusFilter) && (
+          <Button variant="ghost" size="sm" onClick={() => { setSearch(''); setStatusFilter(''); }}>
+            Clear filters
+          </Button>
+        )}
+        <div style={{ marginLeft: 'auto', fontSize: 13, color: '#64748B' }}>
+          {filtered.length} result{filtered.length !== 1 ? 's' : ''}
+        </div>
+      </div>
+
+      <Card padding={0} style={{ overflow: 'hidden' }}>
+        <ApplicationTable rows={filtered} onNavigate={onNavigate} />
+        {filtered.length === 0 && (
+          <div style={{ padding: 40, textAlign: 'center', color: '#94A3B8', fontSize: 14 }}>
+            No applications match your filters.
+          </div>
+        )}
+      </Card>
+    </div>
+  );
+}
+
+function DocumentsScreen() {
+  const [dragOver, setDragOver] = React.useState(false);
+
+  const docTypeColors = { Identity:'blue', Financial:'green', Education:'purple', Health:'yellow', Work:'slate' };
+
+  return (
+    <div>
+      <TopBar
+        title="Documents"
+        subtitle="Manage and verify applicant documents"
+        actions={<Button size="sm">Upload Document</Button>}
+      />
+
+      {/* Upload zone */}
+      <div
+        onDragOver={e => { e.preventDefault(); setDragOver(true); }}
+        onDragLeave={() => setDragOver(false)}
+        onDrop={e => { e.preventDefault(); setDragOver(false); }}
+        style={{
+          border: `2px dashed ${dragOver ? '#7F1D1D' : '#CBD5E1'}`,
+          borderRadius: 12, padding: '28px 24px', textAlign: 'center',
+          background: dragOver ? '#FEF2F2' : '#F8FAFC',
+          marginBottom: 24, cursor: 'pointer',
+          transition: 'all 0.15s',
+        }}
+      >
+        <div style={{ fontSize: 28, marginBottom: 8, opacity: .4 }}>
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#7F1D1D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{margin:'0 auto', display:'block'}}>
+            <path d="M20 8H8a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V12L20 8z"/>
+            <polyline points="20 8 20 12 24 12"/>
+            <line x1="16" y1="18" x2="16" y2="24"/>
+            <line x1="13" y1="21" x2="19" y2="21"/>
+          </svg>
+        </div>
+        <p style={{ fontSize: 14, fontWeight: 600, color: '#334155', marginBottom: 4 }}>
+          Drag & drop files here, or <span style={{ color: '#7F1D1D', cursor: 'pointer' }}>browse</span>
+        </p>
+        <p style={{ fontSize: 12, color: '#94A3B8' }}>PDF, JPG, PNG up to 20 MB</p>
+      </div>
+
+      {/* Documents table */}
+      <Card padding={0} style={{ overflow: 'hidden' }}>
+        <div style={{ padding: '16px 20px', borderBottom: '1px solid #F1F5F9' }}>
+          <span style={{ fontSize: 14, fontWeight: 600, color: '#1E293B' }}>Uploaded Documents</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              {['Document', 'Type', 'Size', 'Uploaded', 'Status', ''].map(h => (
+                <th key={h} style={{ fontSize: 11, fontWeight: 700, color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.05em', padding: '8px 16px', borderBottom: '1px solid #F1F5F9' }}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {DOCUMENTS.map(doc => (
+              <tr key={doc.id}
+                onMouseEnter={e => e.currentTarget.style.background='#FAFAFA'}
+                onMouseLeave={e => e.currentTarget.style.background=''}
+              >
+                <td style={{ padding: '11px 16px', fontSize: 13, fontWeight: 500, color: '#334155' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <div style={{ width: 28, height: 28, borderRadius: 6, background: '#F1F5F9', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#64748B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M8 1H3a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V5L8 1z"/>
+                        <polyline points="8 1 8 5 12 5"/>
+                      </svg>
+                    </div>
+                    {doc.name}
+                  </div>
+                </td>
+                <td style={{ padding: '11px 16px' }}><Badge variant={docTypeColors[doc.type]||'slate'}>{doc.type}</Badge></td>
+                <td style={{ padding: '11px 16px', fontSize: 12, color: '#94A3B8' }}>{doc.size}</td>
+                <td style={{ padding: '11px 16px', fontSize: 12, color: '#94A3B8' }}>{doc.uploaded}</td>
+                <td style={{ padding: '11px 16px' }}><StatusBadge status={doc.status} dot /></td>
+                <td style={{ padding: '11px 16px' }}>
+                  <div style={{ display: 'flex', gap: 4 }}>
+                    <IconButton size="sm" variant="ghost" icon={
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M1 7s2.5-4.5 6-4.5S13 7 13 7s-2.5 4.5-6 4.5S1 7 1 7z"/>
+                        <circle cx="7" cy="7" r="1.5"/>
+                      </svg>
+                    }/>
+                    <IconButton size="sm" variant="ghost" icon={
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="1 9 1 13 5 13"/><line x1="13" y1="1" x2="1" y2="13"/>
+                        <polyline points="9 1 13 1 13 5"/>
+                      </svg>
+                    }/>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </Card>
+    </div>
+  );
+}
+
+function NewApplicationScreen({ onNavigate }) {
+  const [form, setForm] = React.useState({ name:'', email:'', type:'', country:'', notes:'' });
+  const set = k => e => setForm(f => ({...f, [k]: e.target.value}));
+
+  return (
+    <div>
+      <TopBar
+        title="New Application"
+        subtitle="Fill in the applicant details below"
+        actions={
+          <Button variant="ghost" size="sm" onClick={() => onNavigate('applications')}>
+            ← Back
+          </Button>
+        }
+      />
+      <div style={{ maxWidth: 640 }}>
+        <Card style={{ marginBottom: 16 }}>
+          <h3 style={{ fontSize: 14, fontWeight: 600, color: '#1E293B', marginBottom: 16 }}>Applicant Information</h3>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+            <Field label="Full Name" required>
+              <Input size="lg" value={form.name} onChange={set('name')} placeholder="e.g. Maria Silva" />
+            </Field>
+            <Field label="Email Address" required>
+              <Input size="lg" type="email" value={form.email} onChange={set('email')} placeholder="email@example.com" />
+            </Field>
+            <Field label="Visa / Permit Type" required>
+              <Select
+                value={form.type} onChange={set('type')}
+                placeholder="Select type"
+                style={{ height: 48 }}
+                options={[
+                  {value:'student', label:'Student Visa'},
+                  {value:'work', label:'Work Permit'},
+                  {value:'visitor', label:'Visitor Visa'},
+                  {value:'business', label:'Business Visa'},
+                  {value:'pr', label:'Permanent Residency'},
+                ]}
+              />
+            </Field>
+            <Field label="Country of Origin" required>
+              <Input size="lg" value={form.country} onChange={set('country')} placeholder="e.g. Brazil" />
+            </Field>
+          </div>
+        </Card>
+        <Card style={{ marginBottom: 16 }}>
+          <h3 style={{ fontSize: 14, fontWeight: 600, color: '#1E293B', marginBottom: 16 }}>Additional Notes</h3>
+          <textarea
+            value={form.notes}
+            onChange={set('notes')}
+            placeholder="Any special circumstances or notes for this application…"
+            style={{
+              width: '100%', height: 96, borderRadius: 8,
+              border: '1px solid #E2E8F0', background: '#F8FAFC',
+              padding: '10px 12px', fontSize: 14, resize: 'vertical',
+              fontFamily: "'Plus Jakarta Sans', sans-serif", color: '#1E293B',
+              outline: 'none',
+            }}
+          />
+        </Card>
+        <div style={{ display: 'flex', gap: 10 }}>
+          <Button variant="primary" size="lg" onClick={() => onNavigate('applications')}>
+            Submit Application
+          </Button>
+          <Button variant="outline" size="lg" onClick={() => onNavigate('applications')}>
+            Save as Draft
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SettingsScreen() {
+  return (
+    <div>
+      <TopBar title="Settings" subtitle="Manage your account and preferences" />
+      <div style={{ maxWidth: 560 }}>
+        <Card style={{ marginBottom: 16 }}>
+          <h3 style={{ fontSize: 14, fontWeight: 600, color: '#1E293B', marginBottom: 16 }}>Profile</h3>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
+            <div style={{ width: 56, height: 56, borderRadius: '50%', background: '#7F1D1D', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, fontWeight: 700 }}>JD</div>
+            <div>
+              <div style={{ fontSize: 15, fontWeight: 600, color: '#1E293B' }}>Jane Doe</div>
+              <div style={{ fontSize: 13, color: '#64748B' }}>jane.doe@globalyapp.com</div>
+              <Badge variant="blue" style={{ marginTop: 4 }}>Immigration Agent</Badge>
+            </div>
+          </div>
+          <div style={{ display: 'grid', gap: 14 }}>
+            <Field label="Full Name"><Input size="lg" value="Jane Doe" /></Field>
+            <Field label="Email"><Input size="lg" type="email" value="jane.doe@globalyapp.com" /></Field>
+            <Field label="Agency"><Input size="lg" value="Globaly Migration Services" /></Field>
+          </div>
+          <div style={{ marginTop: 16 }}>
+            <Button variant="primary" size="md">Save changes</Button>
+          </div>
+        </Card>
+        <Card>
+          <h3 style={{ fontSize: 14, fontWeight: 600, color: '#1E293B', marginBottom: 16 }}>Brand Mode</h3>
+          <p style={{ fontSize: 13, color: '#64748B', marginBottom: 14 }}>Switch between Globalyapp product themes.</p>
+          <div style={{ display: 'flex', gap: 8 }}>
+            <button style={{ padding: '8px 16px', borderRadius: 8, background: '#7F1D1D', color: '#fff', border: 'none', fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily:"'Plus Jakarta Sans',sans-serif" }}>Globalyapp</button>
+            <button style={{ padding: '8px 16px', borderRadius: 8, background: '#F4EEFF', color: '#6820E4', border: '1px solid #E6D8FF', fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily:"'Plus Jakarta Sans',sans-serif" }}>GlobalyOS</button>
+            <button style={{ padding: '8px 16px', borderRadius: 8, background: '#EFF6FF', color: '#2563EB', border: '1px solid #DBEAFE', fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily:"'Plus Jakarta Sans',sans-serif" }}>GlobalyPay</button>
+          </div>
+        </Card>
+      </div>
+    </div>
+  );
+}
+
+// ─── Main App ────────────────────────────────────────────────
+function App() {
+  const [screen, setScreen] = React.useState(() => localStorage.getItem('gly_screen') || 'dashboard');
+
+  const navigate = s => {
+    setScreen(s);
+    localStorage.setItem('gly_screen', s);
+  };
+
+  const screens = {
+    dashboard:       <DashboardScreen onNavigate={navigate} />,
+    applications:    <ApplicationsScreen onNavigate={navigate} />,
+    documents:       <DocumentsScreen />,
+    'new-application': <NewApplicationScreen onNavigate={navigate} />,
+    settings:        <SettingsScreen />,
+    'report-month':  <div style={{paddingTop:8}}><TopBar title="Month to Date" subtitle="Report for May 2026" /><Card><p style={{color:'#94A3B8',fontSize:14}}>Chart placeholder — connect your analytics integration.</p></Card></div>,
+    'report-year':   <div style={{paddingTop:8}}><TopBar title="Year to Date" subtitle="Report for 2026" /><Card><p style={{color:'#94A3B8',fontSize:14}}>Chart placeholder — connect your analytics integration.</p></Card></div>,
+    search:          <div style={{paddingTop:8}}><TopBar title="Search" subtitle="Search across applications, documents, and contacts" /><SearchInput placeholder="Start typing to search…" style={{width:400,marginBottom:20}} /><Card><p style={{color:'#94A3B8',fontSize:14}}>Search results will appear here.</p></Card></div>,
+    calendar:        <div style={{paddingTop:8}}><TopBar title="Calendar" subtitle="Upcoming appointments and deadlines" /><Card><p style={{color:'#94A3B8',fontSize:14}}>Calendar view — connect your scheduling integration.</p></Card></div>,
+    payments:        <div style={{paddingTop:8}}><TopBar title="Payments" subtitle="Manage application fees and invoices" /><Card><p style={{color:'#94A3B8',fontSize:14}}>Payments dashboard — connect GlobalyPay integration.</p></Card></div>,
+  };
+
+  return (
+    <div style={{
+      display: 'flex', height: '100vh', overflow: 'hidden',
+      background: '#F8FAFC', padding: 12, gap: 12,
+    }}>
+      <Sidebar activeScreen={screen} onNavigate={navigate} />
+      <div style={{
+        flex: 1, overflow: 'auto', padding: '24px 28px',
+        background: '#F8FAFC',
+      }}>
+        {screens[screen] || screens['dashboard']}
+      </div>
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+</script>
+</body>
+</html>
