@@ -1,9 +1,9 @@
 ---
-name: globalyhub-brainstorming
+name: gh-brainstorming
 description: Adaptive brainstorming for GlobalyHub projects — turns a raw idea, fuzzy plan, or near-final design into a validated, decision-complete design doc. Combines YC office-hours forcing questions, founder-mode scope modes, relentless decision-tree grilling, and section-by-section design dialogue. Use when the user says "brainstorm", "let's brainstorm", "grill me", "office hours", "think through this", "stress-test this plan", "help me scope", "is this worth building", or presents any vague/ambitious idea before a PRD or code.
 ---
 
-# GlobalyHub Brainstorming
+# GH-Brainstorming
 
 Deliberate design before implementation. This skill synthesizes four battle-tested methods into one
 adaptive flow: it meets the idea where it is, pushes exactly as hard as the situation warrants, forces
