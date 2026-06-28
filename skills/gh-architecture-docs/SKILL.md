@@ -1,5 +1,5 @@
 ---
-name: architecture-docs
+name: gh-architecture-docs
 description: >
   Auto-triggers after a PRD is finalized when a new feature, screen, or module is mentioned.
   Backend-focused: turns a post-PRD idea into an approved spec, implementation plan, and SQL
@@ -48,7 +48,7 @@ Every new feature gets a dedicated `src/hooks/use<FeatureName>.ts` file:
 ## Hard Gate
 
 NEVER write code, run migrations, create plans, or invoke `write-implementation-plan` until
-the user has typed **"approved"**, **"proceed"**, or **"go"** at the end of this brainstorm.
+the user has typed **"approved"**, **"proceed"**, or **"go"** at the end of this document.
 
 If the user asks to skip or jump to implementation before approval:
 > "The brainstorm isn't approved yet. Approving now ensures we don't build the wrong thing.
@@ -284,7 +284,7 @@ ALTER TABLE <table_name> ENABLE ROW LEVEL SECURITY;
 
 ## Approval Gate
 
-End every brainstorm with:
+End every document with:
 
 ```
 **Design Summary:** [1-paragraph recap]
