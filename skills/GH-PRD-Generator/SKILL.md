@@ -1,13 +1,13 @@
 ---
-name: GH-PRD-Generator
+name: gh-prd-generator
 description: >-
   Generate a structured PRD for any GlobalyHub project. Reads brainstorming
   outputs, market research outputs, and the codebase first, then drafts and
   gap-fills. Writes to docs/PRD.md. Use when the user says "write a PRD",
   "create a spec", "product requirements document", "I need a PRD", or
-  invokes /GH-PRD-Generator or /prd.
+  invokes /gh-prd-generator or /prd.
 trigger:
-  - /GH-PRD-Generator
+  - /gh-prd-generator
   - /prd
 type: workflow
 ---
