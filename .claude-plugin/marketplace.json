@@ -1,0 +1,44 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "globaly",
+  "description": "Globaly Inc internal Claude Code marketplace — company-authored AI skills and plugins across product, research, engineering, and devops.",
+  "owner": {
+    "name": "Globaly Inc",
+    "email": "amit@globalyhub.com"
+  },
+  "metadata": {
+    "description": "Install once, stay in sync. Company skills curated for the whole team."
+  },
+  "plugins": [
+    {
+      "name": "globaly-skills",
+      "source": "./",
+      "description": "All Globaly company skills in one plugin — product discovery, research synthesis, engineering code review, and devops deploy checks. Auto-syncs on each session.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Globaly Inc",
+        "email": "amit@globalyhub.com"
+      },
+      "homepage": "https://github.com/Globaly-Inc/GH-AI-Skills-and-Plugins",
+      "repository": "https://github.com/Globaly-Inc/GH-AI-Skills-and-Plugins",
+      "license": "UNLICENSED",
+      "category": "workflow",
+      "keywords": [
+        "globaly",
+        "skills",
+        "product",
+        "research",
+        "engineering",
+        "devops",
+        "internal"
+      ],
+      "tags": [
+        "globaly",
+        "internal",
+        "skills",
+        "workflow"
+      ],
+      "strict": false
+    }
+  ]
+}

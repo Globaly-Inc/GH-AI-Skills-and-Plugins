@@ -1,0 +1,25 @@
+{
+  "name": "globaly-skills",
+  "version": "0.1.0",
+  "description": "All Globaly company skills in one plugin — product discovery, research synthesis, engineering code review, and devops deploy checks. Auto-syncs on each session.",
+  "author": {
+    "name": "Globaly Inc",
+    "email": "amit@globalyhub.com",
+    "url": "https://github.com/Globaly-Inc"
+  },
+  "homepage": "https://github.com/Globaly-Inc/GH-AI-Skills-and-Plugins",
+  "repository": "https://github.com/Globaly-Inc/GH-AI-Skills-and-Plugins",
+  "license": "UNLICENSED",
+  "keywords": [
+    "globaly",
+    "skills",
+    "product",
+    "research",
+    "engineering",
+    "devops",
+    "internal"
+  ],
+  "skills": [
+    "./skills/"
+  ]
+}
