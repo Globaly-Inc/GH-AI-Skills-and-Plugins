@@ -1,0 +1,41 @@
+<!-- @dsCard group="Components" name="Input" subtitle="Text input · textarea · select · field states (default/active/error/success)" viewport="700x300" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #fff; padding: 20px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { Input, Textarea, Field, Select, SearchInput } = window.GlobalyDesignSystem_c92b6a;
+  function Demo() {
+    return (
+      <div>
+        <div className="grid">
+          <Field label="Default"><Input placeholder="Placeholder text" /></Field>
+          <Field label="Error" error="This field is required."><Input state="error" defaultValue="Invalid" /></Field>
+          <Field label="Success" success="Looks good!"><Input state="success" defaultValue="Valid input" /></Field>
+        </div>
+        <div className="grid">
+          <Field label="Select"><Select placeholder="Choose…" options={[{value:'a',label:'Student Visa'},{value:'b',label:'Work Permit'}]} /></Field>
+          <Field label="Search"><SearchInput placeholder="Search applicants…" /></Field>
+          <Field label="Disabled"><Input disabled placeholder="Disabled" /></Field>
+        </div>
+        <Field label="Notes"><Textarea rows={2} placeholder="Add a note for this application…" /></Field>
+      </div>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!-- @dsCard group="Components" name="SegmentedControl" subtitle="Pill segmented control · active = raised white card" viewport="700x150" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #fff; padding: 24px; }
+  .row { display: flex; gap: 20px; flex-direction: column; align-items: flex-start; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { SegmentedControl } = window.GlobalyDesignSystem_c92b6a;
+  function Demo() {
+    const [a, setA] = React.useState('month');
+    const [b, setB] = React.useState('all');
+    return (
+      <div className="row">
+        <SegmentedControl value={a} onChange={setA} options={[
+          { value: 'month', label: 'Month to date' },
+          { value: 'year', label: 'Year to date' },
+          { value: 'all', label: 'All time' },
+        ]} />
+        <SegmentedControl size="sm" value={b} onChange={setB} options={[
+          { value: 'all', label: 'All' },
+          { value: 'mine', label: 'Mine' },
+        ]} />
+      </div>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script>
+</body>
+</html>

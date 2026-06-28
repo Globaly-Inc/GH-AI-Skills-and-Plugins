@@ -1,0 +1,49 @@
+<!-- @dsCard group="Components" name="Badge" subtitle="Status badges · tags · removable chips — seven tonal variants" viewport="700x230" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #fff; padding: 20px; }
+  .label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #94A3B8; margin-bottom: 10px; }
+  .row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; align-items: center; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { Badge, StatusBadge, Tag, Chip } = window.GlobalyDesignSystem_c92b6a;
+  function Demo() {
+    return (
+      <div>
+        <div className="label">Status badges</div>
+        <div className="row">
+          <StatusBadge status="Active" /><StatusBadge status="Pending" />
+          <StatusBadge status="In Review" /><StatusBadge status="Rejected" />
+          <StatusBadge status="Draft" />
+        </div>
+        <div className="label">Variants</div>
+        <div className="row">
+          <Badge variant="green">Approved</Badge><Badge variant="red">Error</Badge>
+          <Badge variant="yellow">Warning</Badge><Badge variant="blue">Info</Badge>
+          <Badge variant="purple">GlobalyOS</Badge><Badge variant="orange">New</Badge>
+          <Badge variant="slate">Default</Badge>
+        </div>
+        <div className="label">Tags &amp; chips</div>
+        <div className="row">
+          <Tag variant="blue">Identity</Tag><Tag variant="purple">Education</Tag>
+          <Chip>Education</Chip><Chip onRemove={() => {}}>Migration</Chip>
+        </div>
+      </div>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script>
+</body>
+</html>

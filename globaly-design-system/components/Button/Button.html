@@ -1,0 +1,49 @@
+<!-- @dsCard group="Components" name="Button" subtitle="Six variants · five sizes · icons inherit text color" viewport="700x220" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #fff; padding: 20px; }
+  .label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #94A3B8; margin-bottom: 10px; }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; align-items: center; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+  const { Button } = window.GlobalyDesignSystem_c92b6a;
+  const h = React.createElement;
+  const check = h('svg', { width: 16, height: 16, viewBox: '0 0 16 16', fill: 'none', stroke: 'currentColor', strokeWidth: 1.5, strokeLinecap: 'round', strokeLinejoin: 'round' }, h('polyline', { points: '2 8 6 12 14 4' }));
+  function Demo() {
+    return h('div', null,
+      h('div', { className: 'label' }, 'Variants'),
+      h('div', { className: 'row' },
+        h(Button, { variant: 'primary' }, 'Primary'),
+        h(Button, { variant: 'secondary' }, 'Secondary'),
+        h(Button, { variant: 'outline' }, 'Outline'),
+        h(Button, { variant: 'ghost' }, 'Ghost'),
+        h(Button, { variant: 'danger' }, 'Danger'),
+        h(Button, { variant: 'subtle' }, 'Subtle'),
+      ),
+      h('div', { className: 'label' }, 'Sizes & icon'),
+      h('div', { className: 'row' },
+        h(Button, { size: 'xs' }, 'XS'),
+        h(Button, { size: 'sm' }, 'SM'),
+        h(Button, { size: 'md' }, 'MD'),
+        h(Button, { size: 'lg' }, 'LG'),
+        h(Button, { size: 'xl' }, 'XL'),
+        h(Button, { size: 'md', icon: check }, 'With icon'),
+        h(Button, { size: 'md', disabled: true }, 'Disabled'),
+      ),
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(h(Demo));
+</script>
+</body>
+</html>

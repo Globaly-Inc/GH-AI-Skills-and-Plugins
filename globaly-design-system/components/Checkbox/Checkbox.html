@@ -1,0 +1,37 @@
+<!-- @dsCard group="Components" name="Checkbox" subtitle="Unchecked · checked · indeterminate · disabled — with labels" viewport="700x160" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500&display=swap" rel="stylesheet">
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #fff; padding: 24px; }
+  .row { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { Checkbox } = window.GlobalyDesignSystem_c92b6a;
+  function Demo() {
+    const [a, setA] = React.useState(true);
+    const [b, setB] = React.useState(false);
+    return (
+      <div className="row">
+        <Checkbox checked={a} onChange={() => setA(!a)} label="Email notifications" />
+        <Checkbox checked={b} onChange={() => setB(!b)} label="SMS updates" />
+        <Checkbox indeterminate label="Select all" />
+        <Checkbox checked disabled label="Disabled checked" />
+        <Checkbox disabled label="Disabled" />
+      </div>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script>
+</body>
+</html>

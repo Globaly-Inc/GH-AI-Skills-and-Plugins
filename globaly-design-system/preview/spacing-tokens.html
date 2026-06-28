@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Spacing" name="Spacing Scale" subtitle="4px base unit · 34 steps · space-1 (4px) → space-24 (96px)" viewport="700x240" -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: #fff; padding: 20px; }
+  .section { margin-bottom: 20px; }
+  .label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #94A3B8; margin-bottom: 10px; }
+  /* Spacing tokens */
+  .space-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .space-bar { height: 12px; background: #7F1D1D; border-radius: 3px; opacity: .8; flex-shrink: 0; }
+  .space-name { font-size: 10px; color: #475569; font-weight: 500; width: 40px; }
+  .space-val  { font-size: 10px; color: #94A3B8; width: 32px; }
+  /* Radius tokens */
+  .radius-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .radius-item { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+  .radius-box { width: 44px; height: 44px; background: #F1F5F9; border: 1.5px solid #CBD5E1; }
+  .radius-name { font-size: 9px; color: #64748B; font-weight: 500; }
+  .radius-px { font-size: 8px; color: #CBD5E1; }
+</style>
+</head>
+<body>
+  <div class="section">
+    <div class="label">Spacing Scale · 4px base</div>
+    <div class="space-row"><span class="space-name">space-1</span><div class="space-bar" style="width:4px;"></div><span class="space-val">4px</span></div>
+    <div class="space-row"><span class="space-name">space-2</span><div class="space-bar" style="width:8px;"></div><span class="space-val">8px</span></div>
+    <div class="space-row"><span class="space-name">space-3</span><div class="space-bar" style="width:12px;"></div><span class="space-val">12px</span></div>
+    <div class="space-row"><span class="space-name">space-4</span><div class="space-bar" style="width:16px;"></div><span class="space-val">16px</span></div>
+    <div class="space-row"><span class="space-name">space-6</span><div class="space-bar" style="width:24px;"></div><span class="space-val">24px</span></div>
+    <div class="space-row"><span class="space-name">space-8</span><div class="space-bar" style="width:32px;"></div><span class="space-val">32px</span></div>
+    <div class="space-row"><span class="space-name">space-10</span><div class="space-bar" style="width:40px;"></div><span class="space-val">40px</span></div>
+    <div class="space-row"><span class="space-name">space-12</span><div class="space-bar" style="width:48px;"></div><span class="space-val">48px</span></div>
+    <div class="space-row"><span class="space-name">space-16</span><div class="space-bar" style="width:64px;"></div><span class="space-val">64px</span></div>
+    <div class="space-row"><span class="space-name">space-20</span><div class="space-bar" style="width:80px;"></div><span class="space-val">80px</span></div>
+    <div class="space-row"><span class="space-name">space-24</span><div class="space-bar" style="width:96px;"></div><span class="space-val">96px</span></div>
+  </div>
+</body>
+</html>

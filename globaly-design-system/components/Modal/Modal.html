@@ -1,0 +1,43 @@
+<!-- @dsCard group="Components" name="Modal" subtitle="Centered dialog · overlay · header / body / footer actions" viewport="700x360" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #F1F5F9; padding: 24px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { Modal, Button } = window.GlobalyDesignSystem_c92b6a;
+  function Demo() {
+    const [open, setOpen] = React.useState(true);
+    return (
+      <div>
+        <Button onClick={() => setOpen(true)}>Open modal</Button>
+        <Modal
+          open={open}
+          title="Submit application?"
+          onClose={() => setOpen(false)}
+          footer={<>
+            <Button variant="outline" size="md" onClick={() => setOpen(false)}>Cancel</Button>
+            <Button variant="primary" size="md" onClick={() => setOpen(false)}>Submit</Button>
+          </>}
+        >
+          You're about to submit Maria Silva's student visa application. Once submitted, you won't be able to edit the documents.
+        </Modal>
+      </div>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script>
+</body>
+</html>
