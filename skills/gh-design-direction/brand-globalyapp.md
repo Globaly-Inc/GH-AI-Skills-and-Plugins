@@ -3,7 +3,30 @@
 **Project:** GlobalyApp — public-facing business directory and marketplace  
 **Repo path:** `globalyhub/GlobalyApp`  
 **Stack note:** No framer-motion — animations are CSS utility classes defined in `src/index.css`  
-**Global state:** MobX (`mobx` + `mobx-react-lite`) — install with `npm i mobx mobx-react-lite` if not present
+**Global state:** MobX (`mobx` + `mobx-react-lite`) — install with `npm i mobx mobx-react-lite` if not present  
+**Design system brand:** Default — no `data-brand` attribute needed (maroon `#7F1D1D`)
+
+---
+
+## Design system token mapping
+
+GlobalyApp maps Tailwind/shadcn CSS variables to the Globaly Design System semantic tokens. When both exist, prefer the design system token for surfaces, foreground text, borders, and shadows; use the Tailwind token for component variants wired to shadcn primitives.
+
+| Design system token | GlobalyApp equivalent |
+|--------------------|-----------------------|
+| `--brand-primary-default` | `--primary` (`hsl(0 63% 31%)`) |
+| `--brand-primary-hover` | `hsl(0 63% 25%)` |
+| `--brand-primary-subtle` | `--secondary` (`hsl(0 30% 96%)`) |
+| `--surface-page` | `--background` (`hsl(0 0% 100%)`) |
+| `--surface-card` | `--card` (`hsl(0 0% 100%)`) |
+| `--surface-panel` | `--muted` (`hsl(210 17% 96%)`) |
+| `--fg-primary` | `--foreground` |
+| `--fg-muted` | `--muted-foreground` |
+| `--border-default` | `--border` (`hsl(215 16% 90%)`) |
+| `--border-focus` | `--ring` (`hsl(0 63% 31%)`) |
+| `--border-error` | `--destructive` |
+
+Typography semantic classes (`.t-h1`, `.t-body`, etc.) from the design system are available alongside Tailwind type utilities — use the semantic class when it covers the case exactly.
 
 ---
 
