@@ -44,6 +44,7 @@ claude plugin update globaly-skills@globaly   # restart to apply
 | `product-discovery` | Product | framing a fuzzy idea before a PRD |
 | `research-synthesis` | R&D / Research | turning raw research into findings |
 | `eng-code-review` | Engineering | reviewing a diff before merge |
+| `gh-full-dev-implementation` | Engineering | implementing a feature or improving architecture end-to-end |
 | `devops-deploy-check` | DevOps | a pre-deploy Go/No-Go gate |
 
 More skills are added over time — they appear automatically after a sync.
