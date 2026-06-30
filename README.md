@@ -41,11 +41,14 @@ claude plugin update globaly-skills@globaly   # restart to apply
 
 | Skill | Function | Use it when… |
 |-------|----------|--------------|
-| `product-discovery` | Product | framing a fuzzy idea before a PRD |
-| `research-synthesis` | R&D / Research | turning raw research into findings |
-| `eng-code-review` | Engineering | reviewing a diff before merge |
+| `gh-brainstorming` | Product | adaptive brainstorming for a raw idea or fuzzy plan |
+| `gh-product-deep-research` | R&D / Research | competitor analysis, product-market fit, user pain points |
+| `gh-prd-generator` | Product | generating a structured PRD from brainstorming outputs |
+| `gh-architecture-docs` | Engineering | turning a PRD into a spec, SQL skeleton, and migration plan |
+| `gh-design-direction` | Design | frontend design direction before components are built |
+| `gh-implementation-plan` | Engineering | step-by-step implementation plan gate before coding |
 | `gh-full-dev-implementation` | Engineering | implementing a feature or improving architecture end-to-end |
-| `devops-deploy-check` | DevOps | a pre-deploy Go/No-Go gate |
+| `gh-parallel-subagents` | Engineering | dispatching independent tasks to parallel subagents for concurrent execution |
 
 More skills are added over time — they appear automatically after a sync.
 
