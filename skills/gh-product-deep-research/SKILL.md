@@ -1,111 +1,63 @@
 ---
 name: gh-product-deep-research
-description: Deep product research for GlobalyHub projects — runs AFTER a brainstorming doc to analyze product-market fit, competitor products and their weaknesses (mined from real user reviews/Reddit), and whether to fit an existing market category or create a new one. Fans out parallel research agents across multiple AI models/engines (Claude subagents, exa+firecrawl, Gemini Deep Research), verifies findings with a counter-review team, and produces ONE consolidated, cited markdown report. Use when the user says "deep research", "product research", "market research", "competitor analysis", "PMF", "validate the market", or wants research after brainstorming.
+description: Lean product research for GlobalyHub projects — runs AFTER a brainstorming doc to assess product-market fit, competitors and their weaknesses (from real user reviews/Reddit), and which market category to play in. Single-agent, one search engine, capped sources, one consolidated cited markdown report. Use when the user says "deep research", "product research", "market research", "competitor analysis", "PMF", or "validate the market".
 ---
 
 # GH-Product-Deep-Research
 
-A disciplined, multi-engine product-research pipeline. It takes a finished **brainstorming doc** and turns it
-into one consolidated, evidence-backed market+competitor report: where the product fits, who the competitors
-are, where they're weak (from real users), and which category to play in.
+Takes a finished **brainstorming doc** and produces one consolidated, cited market+competitor report: where
+the product fits, who the competitors are, where they're weak (from real users), and which category to play
+in. This is **research, not strategy execution** — no code, PRDs, or plans.
 
-This is **research, not strategy execution.** It gathers and verifies evidence and presents implications.
-It does not write code, PRDs, or plans.
+**Token-lean by design:** one search engine, capped sources, no paid external APIs, no extra verifier agents.
+Do the research directly; only spawn a subagent if a single area is genuinely too large for one pass.
 
-## Pipeline (P0 → P6)
+## Pipeline
 
 ```mermaid
 flowchart TD
-  P0[P0 Intake: load brainstorm doc + frame] --> P1[P1 Plan: 5 fixed tracks + adaptive extras]
-  P1 --> P2[P2 Fan-out: parallel agents across engines]
-  P2 --> P3[P3 Counter-review team verifies findings]
-  P3 --> P4[P4 Citation registry + quality gates]
-  P4 --> P5[P5 Synthesize: frameworks + Mermaid diagrams]
-  P5 --> P6[P6 Self-review + write single md report]
+  P0[Intake: load brainstorm doc, pick 1 engine] --> P1[Research 3 consolidated areas, capped sources]
+  P1 --> P2[Synthesize: 4 frameworks + just-in-time diagrams]
+  P2 --> P3[Self-review + write one md report]
 ```
 
-## P0 — Intake & frame
+## P0 — Intake
+1. **Ask for the brainstorm doc path** (always ask; don't auto-pick). Read it; extract the problem, target
+   user, proposed wedge, and dream state — these frame the research.
+2. Set **AS_OF = today's actual date** (from context, never memory). All recency judgments use it.
+3. **Pick ONE search engine**: exa or firecrawl, whichever is available (load via ToolSearch). If neither,
+   use built-in web search and note reduced coverage. Do **not** run both.
+4. Restate the research question + scope (geography, segment, time horizon) in one line before starting.
 
-1. **Ask the user for the brainstorm doc path.** Always ask (don't auto-pick). Read it fully.
-   Extract: the problem, target user, the proposed product/wedge, and the dream state. These seed every track.
-2. Set **AS_OF = today's actual date** (from context, never from memory). All recency judgments use it.
-3. Confirm engine availability (see `references/engines-and-mcps.md`). State which engines are live; degrade
-   gracefully if any are missing (note it in the report, lower confidence — never fake a source).
-4. Restate the research question in one line and the scope (geography, time horizon, segment) before running.
+## P1 — Research 3 consolidated areas
+Cover these three areas (details + per-area sub-questions in `references/research-areas.md`). Default to doing
+them yourself sequentially; cap **≤6 high-quality sources per area** and capture distilled notes (claim ·
+source · date · confidence), not raw dumps.
 
-## P1 — Plan the tracks
+1. **Market & Category** — size (TAM/SAM/SOM), demand signals, willingness to pay, existing-vs-new category, key trends/regulatory constraints.
+2. **Competitors** — who exists (direct + indirect + status quo), features, pricing, positioning.
+3. **Voice-of-Customer weaknesses** — competitor weaknesses mined from user reviews/Reddit/G2/forums. A weakness is a "pattern" only with **≥3 independent mentions**; otherwise label it anecdotal.
 
-Run the **5 fixed product tracks**, plus **1–2 adaptive extra tracks** if the brainstorm doc surfaces a
-unique angle (e.g. a regulated niche, a specific channel). Full track specs + per-track sub-questions and
-engine routing in **`references/research-tracks.md`**:
+## P2 — Synthesize with frameworks
+Apply the four frameworks (how-to + report structure in `references/report-template.md`), with **Mermaid
+diagrams just-in-time** (only where a picture beats prose): competitor matrix + weaknesses · positioning map ·
+TAM/SAM/SOM · category fit + Five Forces. Lead with conclusions; mark confidence per section; show
+disagreement rather than flattening it.
 
-1. **Market & PMF signals** — size (TAM/SAM/SOM), demand evidence, willingness to pay.
-2. **Competitor landscape** — who exists, features, pricing, positioning.
-3. **Competitor weaknesses** — mined from **user reviews, Reddit, forums, app-store/G2/Trustpilot** complaints.
-4. **Category fit** — does this slot into an existing category or warrant a new one (category design)?
-5. **Trends, future-fit & regulatory** — where the market is heading; what could constrain it.
-
-## P2 — Parallel fan-out across engines
-
-Dispatch tracks **concurrently** across the selected engines (see `references/engines-and-mcps.md`):
-
-- **Claude subagents (Task tool)** — orchestration backbone; one subagent per track. Each searches, reads
-  full sources, and returns **distilled structured notes only** (not raw search dumps) to keep context lean.
-- **exa + firecrawl MCPs** — broad multi-source search + scraping competitor sites, Reddit, and review pages
-  (the weakness-mining track leans hard on these).
-- **Gemini Deep Research API** — offload 1–2 heavy tracks to a *different model* for cross-model diversity.
-  **PAID (~$2–5, minutes each):** free engines run automatically, but **before any Gemini call, show an
-  estimated cost + which track(s) it covers and get explicit go-ahead.** If declined/unavailable, cover that
-  track with Claude+MCPs and note it.
-
-Each agent records evidence in the log shape from `references/verification.md` (claim · source · type · date
-· supports · limitation · confidence).
-
-## P3 — Counter-review team (verification)
-
-Before any finding enters the report, run dedicated verifier agents **in parallel**:
-
-- **claim-validator** — is each central claim actually supported by its cited source?
-- **source-diversity-checker** — are claims resting on independent sources, not one echoed secondary article?
-- **recency-validator** — are dated/versioned claims current as of AS_OF?
-- **contradiction-finder** — surface conflicts between sources; flag unresolved disputes.
-
-Findings that fail verification are dropped or downgraded. Detail in **`references/verification.md`**.
-
-## P4 — Citation registry & quality gates
-
-Build a unified **citation registry**: dedupe sources, assign `[n]` numbers, tag type (official / review /
-forum / journalism / analysis) and date. Apply quality gates: central claims need a primary/strong source;
-review-derived weaknesses need ≥3 independent user mentions before stated as a pattern (never launder one
-complaint into a trend). List dropped sources with the reason.
-
-## P5 — Synthesize with frameworks
-
-Apply all four frameworks (how-to in **`references/frameworks.md`**), using **Mermaid diagrams just-in-time**
-(only where a picture beats prose):
-
-- **Competitor matrix + weaknesses** — feature/pricing table + synthesized, citation-backed weakness list.
-- **Positioning / perceptual map** — 2-axis map of competitors and where GlobalyHub lands.
-- **Market sizing** — TAM/SAM/SOM, top-down + bottom-up, assumptions stated.
-- **Category fit + Five Forces** — existing vs new category recommendation + industry attractiveness.
-
-Lead with conclusions, then evidence. Explain disagreement; don't flatten it. Mark confidence per section.
-
-## P6 — Self-review & write the report
-
-1. **Self-review** against the checklist in `references/report-template.md` (every central claim cited near
-   the claim, dates present, contradictions visible, no placeholders, diagrams valid).
-2. **Ask where to save**, then write **one consolidated markdown report** using the template. Single md file —
-   no JSON sidecar, no separate per-track files.
-3. Save the key conclusions + decision-relevant facts to **claude-mem** so later work compounds.
-
-Then stop. The deliverable is the report.
+## P3 — Self-review & write
+1. **Single self-review pass** against the checklist in `references/report-template.md`: every central claim
+   cited inline, dates present, weaknesses meet the ≥3-mention bar, no placeholders, diagrams valid.
+2. **Ask where to save**, then write **one consolidated markdown report** (single file — no sidecar).
+3. Save key conclusions to **claude-mem** so later work compounds. Then stop.
 
 ## Guardrails
-
-- ❌ Never answer competitor/market questions from memory after activating — gather fresh evidence.
-- ❌ No hallucinated URLs; never resurrect a dropped source; never imply an unread source was read.
-- ❌ No review-mined "pattern" from a single complaint (≥3 independent mentions).
+- ❌ Never answer from memory after activating — gather fresh evidence (within the source cap).
+- ❌ No hallucinated URLs; never imply an unread source was read.
+- ❌ No paid research APIs; no second search engine; no separate verifier agents.
 - ✅ Citations sit next to the claims they support, not only in a final list.
-- ✅ Disclose access limits (paywalls, blocked pages, skipped paid engine) and lower confidence accordingly.
-- Keep the run proportional: a narrow product gets a tight report; a broad/contested market gets the full treatment.
+- ✅ Disclose access limits (paywalls, blocked pages) and lower confidence accordingly.
+- Keep it proportional: a narrow product gets a tight brief; cap sources regardless.
+
+> Need the heavyweight multi-engine version (parallel agents across Claude + exa + firecrawl + Gemini, with a
+> counter-review team)? That was removed to keep this skill token-lean. Use `gh-parallel-subagents` to fan out
+> if you truly need it.

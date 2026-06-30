@@ -1,64 +1,60 @@
-# Report Template
+# Report Template & Frameworks
 
 One consolidated markdown file. Lead with conclusions, then evidence. Citations sit **next to** the claims
-they support (inline `[n]`), with a full registry at the end. Mermaid diagrams just-in-time. No placeholders.
+they support (inline `[n]`), plus a registry at the end. Mermaid diagrams **just-in-time** (only where a
+picture beats prose). No placeholders.
+
+## Frameworks to apply (all four, evidence-backed)
+
+1. **Competitor matrix + weaknesses** — a table across competitors + the status quo:
+   `| Competitor | Segment | Key features | Pricing | Positioning | Top user-reported weaknesses [n] |`
+   Below it, a weakness list — each with # independent mentions + 1–2 cited verbatims. This is the wedge.
+2. **Positioning map** — pick the two axes buyers care about (e.g. price vs depth) and plot competitors +
+   where GlobalyHub lands (aim for an empty, valuable quadrant). Mermaid `quadrantChart`, or a prose 2×2 if it
+   won't render.
+3. **Market sizing** — TAM/SAM/SOM, top-down + bottom-up, assumptions stated.
+4. **Category fit + Five Forces** — existing vs new category recommendation, then rate each of Porter's five
+   forces (Low/Med/High + one-line justification) and conclude on industry attractiveness.
+
+Tie them into one **"How GlobalyHub fits"** verdict: the wedge + category play + reachable market + top risks,
+each line traceable to a cited finding.
+
+## Report structure
 
 ```markdown
-# <Product> — Deep Product Research
+# <Product> — Product Research
 
-> AS_OF: YYYY-MM-DD · Source brainstorm doc: <path> · Engines used: Claude subagents, exa/firecrawl, Gemini (used/skipped) · Mode: Fast | Standard
+> AS_OF: YYYY-MM-DD · Brainstorm doc: <path> · Engine: exa|firecrawl|builtin
 
 ## Executive Summary
-<The verdict in 5–8 lines: Is there a market? Where do we fit? What's the wedge? Existing vs new category?
-Top 3 risks. Overall confidence.>
+<5–8 lines: market real? where we fit? the wedge? existing vs new category? top 3 risks. Overall confidence.>
 
-## How GlobalyHub Fits  (the verdict)
-<The wedge (from competitor weaknesses) + category play + reachable market + top risks. Each line cited.>
+## How GlobalyHub Fits  (verdict)
+<Wedge (from competitor weaknesses) + category play + reachable market + top risks. Each line cited.>
 
-## 1. Market & PMF Signals   `confidence: H/M/L`
-<Demand evidence, growth, willingness to pay. TAM/SAM/SOM with diagram + assumptions.>
+## 1. Market & Category   `confidence: H/M/L`
+<TAM/SAM/SOM (+ assumptions), demand signals, existing-vs-new category call, key trends/regulatory.>
 
-## 2. Competitor Landscape   `confidence: H/M/L`
-<Competitor matrix table. Status-quo workaround.>
+## 2. Competitors   `confidence: H/M/L`
+<Competitor matrix + positioning map. Status-quo workaround.>
 
 ## 3. Competitor Weaknesses (Voice of Customer)   `confidence: H/M/L`
-<Weakness themes, each with # independent mentions + representative cited verbatims. This is the wedge.>
+<Weakness themes, each with # independent mentions + cited verbatims.>
 
-## 4. Positioning   `confidence: H/M/L`
-<Perceptual map (Mermaid) + where we land and why.>
+## Risks & Open Questions
+<Unresolved contradictions, what to validate next.>
 
-## 5. Category Fit   `confidence: H/M/L`
-<Existing vs new category recommendation + Five Forces table + industry attractiveness.>
-
-## 6. Trends, Future-Fit & Regulatory   `confidence: H/M/L`
-<Tailwinds/headwinds, regulatory constraints, why this matters more over time.>
-
-## Areas of Disagreement / Uncertainty
-<Unresolved contradictions between sources; what would resolve them.>
-
-## Implications & Open Questions
-<What this means for the product decision; what to validate next.>
-
-## Methodology
-<Tracks run (incl. any adaptive extras + why), engines per track, what couldn't be checked (access limits,
-skipped paid engine), AS_OF.>
-
-## Citation Registry
-<[1] Author/Institution — Title — date — URL — what it establishes — limitation. One row per source.>
-
-### Dropped Sources
-<Source — reason rejected (secondary echo / undated / paywalled-unread / contradicted by [n]).>
+## Methodology & Sources
+<Engine used, source cap, what couldn't be checked (paywalls/blocked), AS_OF.
+[1] Author — Title — date — url — what it establishes.>
 ```
 
-## Completion checklist (P6 self-review)
-- [ ] Brainstorm doc was loaded and its product/wedge framed the tracks.
-- [ ] All 5 fixed tracks covered (+ any adaptive extras named & justified).
-- [ ] All four frameworks present and evidence-backed.
-- [ ] Every central claim cited **inline**, not only in the registry.
-- [ ] Review-mined weaknesses meet the ≥3-independent-mentions bar (or labeled anecdotal).
-- [ ] Dates checked against AS_OF; stale/undated sources flagged.
-- [ ] Counter-review passed; dropped sources listed and absent from the body.
-- [ ] Contradictions visible, not flattened. Confidence marked per section.
-- [ ] Access limits / skipped paid engine disclosed.
-- [ ] Diagrams render (valid Mermaid) and earn their place. No placeholders, no "TBD".
-- [ ] Single md file; saved to the user-chosen location; key conclusions saved to claude-mem.
+## Self-review checklist (single pass)
+- [ ] Brainstorm doc loaded and framed the research.
+- [ ] All 3 areas covered; ≤6 sources/area respected.
+- [ ] All 4 frameworks present and evidence-backed.
+- [ ] Every central claim cited **inline**, not only in the source list.
+- [ ] Weaknesses meet the ≥3-independent-mentions bar (or labeled anecdotal).
+- [ ] Dates checked vs AS_OF; access limits disclosed; confidence marked per section.
+- [ ] Diagrams render (valid Mermaid) and earn their place. No placeholders.
+- [ ] Single md file saved to the chosen location; key conclusions saved to claude-mem.
