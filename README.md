@@ -1,11 +1,13 @@
 # GH AI Skills and Plugins
 
 **Globaly Inc's internal Claude Code marketplace.** Install it once and you get every
-company-authored skill — across product, research, engineering, and devops — and you stay
+company-authored skill — across product, research, design, and engineering — and you stay
 in sync automatically as the team ships new skills.
 
 This repo is a [Claude Code plugin marketplace](https://docs.claude.com/en/docs/claude-code/plugins).
 It works the same on your laptop or any cloud box.
+
+> **Current version:** `globaly-skills` v0.6.0 · 8 skills + the Globaly design system.
 
 ---
 
@@ -37,18 +39,39 @@ claude plugin marketplace update globaly
 claude plugin update globaly-skills@globaly   # restart to apply
 ```
 
+## The product pipeline
+
+The skills chain into one idea-to-shipped-feature flow. Each stage feeds the next; invoke them in order
+(or jump in wherever your work starts).
+
+```mermaid
+flowchart LR
+  A[gh-brainstorming] --> B[gh-product-deep-research]
+  B --> C[gh-prd-generator]
+  C --> D[gh-architecture-docs]
+  C --> E[gh-design-direction]
+  D --> F[gh-implementation-plan]
+  E --> F
+  F --> G[gh-full-dev-implementation]
+  H[gh-parallel-subagents]:::cross -.fan out any stage.-> G
+  classDef cross fill:#eee,stroke:#999,stroke-dasharray:4;
+```
+
 ## What's inside
 
-| Skill | Function | Use it when… |
-|-------|----------|--------------|
-| `gh-brainstorming` | Product | adaptive brainstorming for a raw idea or fuzzy plan |
-| `gh-product-deep-research` | R&D / Research | competitor analysis, product-market fit, user pain points |
-| `gh-prd-generator` | Product | generating a structured PRD from brainstorming outputs |
-| `gh-architecture-docs` | Engineering | turning a PRD into a spec, SQL skeleton, and migration plan |
-| `gh-design-direction` | Design | frontend design direction before components are built |
-| `gh-implementation-plan` | Engineering | step-by-step implementation plan gate before coding |
-| `gh-full-dev-implementation` | Engineering | implementing a feature or improving architecture end-to-end |
-| `gh-parallel-subagents` | Engineering | dispatching independent tasks to parallel subagents for concurrent execution |
+| Stage | Skill | Function | Use it when… |
+|-------|-------|----------|--------------|
+| 1 | `gh-brainstorming` | Product | adaptive brainstorming for a raw idea or fuzzy plan |
+| 2 | `gh-product-deep-research` | R&D / Research | competitor analysis, product-market fit, user pain points (token-lean: single engine, capped sources) |
+| 3 | `gh-prd-generator` | Product | generating a structured PRD (`docs/PRD.md`) from brainstorming + research |
+| 4 | `gh-architecture-docs` | Engineering | turning a PRD into a backend spec, SQL skeleton, and migration plan |
+| 4 | `gh-design-direction` | Design | frontend design direction + component plan before components are built |
+| 5 | `gh-implementation-plan` | Engineering | step-by-step implementation plan gate before any code is written |
+| 6 | `gh-full-dev-implementation` | Engineering | implementing a feature or improving architecture end-to-end (React + TS + Supabase) |
+| — | `gh-parallel-subagents` | Engineering | fan independent tasks out to parallel subagents on separate git worktrees |
+
+**Also included:** [`globaly-design-system/`](./globaly-design-system/) — the shared component library
+(40 components, design tokens, typography), brand-aware via `data-brand`. `gh-design-direction` builds against it.
 
 More skills are added over time — they appear automatically after a sync.
 
