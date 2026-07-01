@@ -1,5 +1,5 @@
 ---
-name: frontend-design
+name: gh-design-direction
 description: Use when a PRD and dev architecture are approved and a feature needs frontend design direction before any component is built, OR when a product change happens mid-development and the design direction needs a delta update before updating the PRD and architecture. Triggers on "design direction", "frontend plan", "component architecture", "how should this look", "UI breakdown", "wireframe this", "what do we build first", "design this feature", "requirement changed", "scope changed", "update design direction", or "product change".
 ---
 
