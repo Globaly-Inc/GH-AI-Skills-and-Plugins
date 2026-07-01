@@ -3,9 +3,9 @@ name: gh-prd-generator
 description: >-
   Generate a structured PRD for any GlobalyHub project. Reads brainstorming
   outputs, market research outputs, and the codebase first, then drafts and
-  gap-fills. Writes to docs/PRD.md. Use when the user says "write a PRD",
-  "create a spec", "product requirements document", "I need a PRD", or
-  invokes /gh-prd-generator or /prd.
+  gap-fills. Writes to docs/prd/YYYY-MM-DD-<feature-name>-prd.md. Use when the
+  user says "write a PRD", "create a spec", "product requirements document",
+  "I need a PRD", or invokes /gh-prd-generator or /prd.
 trigger:
   - /gh-prd-generator
   - /prd
@@ -27,8 +27,8 @@ outputs before exploring the codebase:
 
 | Skill | Expected output file | What to extract |
 |-------|---------------------|-----------------|
-| `/brainstorming` | `docs/superpowers/specs/*-design.md` | Problem framing, personas, design decisions, approved approach |
-| `/GH-Market-Research` (or equivalent) | `docs/research/*.md` or `docs/market-research.md` | Competitor landscape, market sizing, user insights, differentiation signals |
+| `/gh-brainstorming` | `docs/brainstorms/YYYY-MM-DD-<topic>-design.md` (path is user-chosen at write time — glob `docs/brainstorms/*-design.md` and take the latest, or ask if none found) | Problem framing, personas, design decisions, approved approach |
+| `/gh-product-deep-research` | `docs/research/YYYY-MM-DD-<topic>-research.md` (path is user-chosen at write time — glob `docs/research/*-research.md` and take the latest, or ask if none found) | Competitor landscape, market sizing, user insights, differentiation signals |
 
 If either file is missing, mark the affected sections `🔵 Open Question` and
 continue — do not block on them.
@@ -56,8 +56,8 @@ continue — do not block on them.
 
 Read in this order:
 
-1. **Brainstorming output** — `docs/superpowers/specs/` (latest `-design.md`)
-2. **Market research output** — `docs/research/` or `docs/market-research.md`
+1. **Brainstorming output** — `docs/brainstorms/` (latest `*-design.md`)
+2. **Market research output** — `docs/research/` (latest `*-research.md`)
 3. `docs/` — other existing specs, ADRs, design docs
 4. `.planning/` — GSD planning artifacts if present
 5. `README.md` / `CLAUDE.md` — project overview and constraints
@@ -91,9 +91,14 @@ Mandatory sections that must not remain as pure `🔵 Open Questions`:
 - Success Metrics (primary metric with baseline → target)
 - Scope (at least one explicit out-of-scope item)
 
-### Step 4 — Write `docs/PRD.md`
+### Step 4 — Write the PRD
 
-Write the complete file. End with a one-line summary:
+Derive `<feature-name>` (kebab-case slug of the feature/initiative name) and save to:
+
+`docs/prd/YYYY-MM-DD-<feature-name>-prd.md`
+
+using today's actual date. Confirm the path with the user if the inferred slug is ambiguous; otherwise
+proceed without asking. Write the complete file, then end with a one-line summary:
 `Inferred from: [sources used]. Asked about: [sections that needed Q&A].`
 
 ---
@@ -384,8 +389,8 @@ Every epic flow MUST cover all six states. None are optional:
 
 ## Related Skills
 
-- `/GH-brainstorming` — Required upstream: explore and design before PRD
-- `/GH-Market-Research` — Required upstream: competitor and user research
+- `/gh-brainstorming` — Required upstream: explore and design before PRD
+- `/gh-product-deep-research` — Required upstream: competitor and user research
 - `/epic-breakdown-advisor` — Split large epics using 9 Humanizing Work patterns
 - `/user-story` — Write and validate individual user stories
 - `/product-discovery` — Validate an idea before brainstorming

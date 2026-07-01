@@ -47,7 +47,9 @@ disagreement rather than flattening it.
 ## P3 — Self-review & write
 1. **Single self-review pass** against the checklist in `references/report-template.md`: every central claim
    cited inline, dates present, weaknesses meet the ≥3-mention bar, no placeholders, diagrams valid.
-2. **Ask where to save**, then write **one consolidated markdown report** (single file — no sidecar).
+2. **Ask where to save**, defaulting to `docs/research/YYYY-MM-DD-<topic>-research.md` (version-controlled,
+   discoverable by `gh-prd-generator`), then write **one consolidated markdown report** (single file — no
+   sidecar).
 3. Save key conclusions to **claude-mem** so later work compounds. Then stop.
 
 ## Guardrails
