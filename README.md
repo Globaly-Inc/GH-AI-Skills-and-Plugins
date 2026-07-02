@@ -7,7 +7,7 @@ in sync automatically as the team ships new skills.
 This repo is a [Claude Code plugin marketplace](https://docs.claude.com/en/docs/claude-code/plugins).
 It works the same on your laptop or any cloud box.
 
-> **Current version:** `globaly-skills` v0.6.0 · 8 skills + the Globaly design system.
+> **Current version:** `globaly-skills` v0.7.0 · 9 skills + the Globaly design system.
 
 ---
 
@@ -69,6 +69,7 @@ flowchart LR
 | 5 | `gh-implementation-plan` | Engineering | step-by-step implementation plan gate before any code is written |
 | 6 | `gh-full-dev-implementation` | Engineering | implementing a feature or improving architecture end-to-end (React + TS + Supabase) |
 | — | `gh-parallel-subagents` | Engineering | fan independent tasks out to parallel subagents on separate git worktrees |
+| — | `gh-repo-docs` | Docs | generate a shareable team reference guide for any GitHub repo from its URL |
 
 **Also included:** [`globaly-design-system/`](./globaly-design-system/) — the shared component library
 (40 components, design tokens, typography), brand-aware via `data-brand`. `gh-design-direction` builds against it.
