@@ -15,8 +15,8 @@ export function Pagination({ page = 1, total = 1, onChange, style = {} }) {
     <button onClick={opts.onClick} disabled={opts.disabled}
       style={{
         minWidth: 34, height: 34, padding: '0 8px', borderRadius: 8,
-        border: `1px solid ${opts.active ? '#7F1D1D' : '#E2E8F0'}`,
-        background: opts.active ? '#7F1D1D' : '#fff',
+        border: `1px solid ${opts.active ? '#012E8A' : '#E2E8F0'}`,
+        background: opts.active ? '#012E8A' : '#fff',
         color: opts.active ? '#fff' : opts.disabled ? '#CBD5E1' : '#334155',
         fontSize: 13, fontWeight: opts.active ? 600 : 500, cursor: opts.disabled ? 'not-allowed' : 'pointer',
         fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif",

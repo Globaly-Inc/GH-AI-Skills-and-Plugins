@@ -7,5 +7,5 @@ export interface TabsProps {
   onChange?: (value: string) => void;
   style?: React.CSSProperties;
 }
-/** Underline tabs. Active tab uses maroon text + 2px maroon indicator. */
+/** Underline tabs. Active tab uses navy text + 2px navy indicator. */
 export function Tabs(props: TabsProps): React.ReactElement;

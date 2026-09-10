@@ -15,7 +15,7 @@ export interface StatCardProps {
   change?: string;
   changeType?: 'positive' | 'negative' | 'neutral';
   icon?: React.ReactNode;
-  /** Accent color for the icon chip. @default "#7F1D1D" */
+  /** Accent color for the icon chip. @default "#012E8A" */
   accent?: string;
   style?: React.CSSProperties;
 }

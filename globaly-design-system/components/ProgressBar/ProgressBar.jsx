@@ -1,6 +1,6 @@
 // Globalyapp Design System — ProgressBar
 
-export function ProgressBar({ value = 0, max = 100, label, showValue = false, size = 'md', color = '#7F1D1D', style = {} }) {
+export function ProgressBar({ value = 0, max = 100, label, showValue = false, size = 'md', color = '#012E8A', style = {} }) {
   const pct = Math.max(0, Math.min(100, (value / max) * 100));
   const h = size === 'sm' ? 6 : size === 'lg' ? 12 : 8;
   return (

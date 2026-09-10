@@ -8,5 +8,5 @@ export interface SegmentedControlProps {
   size?: 'sm' | 'md';
   style?: React.CSSProperties;
 }
-/** Pill segmented control. Active segment is a raised white card with maroon text. */
+/** Pill segmented control. Active segment is a raised white card with navy text. */
 export function SegmentedControl(props: SegmentedControlProps): React.ReactElement;

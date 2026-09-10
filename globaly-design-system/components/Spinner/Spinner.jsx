@@ -1,6 +1,6 @@
 // Globalyapp Design System — Spinner
 
-export function Spinner({ size = 24, color = '#7F1D1D', thickness = 2.5, style = {} }) {
+export function Spinner({ size = 24, color = '#012E8A', thickness = 2.5, style = {} }) {
   return (
     <span style={{ display: 'inline-flex', width: size, height: size, ...style }}>
       <svg width={size} height={size} viewBox="0 0 24 24" style={{ animation: 'gly-spin 0.7s linear infinite' }}>

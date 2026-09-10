@@ -44,9 +44,9 @@ export function Datepicker({ value, onChange, style = {} }) {
             style={{
               height: 32, borderRadius: 8, border: 'none', cursor: 'pointer', fontSize: 13,
               fontFamily: 'inherit', fontWeight: isSel(d) ? 600 : 500,
-              background: isSel(d) ? '#7F1D1D' : 'transparent',
-              color: isSel(d) ? '#fff' : isToday(d) ? '#7F1D1D' : '#334155',
-              boxShadow: isToday(d) && !isSel(d) ? 'inset 0 0 0 1px #FCA5A5' : 'none',
+              background: isSel(d) ? '#012E8A' : 'transparent',
+              color: isSel(d) ? '#fff' : isToday(d) ? '#012E8A' : '#334155',
+              boxShadow: isToday(d) && !isSel(d) ? 'inset 0 0 0 1px #93C5FD' : 'none',
             }}
             onMouseEnter={e => { if (!isSel(d)) e.currentTarget.style.background = '#F1F5F9'; }}
             onMouseLeave={e => { if (!isSel(d)) e.currentTarget.style.background = 'transparent'; }}>

@@ -4,7 +4,7 @@
 **Repo path:** `globalyhub/GlobalyApp`  
 **Stack note:** No framer-motion — animations are CSS utility classes defined in `src/index.css`  
 **Global state:** MobX (`mobx` + `mobx-react-lite`) — install with `npm i mobx mobx-react-lite` if not present  
-**Design system brand:** Default — no `data-brand` attribute needed (maroon `#7F1D1D`)
+**Design system brand:** Default — no `data-brand` attribute needed (navy `#012E8A`)
 
 ---
 
@@ -14,16 +14,16 @@ GlobalyApp maps Tailwind/shadcn CSS variables to the Globaly Design System seman
 
 | Design system token | GlobalyApp equivalent |
 |--------------------|-----------------------|
-| `--brand-primary-default` | `--primary` (`hsl(0 63% 31%)`) |
-| `--brand-primary-hover` | `hsl(0 63% 25%)` |
-| `--brand-primary-subtle` | `--secondary` (`hsl(0 30% 96%)`) |
+| `--brand-primary-default` | `--primary` (`hsl(220 99% 27%)`) |
+| `--brand-primary-hover` | `hsl(220 99% 22%)` |
+| `--brand-primary-subtle` | `--secondary` (`hsl(214 100% 97%)`) |
 | `--surface-page` | `--background` (`hsl(0 0% 100%)`) |
 | `--surface-card` | `--card` (`hsl(0 0% 100%)`) |
 | `--surface-panel` | `--muted` (`hsl(210 17% 96%)`) |
 | `--fg-primary` | `--foreground` |
 | `--fg-muted` | `--muted-foreground` |
 | `--border-default` | `--border` (`hsl(215 16% 90%)`) |
-| `--border-focus` | `--ring` (`hsl(0 63% 31%)`) |
+| `--border-focus` | `--ring` (`hsl(220 99% 27%)`) |
 | `--border-error` | `--destructive` |
 
 Typography semantic classes (`.t-h1`, `.t-body`, etc.) from the design system are available alongside Tailwind type utilities — use the semantic class when it covers the case exactly.
@@ -34,22 +34,22 @@ Typography semantic classes (`.t-h1`, `.t-body`, etc.) from the design system ar
 
 | Token | Light | Dark | Use |
 |-------|-------|------|-----|
-| `--primary` | `hsl(0 63% 31%)` — `#7F1D1D` | `hsl(0 70% 50%)` | CTAs, links, active nav |
+| `--primary` | `hsl(220 99% 27%)` — `#012E8A` | `hsl(217 91% 60%)` | CTAs, links, active nav |
 | `--primary-foreground` | `hsl(0 0% 100%)` | `hsl(0 0% 100%)` | Text on primary bg |
-| `--secondary` | `hsl(0 30% 96%)` | `hsl(222 30% 18%)` | Chips, tag backgrounds |
-| `--secondary-foreground` | `hsl(0 63% 31%)` | `hsl(270 40% 98%)` | Text on secondary |
-| `--accent` | `hsl(0 86% 80%)` | `hsl(222 30% 22%)` | Soft highlights |
+| `--secondary` | `hsl(214 100% 97%)` | `hsl(222 30% 18%)` | Chips, tag backgrounds |
+| `--secondary-foreground` | `hsl(220 99% 27%)` | `hsl(270 40% 98%)` | Text on secondary |
+| `--accent` | `hsl(213 94% 78%)` | `hsl(222 30% 22%)` | Soft highlights |
 | `--gold` | `hsl(38 92% 50%)` | — | Badges, pricing, editorial accent |
 | `--navy` | `hsl(222 47% 11%)` | `hsl(222 47% 6%)` | Sidebar, footer, dark surfaces |
-| `--purple-dark` | `hsl(0 63% 20%)` | — | Hero section backgrounds |
-| `--purple-deep` | `hsl(0 63% 14%)` | — | Deep hero / full-bleed sections |
+| `--purple-dark` | `hsl(220 63% 20%)` | — | Hero section backgrounds |
+| `--purple-deep` | `hsl(220 63% 14%)` | — | Deep hero / full-bleed sections |
 | `--muted` | `hsl(210 17% 96%)` | `hsl(222 30% 18%)` | Disabled/inactive areas |
 | `--muted-foreground` | `hsl(215 16% 47%)` | `hsl(240 5% 60%)` | Secondary/hint text |
 | `--destructive` | `hsl(0 84% 60%)` | `hsl(0 62% 30%)` | Errors, delete actions |
 | `--border` | `hsl(215 16% 90%)` | `hsl(222 30% 22%)` | Dividers, input borders |
 | `--background` | `hsl(0 0% 100%)` | `hsl(222 47% 8%)` | Page background |
 | `--card` | `hsl(0 0% 100%)` | `hsl(222 47% 11%)` | Card backgrounds |
-| `--ring` | `hsl(0 63% 31%)` | `hsl(0 70% 50%)` | Focus rings |
+| `--ring` | `hsl(220 99% 27%)` | `hsl(217 91% 60%)` | Focus rings |
 
 **Dark mode:** `darkMode: ["class"]` — toggled via `class="dark"` on `<html>`.  
 **Never hardcode hex values.** Always reference the token name.
@@ -313,6 +313,6 @@ Portal pages (`PersonalLayout`, `BusinessLayout`) are auth-gated and do not need
 |-------|-------|
 | `--sidebar-background` | `hsl(222 47% 11%)` (navy) |
 | `--sidebar-foreground` | `hsl(240 5% 85%)` |
-| `--sidebar-primary` | `hsl(0 63% 45%)` |
+| `--sidebar-primary` | `hsl(220 63% 45%)` |
 | `--sidebar-accent` | `hsl(222 30% 18%)` |
 | `--sidebar-border` | `hsl(222 30% 18%)` |

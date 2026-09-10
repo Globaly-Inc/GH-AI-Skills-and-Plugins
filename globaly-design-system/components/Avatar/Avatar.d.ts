@@ -9,7 +9,7 @@ export interface AvatarProps {
   src?: string;
   size?: AvatarSize | number;
   status?: 'online' | 'away' | 'offline' | 'busy';
-  /** Initials background color. @default "#7F1D1D" */
+  /** Initials background color. @default "#012E8A" */
   color?: string;
   style?: React.CSSProperties;
 }

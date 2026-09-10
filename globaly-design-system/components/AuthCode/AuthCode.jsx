@@ -29,7 +29,7 @@ export function AuthCode({ length = 6, value = '', onChange, disabled = false, e
           inputMode="numeric" maxLength={1}
           style={{
             width: 44, height: 52, textAlign: 'center', fontSize: 20, fontWeight: 700,
-            borderRadius: 10, border: `1.5px solid ${error ? '#DC2626' : c ? '#7F1D1D' : '#E2E8F0'}`,
+            borderRadius: 10, border: `1.5px solid ${error ? '#DC2626' : c ? '#012E8A' : '#E2E8F0'}`,
             background: error ? '#FEE2E2' : '#F8FAFC', color: '#1E293B', outline: 'none',
             fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif", opacity: disabled ? 0.5 : 1,
             transition: 'border-color .12s',

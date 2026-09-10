@@ -6,5 +6,5 @@ export interface DatepickerProps {
   onChange?: (date: Date) => void;
   style?: React.CSSProperties;
 }
-/** Month calendar. Selected day is maroon; today is ringed. */
+/** Month calendar. Selected day is navy; today is ringed. */
 export function Datepicker(props: DatepickerProps): React.ReactElement;

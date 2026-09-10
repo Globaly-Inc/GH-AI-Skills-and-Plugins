@@ -275,7 +275,7 @@ function AuthCode({
       fontSize: 20,
       fontWeight: 700,
       borderRadius: 10,
-      border: `1.5px solid ${error ? '#DC2626' : c ? '#7F1D1D' : '#E2E8F0'}`,
+      border: `1.5px solid ${error ? '#DC2626' : c ? '#012E8A' : '#E2E8F0'}`,
       background: error ? '#FEE2E2' : '#F8FAFC',
       color: '#1E293B',
       outline: 'none',
@@ -308,7 +308,7 @@ function Avatar({
   src,
   size = 'md',
   status,
-  color = '#7F1D1D',
+  color = '#012E8A',
   style = {}
 }) {
   const dim = AVATAR_SIZES[size] || size || 40;
@@ -681,9 +681,9 @@ const BTN_SIZES = {
 };
 const BTN_VARIANTS = {
   primary: {
-    background: '#7F1D1D',
+    background: '#012E8A',
     color: '#fff',
-    hoverBg: '#6B1818'
+    hoverBg: '#012670'
   },
   secondary: {
     background: '#1E293B',
@@ -707,9 +707,9 @@ const BTN_VARIANTS = {
     hoverBg: '#B91C1C'
   },
   subtle: {
-    background: '#FEE2E2',
-    color: '#7F1D1D',
-    hoverBg: '#FECACA'
+    background: '#DBEAFE',
+    color: '#012E8A',
+    hoverBg: '#BFDBFE'
   }
 };
 function Button({
@@ -841,7 +841,7 @@ function StatCard({
   change,
   changeType = 'positive',
   icon,
-  accent = '#7F1D1D',
+  accent = '#012E8A',
   style = {}
 }) {
   const changeColor = changeType === 'positive' ? '#15803D' : changeType === 'negative' ? '#DC2626' : '#64748B';
@@ -1026,7 +1026,7 @@ function Carousel({
       borderRadius: 9999,
       border: 'none',
       cursor: 'pointer',
-      background: idx === i ? '#7F1D1D' : 'rgba(255,255,255,0.7)',
+      background: idx === i ? '#012E8A' : 'rgba(255,255,255,0.7)',
       transition: 'all .2s',
       boxShadow: '0 0 0 1px rgba(0,0,0,0.06)'
     }
@@ -1072,8 +1072,8 @@ function Checkbox({
       height: dim,
       borderRadius: 4,
       flexShrink: 0,
-      border: `1.5px solid ${on ? '#7F1D1D' : '#CBD5E1'}`,
-      background: on ? '#7F1D1D' : '#fff',
+      border: `1.5px solid ${on ? '#012E8A' : '#CBD5E1'}`,
+      background: on ? '#012E8A' : '#fff',
       display: 'inline-flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -1172,7 +1172,7 @@ function Combobox({
       width: '100%',
       height: 40,
       borderRadius: 8,
-      border: `1px solid ${open ? '#7F1D1D' : '#E2E8F0'}`,
+      border: `1px solid ${open ? '#012E8A' : '#E2E8F0'}`,
       background: '#F8FAFC',
       padding: '0 10px',
       display: 'flex',
@@ -1262,8 +1262,8 @@ function Combobox({
         borderRadius: 6,
         border: 'none',
         cursor: 'pointer',
-        background: on ? '#FEE2E2' : 'transparent',
-        color: on ? '#991B1B' : '#334155',
+        background: on ? '#DBEAFE' : 'transparent',
+        color: on ? '#012E8A' : '#334155',
         fontSize: 13,
         fontWeight: on ? 600 : 500,
         fontFamily: 'inherit',
@@ -1422,9 +1422,9 @@ function Datepicker({
       fontSize: 13,
       fontFamily: 'inherit',
       fontWeight: isSel(d) ? 600 : 500,
-      background: isSel(d) ? '#7F1D1D' : 'transparent',
-      color: isSel(d) ? '#fff' : isToday(d) ? '#7F1D1D' : '#334155',
-      boxShadow: isToday(d) && !isSel(d) ? 'inset 0 0 0 1px #FCA5A5' : 'none'
+      background: isSel(d) ? '#012E8A' : 'transparent',
+      color: isSel(d) ? '#fff' : isToday(d) ? '#012E8A' : '#334155',
+      boxShadow: isToday(d) && !isSel(d) ? 'inset 0 0 0 1px #93C5FD' : 'none'
     },
     onMouseEnter: e => {
       if (!isSel(d)) e.currentTarget.style.background = '#F1F5F9';
@@ -1684,8 +1684,8 @@ function Input({
 }) {
   const [focused, setFocused] = React.useState(false);
   const borderColors = {
-    default: focused ? '#7F1D1D' : '#E2E8F0',
-    active: '#7F1D1D',
+    default: focused ? '#012E8A' : '#E2E8F0',
+    active: '#012E8A',
     error: '#DC2626',
     success: '#16A34A',
     disabled: '#E2E8F0'
@@ -1758,7 +1758,7 @@ function Textarea({
   ...props
 }) {
   const [focused, setFocused] = React.useState(false);
-  const borderColor = disabled ? '#E2E8F0' : state === 'error' ? '#DC2626' : state === 'success' ? '#16A34A' : focused ? '#7F1D1D' : '#E2E8F0';
+  const borderColor = disabled ? '#E2E8F0' : state === 'error' ? '#DC2626' : state === 'success' ? '#16A34A' : focused ? '#012E8A' : '#E2E8F0';
   const bg = state === 'error' ? '#FEE2E2' : state === 'success' ? '#DCFCE7' : '#F8FAFC';
   return /*#__PURE__*/React.createElement("textarea", _extends({
     value: value,
@@ -2052,8 +2052,8 @@ function Pagination({
       height: 34,
       padding: '0 8px',
       borderRadius: 8,
-      border: `1px solid ${opts.active ? '#7F1D1D' : '#E2E8F0'}`,
-      background: opts.active ? '#7F1D1D' : '#fff',
+      border: `1px solid ${opts.active ? '#012E8A' : '#E2E8F0'}`,
+      background: opts.active ? '#012E8A' : '#fff',
       color: opts.active ? '#fff' : opts.disabled ? '#CBD5E1' : '#334155',
       fontSize: 13,
       fontWeight: opts.active ? 600 : 500,
@@ -2197,7 +2197,7 @@ function ProgressBar({
   label,
   showValue = false,
   size = 'md',
-  color = '#7F1D1D',
+  color = '#012E8A',
   style = {}
 }) {
   const pct = Math.max(0, Math.min(100, value / max * 100));
@@ -2288,7 +2288,7 @@ function Radio({
       height: dim,
       borderRadius: '50%',
       flexShrink: 0,
-      border: `1.5px solid ${checked ? '#7F1D1D' : '#CBD5E1'}`,
+      border: `1.5px solid ${checked ? '#012E8A' : '#CBD5E1'}`,
       background: '#fff',
       display: 'inline-flex',
       alignItems: 'center',
@@ -2300,7 +2300,7 @@ function Radio({
       width: 8,
       height: 8,
       borderRadius: '50%',
-      background: '#7F1D1D'
+      background: '#012E8A'
     }
   })), label && /*#__PURE__*/React.createElement("span", {
     style: {
@@ -2372,7 +2372,7 @@ function SegmentedControl({
         border: 'none',
         cursor: 'pointer',
         background: on ? '#fff' : 'transparent',
-        color: on ? '#7F1D1D' : '#64748B',
+        color: on ? '#012E8A' : '#64748B',
         fontSize: 13,
         fontWeight: on ? 600 : 500,
         fontFamily: 'inherit',
@@ -2392,7 +2392,7 @@ try { (() => {
 
 function Spinner({
   size = 24,
-  color = '#7F1D1D',
+  color = '#012E8A',
   thickness = 2.5,
   style = {}
 }) {
@@ -2471,7 +2471,7 @@ function Switch({
       borderRadius: 9999,
       flexShrink: 0,
       position: 'relative',
-      background: checked ? '#7F1D1D' : '#CBD5E1',
+      background: checked ? '#012E8A' : '#CBD5E1',
       transition: 'background .15s'
     }
   }, /*#__PURE__*/React.createElement("span", {
@@ -2603,7 +2603,7 @@ function Tabs({
         padding: '10px 14px',
         fontSize: 14,
         fontWeight: on ? 600 : 500,
-        color: tab.disabled ? '#CBD5E1' : on ? '#7F1D1D' : '#64748B',
+        color: tab.disabled ? '#CBD5E1' : on ? '#012E8A' : '#64748B',
         fontFamily: 'inherit',
         display: 'inline-flex',
         alignItems: 'center',
@@ -2612,8 +2612,8 @@ function Tabs({
       }
     }, tab.label, tab.badge != null && /*#__PURE__*/React.createElement("span", {
       style: {
-        background: on ? '#FEE2E2' : '#F1F5F9',
-        color: on ? '#991B1B' : '#64748B',
+        background: on ? '#DBEAFE' : '#F1F5F9',
+        color: on ? '#012E8A' : '#64748B',
         borderRadius: 9999,
         fontSize: 11,
         fontWeight: 600,
@@ -2629,7 +2629,7 @@ function Tabs({
         bottom: 0,
         height: 2,
         borderRadius: 2,
-        background: on ? '#7F1D1D' : 'transparent'
+        background: on ? '#012E8A' : 'transparent'
       }
     }));
   }));
@@ -3114,7 +3114,7 @@ function NavItem({
       fontFamily: "'Plus Jakarta Sans', sans-serif",
       fontSize: 14,
       fontWeight: active ? 600 : 400,
-      color: active ? '#7F1D1D' : '#475569',
+      color: active ? '#012E8A' : '#475569',
       userSelect: 'none'
     }
   }, /*#__PURE__*/React.createElement("span", {
@@ -3130,7 +3130,7 @@ function NavItem({
     }
   }, label), badge && /*#__PURE__*/React.createElement("span", {
     style: {
-      background: '#7F1D1D',
+      background: '#012E8A',
       color: '#fff',
       borderRadius: 9999,
       fontSize: 10,
@@ -3209,7 +3209,7 @@ function Sidebar({
       width: 28,
       height: 28,
       borderRadius: 8,
-      background: 'linear-gradient(135deg, #C51918 0%, #7F1D1D 100%)',
+      background: 'linear-gradient(135deg, #1D4ED8 0%, #012E8A 100%)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -3314,7 +3314,7 @@ function Sidebar({
       width: 32,
       height: 32,
       borderRadius: '50%',
-      background: '#7F1D1D',
+      background: '#012E8A',
       color: '#fff',
       display: 'flex',
       alignItems: 'center',
@@ -3475,7 +3475,7 @@ function TopBar({
       width: 6,
       height: 6,
       borderRadius: '50%',
-      background: '#7F1D1D',
+      background: '#012E8A',
       border: '1px solid #fff'
     }
   })), actions));

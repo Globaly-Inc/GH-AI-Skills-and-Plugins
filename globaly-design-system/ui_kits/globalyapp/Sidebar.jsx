@@ -66,7 +66,7 @@ function NavItem({ icon, label, active = false, onClick, badge }) {
         fontFamily: "'Plus Jakarta Sans', sans-serif",
         fontSize: 14,
         fontWeight: active ? 600 : 400,
-        color: active ? '#7F1D1D' : '#475569',
+        color: active ? '#012E8A' : '#475569',
         userSelect: 'none',
       }}
     >
@@ -76,7 +76,7 @@ function NavItem({ icon, label, active = false, onClick, badge }) {
       <span style={{ flex: 1 }}>{label}</span>
       {badge && (
         <span style={{
-          background: '#7F1D1D', color: '#fff', borderRadius: 9999,
+          background: '#012E8A', color: '#fff', borderRadius: 9999,
           fontSize: 10, fontWeight: 700, padding: '1px 6px', minWidth: 18, textAlign: 'center',
         }}>{badge}</span>
       )}
@@ -115,7 +115,7 @@ function Sidebar({ activeScreen, onNavigate, userName = 'Jane Doe', userRole = '
       }}>
         <div style={{
           width: 28, height: 28, borderRadius: 8,
-          background: 'linear-gradient(135deg, #C51918 0%, #7F1D1D 100%)',
+          background: 'linear-gradient(135deg, #1D4ED8 0%, #012E8A 100%)',
           display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
         }}>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -164,7 +164,7 @@ function Sidebar({ activeScreen, onNavigate, userName = 'Jane Doe', userRole = '
       <div style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '6px 10px', cursor: 'pointer' }}>
         <div style={{
           width: 32, height: 32, borderRadius: '50%',
-          background: '#7F1D1D', color: '#fff',
+          background: '#012E8A', color: '#fff',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           fontSize: 11, fontWeight: 700, flexShrink: 0,
           fontFamily: "'Plus Jakarta Sans', sans-serif",

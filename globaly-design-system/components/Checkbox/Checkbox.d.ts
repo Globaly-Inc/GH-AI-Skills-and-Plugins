@@ -9,5 +9,5 @@ export interface CheckboxProps {
   size?: 'sm' | 'md';
   style?: React.CSSProperties;
 }
-/** Checkbox with optional label. Checked/indeterminate states, maroon fill. */
+/** Checkbox with optional label. Checked/indeterminate states, navy fill. */
 export function Checkbox(props: CheckboxProps): React.ReactElement;

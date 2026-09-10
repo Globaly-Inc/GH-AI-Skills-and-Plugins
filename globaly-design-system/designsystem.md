@@ -12,14 +12,14 @@ One component library, three brand modes. Brand is switched by setting `data-bra
 
 | Product | Primary | Accent | Audience |
 |---------|---------|--------|----------|
-| **Globalyapp** (default) | `#7F1D1D` deep maroon | `#C51918` red | Students, agents, institutions |
+| **Globalyapp** (default) | `#012E8A` deep navy | `#1D4ED8` blue | Students, agents, institutions |
 | **GlobalyOS** | `#6820E4` purple | `#7A32EA` | Business / OS users |
 | **GlobalyPay** | `#2563EB` blue | `#1D4ED8` | Payments, financial |
 
 ```html
 <body data-brand="globalyos">…</body>   <!-- purple mode -->
 <body data-brand="globalypay">…</body  <!-- blue mode -->
-<!-- no attribute = Globalyapp maroon -->
+<!-- no attribute = Globalyapp navy -->
 ```
 
 ---
@@ -44,13 +44,13 @@ One component library, three brand modes. Brand is switched by setting `data-bra
 
 | Token | Globalyapp | GlobalyOS | GlobalyPay |
 |-------|-----------|-----------|------------|
-| `--brand-primary-default` | `#7F1D1D` | `#6820E4` | `#2563EB` |
-| `--brand-primary-hover` | `#6B1818` | `#5618BF` | `#1D4ED8` |
-| `--brand-primary-active` | `#B91C1C` | `#461699` | `#1E40AF` |
-| `--brand-primary-subtle` | `#FEE2E2` | `#E6D8FF` | `#DBEAFE` |
+| `--brand-primary-default` | `#012E8A` | `#6820E4` | `#2563EB` |
+| `--brand-primary-hover` | `#012670` | `#5618BF` | `#1D4ED8` |
+| `--brand-primary-active` | `#001F5B` | `#461699` | `#1E40AF` |
+| `--brand-primary-subtle` | `#DBEAFE` | `#E6D8FF` | `#DBEAFE` |
 | `--brand-primary-foreground` | `#FFFFFF` | `#FFFFFF` | `#FFFFFF` |
 | `--brand-secondary-default` | `#1E293B` | `#1E293B` | `#1E293B` |
-| `--brand-accent-default` | `#C51918` | `#7A32EA` | `#2563EB` |
+| `--brand-accent-default` | `#1D4ED8` | `#7A32EA` | `#2563EB` |
 
 ### Surface & Background
 
@@ -72,7 +72,7 @@ One component library, three brand modes. Brand is switched by setting `data-bra
 | `--fg-subtle` | `#94A3B8` | Placeholders, hints |
 | `--fg-disabled` | `#CBD5E1` | Disabled state text |
 | `--fg-inverse` | `#FFFFFF` | Text on dark surfaces |
-| `--fg-brand` | `#7F1D1D` | Brand-colored text (swaps per mode) |
+| `--fg-brand` | `#012E8A` | Brand-colored text (swaps per mode) |
 
 ### Border
 
@@ -80,7 +80,7 @@ One component library, three brand modes. Brand is switched by setting `data-bra
 |-------|-------|-------|
 | `--border-default` | `#E2E8F0` | Default borders, dividers |
 | `--border-strong` | `#CBD5E1` | Emphasized borders |
-| `--border-focus` | `#7F1D1D` | Active input ring (swaps per brand) |
+| `--border-focus` | `#012E8A` | Active input ring (swaps per brand) |
 | `--border-error` | `#DC2626` | Error state |
 | `--border-success` | `#16A34A` | Success state |
 
@@ -256,7 +256,7 @@ name?:   string                              // initials fallback + alt
 src?:    string                              // image URL
 size?:   'xs' | 'sm' | 'md' | 'lg' | 'xl' | number
 status?: 'online' | 'away' | 'offline' | 'busy'
-color?:  string                              // initials bg, default #7F1D1D
+color?:  string                              // initials bg, default #012E8A
 ```
 
 #### `AvatarGroup`
@@ -325,7 +325,7 @@ Two sizes. On/off toggle with labels. Disabled state supported.
 ```
 
 #### `Datepicker`
-Month calendar. Selected day = maroon fill. Today = ring indicator.
+Month calendar. Selected day = navy fill. Today = ring indicator.
 
 #### `AuthCode`
 One-time code input with auto-advance and error state.
@@ -361,13 +361,13 @@ Indeterminate loader. Multiple sizes and colors.
 ### Navigation
 
 #### `Tabs`
-Underline-style tabs. Active tab: maroon indicator. Supports count badges.
+Underline-style tabs. Active tab: navy indicator. Supports count badges.
 
 #### `Breadcrumb`
 Path trail, chevron separators, current page emphasized.
 
 #### `Pagination`
-Prev/next + truncated page list. Active page = maroon.
+Prev/next + truncated page list. Active page = navy.
 
 #### `SegmentedControl`
 Pill container. Active segment = raised white card on light bg.

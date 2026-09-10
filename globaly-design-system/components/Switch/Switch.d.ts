@@ -8,5 +8,5 @@ export interface SwitchProps {
   size?: 'sm' | 'md';
   style?: React.CSSProperties;
 }
-/** Toggle switch. Maroon track when on, sliding white knob. */
+/** Toggle switch. Navy track when on, sliding white knob. */
 export function Switch(props: SwitchProps): React.ReactElement;
