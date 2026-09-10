@@ -10,12 +10,12 @@ const BTN_SIZES = {
 };
 
 const BTN_VARIANTS = {
-  primary:   { background: '#7F1D1D', color: '#fff', hoverBg: '#6B1818' },
+  primary:   { background: '#012E8A', color: '#fff', hoverBg: '#012670' },
   secondary: { background: '#1E293B', color: '#fff', hoverBg: '#334155' },
   outline:   { background: 'transparent', color: '#1E293B', border: '1.5px solid #E2E8F0', hoverBg: '#F8FAFC' },
   ghost:     { background: 'transparent', color: '#475569', hoverBg: '#F1F5F9' },
   danger:    { background: '#DC2626', color: '#fff', hoverBg: '#B91C1C' },
-  subtle:    { background: '#FEE2E2', color: '#7F1D1D', hoverBg: '#FECACA' },
+  subtle:    { background: '#DBEAFE', color: '#012E8A', hoverBg: '#BFDBFE' },
 };
 
 export function Button({

@@ -12,7 +12,7 @@ export function Switch({ checked = false, onChange, label, disabled = false, siz
       <input type="checkbox" checked={checked} onChange={onChange} disabled={disabled} style={{ position: 'absolute', opacity: 0, width: 0, height: 0 }} />
       <span style={{
         width: w, height: h, borderRadius: 9999, flexShrink: 0, position: 'relative',
-        background: checked ? '#7F1D1D' : '#CBD5E1', transition: 'background .15s',
+        background: checked ? '#012E8A' : '#CBD5E1', transition: 'background .15s',
       }}>
         <span style={{
           position: 'absolute', top: 2, left: checked ? w - knob - 2 : 2,

@@ -6,8 +6,8 @@ export function Checkbox({ checked = false, indeterminate = false, onChange, lab
   const box = (
     <span style={{
       width: dim, height: dim, borderRadius: 4, flexShrink: 0,
-      border: `1.5px solid ${on ? '#7F1D1D' : '#CBD5E1'}`,
-      background: on ? '#7F1D1D' : '#fff',
+      border: `1.5px solid ${on ? '#012E8A' : '#CBD5E1'}`,
+      background: on ? '#012E8A' : '#fff',
       display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
       transition: 'background .12s, border-color .12s',
     }}>

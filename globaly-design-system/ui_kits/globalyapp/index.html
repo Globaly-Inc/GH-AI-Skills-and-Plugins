@@ -83,7 +83,7 @@ function DashboardScreen({ onNavigate }) {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 14, marginBottom: 28 }}>
         <StatCard title="Total Applications" value="24"
           change="↑ 3 this week" changeType="positive"
-          accent="#7F1D1D"
+          accent="#012E8A"
           icon={<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M13 10V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v4"/><path d="M1 10h14"/></svg>}
         />
         <StatCard title="In Review" value="7"
@@ -254,15 +254,15 @@ function DocumentsScreen() {
         onDragLeave={() => setDragOver(false)}
         onDrop={e => { e.preventDefault(); setDragOver(false); }}
         style={{
-          border: `2px dashed ${dragOver ? '#7F1D1D' : '#CBD5E1'}`,
+          border: `2px dashed ${dragOver ? '#012E8A' : '#CBD5E1'}`,
           borderRadius: 12, padding: '28px 24px', textAlign: 'center',
-          background: dragOver ? '#FEF2F2' : '#F8FAFC',
+          background: dragOver ? '#EFF6FF' : '#F8FAFC',
           marginBottom: 24, cursor: 'pointer',
           transition: 'all 0.15s',
         }}
       >
         <div style={{ fontSize: 28, marginBottom: 8, opacity: .4 }}>
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#7F1D1D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{margin:'0 auto', display:'block'}}>
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#012E8A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{margin:'0 auto', display:'block'}}>
             <path d="M20 8H8a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V12L20 8z"/>
             <polyline points="20 8 20 12 24 12"/>
             <line x1="16" y1="18" x2="16" y2="24"/>
@@ -270,7 +270,7 @@ function DocumentsScreen() {
           </svg>
         </div>
         <p style={{ fontSize: 14, fontWeight: 600, color: '#334155', marginBottom: 4 }}>
-          Drag & drop files here, or <span style={{ color: '#7F1D1D', cursor: 'pointer' }}>browse</span>
+          Drag & drop files here, or <span style={{ color: '#012E8A', cursor: 'pointer' }}>browse</span>
         </p>
         <p style={{ fontSize: 12, color: '#94A3B8' }}>PDF, JPG, PNG up to 20 MB</p>
       </div>
@@ -414,7 +414,7 @@ function SettingsScreen() {
         <Card style={{ marginBottom: 16 }}>
           <h3 style={{ fontSize: 14, fontWeight: 600, color: '#1E293B', marginBottom: 16 }}>Profile</h3>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
-            <div style={{ width: 56, height: 56, borderRadius: '50%', background: '#7F1D1D', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, fontWeight: 700 }}>JD</div>
+            <div style={{ width: 56, height: 56, borderRadius: '50%', background: '#012E8A', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, fontWeight: 700 }}>JD</div>
             <div>
               <div style={{ fontSize: 15, fontWeight: 600, color: '#1E293B' }}>Jane Doe</div>
               <div style={{ fontSize: 13, color: '#64748B' }}>jane.doe@globalyapp.com</div>
@@ -434,7 +434,7 @@ function SettingsScreen() {
           <h3 style={{ fontSize: 14, fontWeight: 600, color: '#1E293B', marginBottom: 16 }}>Brand Mode</h3>
           <p style={{ fontSize: 13, color: '#64748B', marginBottom: 14 }}>Switch between Globalyapp product themes.</p>
           <div style={{ display: 'flex', gap: 8 }}>
-            <button style={{ padding: '8px 16px', borderRadius: 8, background: '#7F1D1D', color: '#fff', border: 'none', fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily:"'Plus Jakarta Sans',sans-serif" }}>Globalyapp</button>
+            <button style={{ padding: '8px 16px', borderRadius: 8, background: '#012E8A', color: '#fff', border: 'none', fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily:"'Plus Jakarta Sans',sans-serif" }}>Globalyapp</button>
             <button style={{ padding: '8px 16px', borderRadius: 8, background: '#F4EEFF', color: '#6820E4', border: '1px solid #E6D8FF', fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily:"'Plus Jakarta Sans',sans-serif" }}>GlobalyOS</button>
             <button style={{ padding: '8px 16px', borderRadius: 8, background: '#EFF6FF', color: '#2563EB', border: '1px solid #DBEAFE', fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily:"'Plus Jakarta Sans',sans-serif" }}>GlobalyPay</button>
           </div>

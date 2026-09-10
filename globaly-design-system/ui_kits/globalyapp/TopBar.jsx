@@ -66,7 +66,7 @@ function TopBar({ title, subtitle, actions, onSearch, searchValue, searchPlaceho
           <span style={{
             position: 'absolute', top: 6, right: 6,
             width: 6, height: 6, borderRadius: '50%',
-            background: '#7F1D1D', border: '1px solid #fff',
+            background: '#012E8A', border: '1px solid #fff',
           }} />
         </button>
 

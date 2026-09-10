@@ -29,7 +29,7 @@ export function Carousel({ slides = [], height = 220, autoplay = false, interval
             {slides.map((_, idx) => (
               <button key={idx} onClick={() => go(idx)} style={{
                 width: idx === i ? 20 : 7, height: 7, borderRadius: 9999, border: 'none', cursor: 'pointer',
-                background: idx === i ? '#7F1D1D' : 'rgba(255,255,255,0.7)', transition: 'all .2s',
+                background: idx === i ? '#012E8A' : 'rgba(255,255,255,0.7)', transition: 'all .2s',
                 boxShadow: '0 0 0 1px rgba(0,0,0,0.06)',
               }} />
             ))}

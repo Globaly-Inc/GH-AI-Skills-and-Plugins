@@ -10,10 +10,10 @@ export function Radio({ checked = false, onChange, label, value, name, disabled 
       <input type="radio" checked={checked} onChange={onChange} value={value} name={name} disabled={disabled} style={{ position: 'absolute', opacity: 0, width: 0, height: 0 }} />
       <span style={{
         width: dim, height: dim, borderRadius: '50%', flexShrink: 0,
-        border: `1.5px solid ${checked ? '#7F1D1D' : '#CBD5E1'}`, background: '#fff',
+        border: `1.5px solid ${checked ? '#012E8A' : '#CBD5E1'}`, background: '#fff',
         display: 'inline-flex', alignItems: 'center', justifyContent: 'center', transition: 'border-color .12s',
       }}>
-        {checked && <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#7F1D1D' }} />}
+        {checked && <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#012E8A' }} />}
       </span>
       {label && <span style={{ fontSize: 14, color: '#334155' }}>{label}</span>}
     </label>

@@ -12,7 +12,7 @@ Globalyapp is a multi-brand SaaS platform serving education, migration, and busi
 
 | Product | Primary Color | Accent | Audience |
 |---------|--------------|--------|----------|
-| **Globalyapp** | Deep maroon `#7F1D1D` | `#C51918` red | Students, agents, institutions |
+| **Globalyapp** | Deep navy `#012E8A` | `#1D4ED8` blue | Students, agents, institutions |
 | **GlobalyOS** | Purple `#6820E4` | `#7A32EA` | Business/OS users |
 | **GlobalyPay** | Blue `#2563EB` | `#1D4ED8` | Payments, financial |
 
@@ -87,7 +87,7 @@ ui_kits/
 | Overlays | `Modal`, `Drawer`, `Dropdown`, `Popover`, `Accordion` |
 | Media | `Carousel` |
 
-All components use the maroon Globalyapp brand by default and read from the
+All components use the navy Globalyapp brand by default and read from the
 established token system (slate neutrals, 8px input radius, 12px card radius).
 
 ---
@@ -126,10 +126,10 @@ established token system (slate neutrals, 8px input radius, 12px card radius).
 The system uses a **full Tailwind palette** (255 tokens) as primitives + semantic brand tokens across 3 modes.
 
 **Globalyapp brand palette:**
-- Primary: `#7F1D1D` (red-900, deep maroon) — buttons, active borders, focus rings
-- Primary hover: darker maroon ~`#6B1818`
-- Primary subtle: `#FEE2E2` (red-100) — tinted backgrounds, badges
-- Accent/bright red: `#C51918`, `#E31D1C`, `#DC2626` — notifications, warnings
+- Primary: `#012E8A` (deep navy) — buttons, active borders, focus rings
+- Primary hover: darker navy ~`#012670`
+- Primary subtle: `#DBEAFE` (blue-100) — tinted backgrounds, badges
+- Accent/bright blue: `#1D4ED8`, `#DC2626` — notifications, warnings
 - Yellow accent: `#FECA00`, `#FFD018` — highlight, special states (possibly GlobalyPay)
 - Secondary: `#1E293B` (slate-800) — secondary buttons, dark text actions
 - Secondary hover: `#334155` (slate-700)
@@ -213,7 +213,7 @@ Cards typically use `sm` or `DEFAULT` shadow. Modals use `lg`. Dropdowns use `md
 
 ### Animations & Interactions
 - **No heavy animations** — the design system is clean and understated
-- **Hover states:** Slightly darker color (e.g. `#7F1D1D` → `#6B1818`), no opacity tricks
+- **Hover states:** Slightly darker color (e.g. `#012E8A` → `#012670`), no opacity tricks
 - **Press/active states:** Darker still, no scale transforms
 - **Focus:** Border color changes to primary brand color
 - **Transitions:** Implied 150–200ms ease — subtle

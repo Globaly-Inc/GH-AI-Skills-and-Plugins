@@ -8,7 +8,7 @@ export function Card({ children, padding = 20, style = {}, ...props }) {
   );
 }
 
-export function StatCard({ title, value, change, changeType = 'positive', icon, accent = '#7F1D1D', style = {} }) {
+export function StatCard({ title, value, change, changeType = 'positive', icon, accent = '#012E8A', style = {} }) {
   const changeColor = changeType === 'positive' ? '#15803D' : changeType === 'negative' ? '#DC2626' : '#64748B';
   return (
     <Card style={{ display: 'flex', flexDirection: 'column', gap: 8, ...style }}>

@@ -14,7 +14,7 @@ export function SegmentedControl({ options = [], value, onChange, size = 'md', s
           <button key={opt.value} onClick={() => onChange && onChange(opt.value)}
             style={{
               height: h, padding: '0 16px', borderRadius: 9999, border: 'none', cursor: 'pointer',
-              background: on ? '#fff' : 'transparent', color: on ? '#7F1D1D' : '#64748B',
+              background: on ? '#fff' : 'transparent', color: on ? '#012E8A' : '#64748B',
               fontSize: 13, fontWeight: on ? 600 : 500, fontFamily: 'inherit',
               boxShadow: on ? '0 1px 2px rgba(0,0,0,0.1)' : 'none', transition: 'all .12s', whiteSpace: 'nowrap',
             }}>{opt.label}</button>

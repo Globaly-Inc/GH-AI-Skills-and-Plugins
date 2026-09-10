@@ -7,7 +7,7 @@ function initialsOf(name) {
   return name.trim().split(/\s+/).slice(0, 2).map(s => s[0].toUpperCase()).join('');
 }
 
-export function Avatar({ name, src, size = 'md', status, color = '#7F1D1D', style = {} }) {
+export function Avatar({ name, src, size = 'md', status, color = '#012E8A', style = {} }) {
   const dim = AVATAR_SIZES[size] || size || 40;
   const statusColors = { online: '#16A34A', away: '#D97706', offline: '#94A3B8', busy: '#DC2626' };
   return (

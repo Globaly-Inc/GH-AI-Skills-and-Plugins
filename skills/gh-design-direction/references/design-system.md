@@ -7,7 +7,7 @@
 The design system is a shared component library bundled as `_ds_bundle.js` and exposed at `window.GlobalyDesignSystem_c92b6a`. It is brand-aware: setting `data-brand` on a root element switches all tokens.
 
 ```html
-<!-- No attribute = Globalyapp (maroon) -->
+<!-- No attribute = Globalyapp (navy) -->
 <body data-brand="globalyos">…</body>   <!-- purple -->
 <body data-brand="globalypay">…</body>  <!-- blue -->
 ```
@@ -29,13 +29,13 @@ Always use semantic tokens — never hardcode hex or hsl values.
 
 | Token | Globalyapp | GlobalyOS | GlobalyPay |
 |-------|-----------|-----------|------------|
-| `--brand-primary-default` | `#7F1D1D` | `#6820E4` | `#2563EB` |
-| `--brand-primary-hover` | `#6B1818` | `#5618BF` | `#1D4ED8` |
-| `--brand-primary-active` | `#B91C1C` | `#461699` | `#1E40AF` |
-| `--brand-primary-subtle` | `#FEE2E2` | `#E6D8FF` | `#DBEAFE` |
+| `--brand-primary-default` | `#012E8A` | `#6820E4` | `#2563EB` |
+| `--brand-primary-hover` | `#012670` | `#5618BF` | `#1D4ED8` |
+| `--brand-primary-active` | `#1E40AF` | `#461699` | `#1E40AF` |
+| `--brand-primary-subtle` | `#DBEAFE` | `#E6D8FF` | `#DBEAFE` |
 | `--brand-primary-foreground` | `#FFFFFF` | `#FFFFFF` | `#FFFFFF` |
 | `--brand-secondary-default` | `#1E293B` | `#1E293B` | `#1E293B` |
-| `--brand-accent-default` | `#C51918` | `#7A32EA` | `#2563EB` |
+| `--brand-accent-default` | `#1D4ED8` | `#7A32EA` | `#2563EB` |
 
 **Surface & background:**
 

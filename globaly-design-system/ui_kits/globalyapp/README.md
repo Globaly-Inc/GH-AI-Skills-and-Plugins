@@ -30,7 +30,7 @@ A high-fidelity, interactive click-through prototype of the Globalyapp web appli
 
 ## Design Tokens (from Figma Style Guide)
 
-- **Primary brand:** `#7F1D1D` (deep maroon — Globalyapp)
+- **Primary brand:** `#012E8A` (deep navy — Globalyapp)
 - **GlobalyOS:** `#6820E4` (custom purple scale)
 - **GlobalyPay:** `#2563EB` (blue)
 - **Font:** Plus Jakarta Sans (UI), Inter (data/labels), DM Sans (Averta Std fallback)

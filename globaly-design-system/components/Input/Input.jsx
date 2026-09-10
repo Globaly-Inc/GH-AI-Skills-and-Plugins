@@ -11,7 +11,7 @@ export function Input({
 }) {
   const [focused, setFocused] = React.useState(false);
   const borderColors = {
-    default: focused ? '#7F1D1D' : '#E2E8F0', active: '#7F1D1D',
+    default: focused ? '#012E8A' : '#E2E8F0', active: '#012E8A',
     error: '#DC2626', success: '#16A34A', disabled: '#E2E8F0',
   };
   const bgColors = { default: '#F8FAFC', active: '#F8FAFC', error: '#FEE2E2', success: '#DCFCE7', disabled: '#F8FAFC' };
@@ -37,7 +37,7 @@ export function Input({
 
 export function Textarea({ value, onChange, placeholder, rows = 4, state = 'default', disabled = false, style = {}, ...props }) {
   const [focused, setFocused] = React.useState(false);
-  const borderColor = disabled ? '#E2E8F0' : state === 'error' ? '#DC2626' : state === 'success' ? '#16A34A' : focused ? '#7F1D1D' : '#E2E8F0';
+  const borderColor = disabled ? '#E2E8F0' : state === 'error' ? '#DC2626' : state === 'success' ? '#16A34A' : focused ? '#012E8A' : '#E2E8F0';
   const bg = state === 'error' ? '#FEE2E2' : state === 'success' ? '#DCFCE7' : '#F8FAFC';
   return (
     <textarea

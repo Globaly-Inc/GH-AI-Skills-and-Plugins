@@ -15,7 +15,7 @@ export function Combobox({ options = [], value, onChange, placeholder = 'Selectâ
   return (
     <div ref={ref} style={{ position: 'relative', width: 260, fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif", ...style }}>
       <button onClick={() => setOpen(o => !o)} style={{
-        width: '100%', height: 40, borderRadius: 8, border: `1px solid ${open ? '#7F1D1D' : '#E2E8F0'}`,
+        width: '100%', height: 40, borderRadius: 8, border: `1px solid ${open ? '#012E8A' : '#E2E8F0'}`,
         background: '#F8FAFC', padding: '0 10px', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         cursor: 'pointer', fontSize: 14, fontFamily: 'inherit', color: selected ? '#1E293B' : '#94A3B8',
       }}>
@@ -41,7 +41,7 @@ export function Combobox({ options = [], value, onChange, placeholder = 'Selectâ
                   style={{
                     width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8,
                     padding: '8px 10px', borderRadius: 6, border: 'none', cursor: 'pointer',
-                    background: on ? '#FEE2E2' : 'transparent', color: on ? '#991B1B' : '#334155',
+                    background: on ? '#DBEAFE' : 'transparent', color: on ? '#012E8A' : '#334155',
                     fontSize: 13, fontWeight: on ? 600 : 500, fontFamily: 'inherit', textAlign: 'left',
                   }}
                   onMouseEnter={e => { if (!on) e.currentTarget.style.background = '#F1F5F9'; }}

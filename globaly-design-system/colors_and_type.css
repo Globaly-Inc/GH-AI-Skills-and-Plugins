@@ -324,18 +324,18 @@
   --color-white: #FFFFFF;
 
   /* ── BRAND SEMANTIC TOKENS — GLOBALYAPP MODE (default) ───── */
-  --brand-primary-default:    #7F1D1D;   /* red-900 deep maroon */
-  --brand-primary-hover:      #6B1818;   /* darker maroon */
-  --brand-primary-active:     #B91C1C;   /* red-700 */
-  --brand-primary-subtle:     #FEE2E2;   /* red-100 */
+  --brand-primary-default:    #012E8A;   /* deep navy */
+  --brand-primary-hover:      #012670;   /* darker navy */
+  --brand-primary-active:     #1E40AF;   /* blue-800 */
+  --brand-primary-subtle:     #DBEAFE;   /* blue-100 */
   --brand-primary-foreground: #FFFFFF;
 
   --brand-secondary-default:    #1E293B; /* slate-800 */
   --brand-secondary-hover:      #334155; /* slate-700 */
   --brand-secondary-foreground: #FFFFFF;
 
-  --brand-accent-default: #C51918;       /* bright red */
-  --brand-accent-subtle:  #FEF2F2;       /* red-50 */
+  --brand-accent-default: #1D4ED8;       /* bright blue */
+  --brand-accent-subtle:  #EFF6FF;       /* blue-50 */
 
   /* ── SURFACE & BACKGROUND TOKENS ────────────────────────── */
   --surface-page:      #F8FAFC;   /* slate-50 */
@@ -346,7 +346,7 @@
   /* ── BORDER TOKENS ───────────────────────────────────────── */
   --border-default:   #E2E8F0;   /* slate-200 */
   --border-strong:    #CBD5E1;   /* slate-300 */
-  --border-focus:     #7F1D1D;   /* primary — active input border */
+  --border-focus:     #012E8A;   /* primary — active input border */
   --border-error:     #DC2626;
   --border-success:   #16A34A;
 
@@ -358,7 +358,7 @@
   --fg-subtle:     #94A3B8;   /* slate-400 — placeholders, hints */
   --fg-disabled:   #CBD5E1;   /* slate-300 */
   --fg-inverse:    #FFFFFF;
-  --fg-brand:      #7F1D1D;
+  --fg-brand:      #012E8A;
 
   /* ── SEMANTIC STATE TOKENS ───────────────────────────────── */
   --state-error-bg:     #FEE2E2;
