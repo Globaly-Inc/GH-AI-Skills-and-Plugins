@@ -326,7 +326,7 @@
   /* ── BRAND SEMANTIC TOKENS — GLOBALYAPP MODE (default) ───── */
   --brand-primary-default:    #012E8A;   /* deep navy */
   --brand-primary-hover:      #012670;   /* darker navy */
-  --brand-primary-active:     #1E40AF;   /* blue-800 */
+  --brand-primary-active:     #001F5B;   /* darker than hover */
   --brand-primary-subtle:     #DBEAFE;   /* blue-100 */
   --brand-primary-foreground: #FFFFFF;
 

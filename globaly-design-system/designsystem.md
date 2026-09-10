@@ -46,7 +46,7 @@ One component library, three brand modes. Brand is switched by setting `data-bra
 |-------|-----------|-----------|------------|
 | `--brand-primary-default` | `#012E8A` | `#6820E4` | `#2563EB` |
 | `--brand-primary-hover` | `#012670` | `#5618BF` | `#1D4ED8` |
-| `--brand-primary-active` | `#1E40AF` | `#461699` | `#1E40AF` |
+| `--brand-primary-active` | `#001F5B` | `#461699` | `#1E40AF` |
 | `--brand-primary-subtle` | `#DBEAFE` | `#E6D8FF` | `#DBEAFE` |
 | `--brand-primary-foreground` | `#FFFFFF` | `#FFFFFF` | `#FFFFFF` |
 | `--brand-secondary-default` | `#1E293B` | `#1E293B` | `#1E293B` |

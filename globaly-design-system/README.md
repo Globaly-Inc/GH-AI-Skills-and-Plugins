@@ -129,7 +129,7 @@ The system uses a **full Tailwind palette** (255 tokens) as primitives + semanti
 - Primary: `#012E8A` (deep navy) — buttons, active borders, focus rings
 - Primary hover: darker navy ~`#012670`
 - Primary subtle: `#DBEAFE` (blue-100) — tinted backgrounds, badges
-- Accent/bright blue: `#1D4ED8`, `#DC2626` — notifications, warnings
+- Accent/bright blue: `#1D4ED8` — notifications, warnings
 - Yellow accent: `#FECA00`, `#FFD018` — highlight, special states (possibly GlobalyPay)
 - Secondary: `#1E293B` (slate-800) — secondary buttons, dark text actions
 - Secondary hover: `#334155` (slate-700)

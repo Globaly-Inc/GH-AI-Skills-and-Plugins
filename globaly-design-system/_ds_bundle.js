@@ -1424,7 +1424,7 @@ function Datepicker({
       fontWeight: isSel(d) ? 600 : 500,
       background: isSel(d) ? '#012E8A' : 'transparent',
       color: isSel(d) ? '#fff' : isToday(d) ? '#012E8A' : '#334155',
-      boxShadow: isToday(d) && !isSel(d) ? 'inset 0 0 0 1px #FCA5A5' : 'none'
+      boxShadow: isToday(d) && !isSel(d) ? 'inset 0 0 0 1px #93C5FD' : 'none'
     },
     onMouseEnter: e => {
       if (!isSel(d)) e.currentTarget.style.background = '#F1F5F9';
