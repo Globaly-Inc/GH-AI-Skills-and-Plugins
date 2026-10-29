@@ -7,7 +7,7 @@ in sync automatically as the team ships new skills.
 This repo is a [Claude Code plugin marketplace](https://docs.claude.com/en/docs/claude-code/plugins).
 It works the same on your laptop or any cloud box.
 
-> **Current version:** `globaly-skills` v0.7.0 · 9 skills + the Globaly design system.
+> **Current version:** `globaly-skills` v0.8.0 · 10 skills + the Globaly design system.
 
 ---
 
@@ -64,6 +64,7 @@ flowchart LR
 | 1 | `gh-brainstorming` | Product | adaptive brainstorming for a raw idea or fuzzy plan |
 | 2 | `gh-product-deep-research` | R&D / Research | competitor analysis, product-market fit, user pain points (token-lean: single engine, capped sources) |
 | 3 | `gh-prd-generator` | Product | generating a structured PRD (`docs/PRD.md`) from brainstorming + research |
+| 3 | `gh-modern-prd` | Product | a GlobalyOS feature plan as local HTML: audit of the existing app, market scan, founder decisions as one-at-a-time multiple-choice questions, real-shell screen mockups with build notes, user flows, design options and live build status |
 | 4 | `gh-architecture-docs` | Engineering | turning a PRD into a backend spec, SQL skeleton, and migration plan |
 | 4 | `gh-design-direction` | Design | frontend design direction + component plan before components are built |
 | 5 | `gh-implementation-plan` | Engineering | step-by-step implementation plan gate before any code is written |
