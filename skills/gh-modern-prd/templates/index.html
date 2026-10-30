@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Screens</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/*CSS*/
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc" id="toc"></nav>
+<main class="doc">
+  <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:flex-start">
+    <div>
+      <div class="eyebrow" id="eb"></div>
+      <h1 style="font-size:2rem;margin:6px 0 8px" id="ttl"></h1>
+      <p class="lead" id="lead"></p>
+    </div>
+    <button class="toggle" onclick="const r=document.documentElement;r.dataset.theme=r.dataset.theme==='dark'?'light':'dark'">Light / dark</button>
+  </div>
+  <div class="pagenav" id="pn"></div>
+  <div class="decisions" id="dec"></div>
+  <div id="shots"></div>
+</main>
+</div>
+<script>
+/*RAIL*/
+/*SHELL*/
+/*PAGES*/
+/*DATA*/
+document.title=`${DOC.brand}: screens`;
+document.getElementById('eb').textContent=`${DOC.brand} · screens · ${DOC.date} · mockups, not shipped UI`;
+document.getElementById('ttl').textContent=`${DOC.brand}: screens`;
+document.getElementById('lead').innerHTML=DOC.screensLead||'Every screen on the real app shell. Each is tagged NEW or CHANGED against what is live today.';
+document.getElementById('pn').innerHTML=navHtml('index.html');
+document.getElementById('dec').innerHTML=(DOC.decisions||[]).map(([b,t])=>`<div><b>${b.replace(/\.$/,'')}</b>${t}</div>`).join('');
+const toc=document.getElementById('toc'),out=document.getElementById('shots');
+let g='',th=`<div style="font:600 14px Space Grotesk;padding:0 8px 6px">All screens (${S.length})</div>`;
+S.forEach(s=>{
+ if(s.g!==g){g=s.g;th+=`<div class="g">${g}</div>`;out.insertAdjacentHTML('beforeend',`<h2 style="font-size:1.4rem;margin-top:56px;padding-top:12px;border-top:1px solid hsl(var(--border))">${g}</h2>`);}
+ th+=`<a href="#${s.id}">${s.id.toUpperCase()} · ${s.title}</a>`;
+ out.insertAdjacentHTML('beforeend',`<section class="shot" id="${s.id}"><div class="shot-h"><span class="num">${s.id.toUpperCase()}</span><h3>${s.title}</h3><span class="st ${s.st==='NEW'?'new':'chg'}">${s.st}</span><span class="where">${s.where}</span></div>${s.html}<div class="notes">${Object.entries(s.notes||{}).map(([k,v])=>`<div><b>${k}</b>${v}</div>`).join('')}</div></section>`);
+});
+toc.innerHTML=th;
+document.body.setAttribute('data-rendered',String(document.querySelectorAll('.screen,.pphase,.flow').length));
+document.body.setAttribute('data-h',String(document.documentElement.scrollHeight));
+{const y=location.hash.match(/^#y=(\d+)$/);if(y)scrollTo(0,+y[1]);}
+</script>
+</body>
+</html>

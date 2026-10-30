@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Email editor: 5 options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/*CSS*/
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc" id="toc"></nav>
+<main class="doc">
+ <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:flex-start">
+  <div>
+   <div class="eyebrow" id="eb"></div>
+   <h1 style="font-size:2rem;margin:6px 0 8px" id="ttl"></h1>
+   <p class="lead" id="lead"></p>
+  </div>
+  <button class="toggle" onclick="const r=document.documentElement;r.dataset.theme=r.dataset.theme==='dark'?'light':'dark'">Light / dark</button>
+ </div>
+ <div class="pagenav" id="pn"></div>
+ <div id="shots"></div>
+ <section class="plan" id="compare"><div class="eyebrow">Compare</div><h2 style="font-size:1.6rem;margin:6px 0 12px">Side by side</h2><div id="cmp"></div></section>
+</main>
+</div>
+<script>
+/*RAIL*/
+/*SHELL*/
+/*PAGES*/
+/*DATA*/
+/* render */
+document.title=OPT.title;document.getElementById('eb').textContent=`${DOC.brand} · ${OPT.eyebrow||'options'} · ${DOC.date}`;document.getElementById('ttl').textContent=OPT.title;document.getElementById('lead').innerHTML=OPT.intro||'';document.getElementById('pn').innerHTML=navHtml('options.html');
+const toc=document.getElementById('toc'),out=document.getElementById('shots');
+toc.innerHTML=`<div style="font:600 14px Space Grotesk;padding:0 8px 6px">${OPT.title}</div><a href="plan.html">← Plan</a><div class="g">Options</div>`+O.map(o=>`<a href="#${o.id}">${o.id.toUpperCase()} · ${o.title}</a>`).join('')+`<div class="g">Compare</div><a href="#compare">Side by side</a>`;
+O.forEach(o=>out.insertAdjacentHTML('beforeend',`<section class="shot" id="${o.id}"><div class="shot-h"><span class="num">${o.id.toUpperCase()}</span><h3>${o.title}</h3><span class="st new">${o.tag}</span></div>${o.html}<div class="optcard">${Object.entries(o.notes).map(([k,v])=>`<div><b>${k}</b>${v}</div>`).join('')}</div></section>`));
+document.getElementById('cmp').innerHTML=`<div class="tc"><table class="t cmp"><tr><th></th>${O.map(o=>`<th>${o.id.toUpperCase()} ${o.title}</th>`).join('')}</tr>${(OPT.cmp||[]).map(r=>`<tr><td><b>${r[0]}</b></td>${r.slice(1).map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</table></div>${OPT.pick?`<div class="banner info" style="margin-top:14px">${ic('spark')}<div>${OPT.pick}</div></div>`:''}`;
+document.body.setAttribute('data-rendered',String(document.querySelectorAll('.screen,.pphase,.flow').length));
+document.body.setAttribute('data-h',String(document.documentElement.scrollHeight));
+{const y=location.hash.match(/^#y=(\d+)$/);if(y)scrollTo(0,+y[1]);}
+</script>
+</body>
+</html>

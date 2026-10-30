@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/*CSS*/
+</style>
+</head>
+<body>
+<button class="btn sm themebtn" type="button" onclick="const r=document.documentElement;r.dataset.theme=r.dataset.theme==='dark'?'light':'dark'">Theme</button>
+<div class="pdoc">
+<nav class="ptoc" aria-label="Contents" id="ptoc"></nav>
+<article id="top"></article>
+</div>
+<script>
+/*RAIL*/
+/*SHELL*/
+/*PAGES*/
+/*DATA*/
+/* ===== renderer: DOC, STATUS, SECTIONS come from prd.js; S (screens) from screens.js ===== */
+const ST={todo:['Not started',''],doing:['In progress','info'],review:['In review','warn'],done:['Merged','ok'],live:['Live','ok'],blocked:['Blocked','bad']};
+const esc=s=>String(s);
+const tbl=(head,rows)=>`<div class="tbl"><table><thead><tr>${head.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+const dot=v=>v===2?'<span class="yes"></span>':v===1?'<span class="part"></span>':v===0?'<span class="muted">—</span>':v;
+const SCREENS=typeof S!=='undefined'?S:[];
+const allTasks=()=>STATUS.phases.flatMap(p=>p.tasks);
+const doneCount=ts=>ts.filter(t=>t[1]==='live'||t[1]==='done').length;
+const B={
+ table:b=>(b.title?`<h3 class="k">${b.title}</h3>`:'')+tbl(b.head,b.rows)+(b.note?`<p class="src">${b.note}</p>`:''),
+ cards:b=>(b.title?`<h3 class="k">${b.title}</h3>`:'')+`<div class="cards c${b.cols||2}">${b.items.map(i=>`<div class="wsi"><b>${i.title}</b>${i.text?`<p>${i.text}</p>`:''}${i.list?`<ul>${i.list.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}</div>`).join('')}</div>`,
+ pillars:b=>`<div class="cards c3">${b.items.map((i,n)=>`<div class="pillar"><span class="n">${b.label||'Pillar'} ${n+1}</span><h4>${i.title}</h4><p>${i.text}</p>${i.fields?`<dl>${Object.entries(i.fields).map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>`:''}</div>`).join('')}</div>`,
+ matrix:b=>`<div class="tbl"><table><thead><tr><th>${b.corner||''}</th>${b.cols.map(c=>`<th class="c">${c}</th>`).join('')}</tr></thead><tbody>${b.rows.map(r=>`<tr><td>${r[0]}</td>${r.slice(1).map(v=>`<td class="c">${dot(v)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`,
+ lanes:b=>b.items.map(([id,t,steps,ai=[],ext=[]])=>`<div class="pflow"><div class="pflow-h"><h4>${id} · ${t}</h4><span>${steps.length} steps</span></div><div class="lane">${steps.map((s,i)=>`${i?`<span class="parrow">${ic('arrow')}</span>`:''}<a class="pnode ${ai.includes(i)?'ai':''} ${ext.includes(i)?'ext':''}" href="flows.html#${id.toLowerCase()}"><span class="nn">${String(i+1).padStart(2,'0')}</span>${s}</a>`).join('')}</div></div>`).join('')+`<div class="flowkey"><span><i style="border-style:dashed;border-color:hsl(var(--ai)/.5)"></i>AI proposes, a person approves</span><span><i style="background:hsl(var(--muted))"></i>Outside the product</span></div>`,
+ services:b=>`<div class="cards c3">${b.items.map(i=>`<div class="svc"><h4>${i.title}</h4>${i.tag?`<span class="badge mono">${i.tag}</span>`:''}<ul>${(i.list||[i.text]).map(x=>`<li>${x}</li>`).join('')}</ul></div>`).join('')}</div>`,
+ risks:b=>`<div class="cards c2">${b.items.map(i=>`<div class="q"><b>${i.title}</b><p>${i.text}</p>${i.mitigation?`<p><b>Mitigation:</b> ${i.mitigation}</p>`:''}</div>`).join('')}</div>`,
+ html:b=>b.html,
+ status:()=>{const a=allTasks(),c=k=>a.filter(t=>t[1]===k).length;return `<div class="stat"><div><b>${a.length}</b><span>tasks</span></div><div><b class="up">${c('live')+c('done')}</b><span>merged or live</span></div><div><b>${c('doing')+c('review')}</b><span>in progress or review</span></div><div><b>${c('todo')}</b><span>not started</span></div><div><b class="dn">${c('blocked')}</b><span>blocked</span></div></div>`+tbl(['Phase','Progress','Tasks','State'],STATUS.phases.map(p=>{const d=doneCount(p.tasks),pc=Math.round(d/p.tasks.length*100),bl=p.tasks.some(t=>t[1]==='blocked'),act=p.tasks.some(t=>t[1]==='doing'||t[1]==='review');return [`<a href="#${p.id}">${p.name}</a>`,`<div class="prog" style="min-width:140px"><i style="width:${pc}%"></i></div><span class="src">${pc}%</span>`,`${d} / ${p.tasks.length}`,pc===100?'<span class="badge ok">Done</span>':bl?'<span class="badge bad">Has blockers</span>':(d||act)?'<span class="badge info">In progress</span>':'<span class="badge">Not started</span>']}))},
+ build:()=>STATUS.phases.map(p=>{const d=doneCount(p.tasks);return `<div class="pphase" id="${p.id}"><div><h4>${p.name}</h4><div class="when">${p.when||''}</div><div class="prog"><i style="width:${Math.round(d/p.tasks.length*100)}%"></i></div><div class="src">${d} of ${p.tasks.length} done</div></div><div><ul class="tasks">${p.tasks.map(([t,s,n])=>`<li><span class="badge ${ST[s][1]}">${ST[s][0]}</span><span>${t}${n?` <span class="pr">· ${n}</span>`:''}</span></li>`).join('')}</ul>${p.exit?`<div class="exit"><b>Exit:</b> ${p.exit}</div>`:''}</div></div>`}).join(''),
+ screens:()=>{const G=[...new Set(SCREENS.map(s=>s.g))];return `<div class="seg-filter" id="sf"><button class="on" data-g="*">All</button>${G.map(g=>`<button data-g="${g}">${g}</button>`).join('')}</div><div class="pshots">${SCREENS.map(s=>`<a class="pshot" data-g="${s.g}" href="index.html#${s.id}"><div class="th"><div class="sc">${s.html}</div></div><div class="tt">${s.title}</div><div class="tm"><span class="badge mono">${s.id.toUpperCase()}</span><span class="badge ${s.st==='NEW'?'ok':'warn'}">${s.st}</span>${s.where||''}</div></a>`).join('')}</div>`},
+};
+let H=`<section class="hero" id="decisions"><div class="top"><div><div class="row"><span class="badge ${DOC.status[1]}">${DOC.status[0]}</span><span class="badge mono">${DOC.date}</span><span class="badge mono">status updated ${STATUS.updated}</span></div><h1 style="margin-top:1rem">${DOC.title}</h1></div>${RAIL[DOC.module]?`<img class="obj" alt="" src="${RAIL[DOC.module]}">`:''}</div>
+<p class="lead">${DOC.lead}</p><div class="meta-row">${(DOC.links||[]).map(([t,h,c])=>`<a class="btn ${c||''}" href="${h}">${t}</a>`).join('')}</div>
+<ul class="decided">${(DOC.decisions||[]).map(([b,t])=>`<li>${ic('check')}<span><b>${b}</b> ${t}</span></li>`).join('')}</ul>
+${DOC.bet?`<div class="bet"><p>${DOC.bet[0]}</p><span>${DOC.bet[1]||''}</span></div>`:''}</section>`;
+SECTIONS.forEach(s=>{H+=`<section id="${s.id}"><h2 class="s">${s.title}</h2>${s.intro?`<p class="intro">${s.intro}</p>`:''}${(s.blocks||[]).map(b=>{if(!B[b.type])throw new Error('unknown block type '+b.type);return B[b.type](b);}).join('')}</section>`;});
+H+=`<footer>${DOC.brand} plan · ${DOC.date} · status updated ${STATUS.updated} · ${DOC.footer||'mockups, not shipped UI'}</footer>`;
+document.getElementById('top').innerHTML=H;
+document.title=`${DOC.brand}: plan`;
+document.getElementById('ptoc').innerHTML=`<a class="brand" href="#top">${RAIL[DOC.module]?`<img alt="" src="${RAIL[DOC.module]}">`:''}${DOC.brand}</a><a href="#decisions">Decisions</a>`+SECTIONS.map(s=>`<a href="#${s.id}">${s.nav||s.title}</a>`).join('')+`<div style="height:1rem"></div>`+PAGES.filter(p=>p[0]!=='plan.html').map(([h,t])=>`<a href="${h}">${t}</a>`).join('');
+function fit(){document.querySelectorAll('.pshot .th').forEach(t=>{if(t.clientWidth)t.querySelector('.sc').style.transform=`scale(${t.clientWidth/1364})`;});}
+fit();addEventListener('resize',fit);
+const sf=document.getElementById('sf');if(sf)sf.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;sf.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));document.querySelectorAll('.pshot').forEach(s=>s.style.display=(b.dataset.g==='*'||s.dataset.g===b.dataset.g)?'':'none');fit();});
+document.body.setAttribute('data-rendered',String(document.getElementById('top').children.length));
+document.body.setAttribute('data-h',String(document.documentElement.scrollHeight));
+{const y=location.hash.match(/^#y=(\d+)$/);if(y)scrollTo(0,+y[1]);}
+</script>
+</body>
+</html>

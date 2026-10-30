@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>User flows</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/*CSS*/
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc" id="toc"></nav>
+<main class="doc">
+ <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:flex-start">
+  <div>
+   <div class="eyebrow" id="eb"></div>
+   <h1 style="font-size:2rem;margin:6px 0 8px" id="ttl">User flows</h1>
+   <p class="lead">Every journey from start to finish, drawn with the same screens as the Screens page plus the in-between steps (pickers, payment, third-party sign-in, notifications, what the recipient sees). Click any step to open it full-size. Steps marked ↳ are the alternative path.</p>
+  </div>
+  <button class="toggle" onclick="const r=document.documentElement;r.dataset.theme=r.dataset.theme==='dark'?'light':'dark'">Light / dark</button>
+ </div>
+ <div class="pagenav" id="pn"></div>
+ <div class="fi" id="fi"></div>
+ <div id="flows"></div>
+</main>
+</div>
+<div class="lb" id="lb" onclick="if(event.target===this||event.target.classList.contains('x'))this.classList.remove('on')"><span class="x">Close ✕</span><div class="in2" id="lbin"></div></div>
+<script>
+/*RAIL*/
+/*SHELL*/
+/*PAGES*/
+/*DATA*/
+const SCR=id=>{const s=S.find(x=>x.id===id);if(!s)throw new Error('missing screen '+id);return s.html;};
+const get=id=>(typeof X!=='undefined'&&X[id])||SCR(id);
+document.getElementById('eb').textContent=`${DOC.brand} · user flows · ${DOC.date}`;document.getElementById('ttl').textContent=`${DOC.brand}: user flows`;document.getElementById('pn').innerHTML=navHtml('flows.html');document.title=`${DOC.brand}: user flows`;
+const toc=document.getElementById('toc'),out=document.getElementById('flows'),fi=document.getElementById('fi');
+let g='',th=`<div style="font:600 14px Space Grotesk;padding:0 8px 6px">User flows (${F.length})</div><a href="plan.html">← Plan</a>`;
+F.forEach(([grp,id,title,who,goal,steps])=>{
+ if(grp!==g){g=grp;th+=`<div class="g">${g}</div>`;out.insertAdjacentHTML('beforeend',`<h2 style="font-size:1.4rem;margin-top:56px;padding-top:12px;border-top:1px solid hsl(var(--border))">${g}</h2>`);}
+ th+=`<a href="#${id}">${id.toUpperCase()} · ${title}</a>`;
+ fi.insertAdjacentHTML('beforeend',`<a href="#${id}"><b>${id.toUpperCase()}</b>${title} <span class="muted small">· ${steps.length} steps</span></a>`);
+ const row=steps.map(([sid,cap,alt],i)=>`${i?'<div class="arr">→</div>':''}<div class="step"><div class="tw" data-sid="${sid}"><div class="sc">${get(sid)}</div></div><div class="cap"><b>${i+1}</b><div>${cap}${alt?`<span class="alt">${alt}</span>`:''}</div></div></div>`).join('');
+ out.insertAdjacentHTML('beforeend',`<section class="flow" id="${id}"><div class="flow-h"><span class="num">${id.toUpperCase()}</span><h3>${title}</h3><span class="who">${who}</span></div><div class="goal">${goal}</div><div class="steps-row">${row}</div></section>`);
+});
+toc.innerHTML=th;
+document.addEventListener('click',e=>{const tw=e.target.closest('.tw');if(!tw)return;document.getElementById('lbin').innerHTML=get(tw.dataset.sid);document.getElementById('lb').classList.add('on');});
+document.body.setAttribute('data-rendered',String(document.querySelectorAll('.screen,.pphase,.flow').length));
+document.body.setAttribute('data-h',String(document.documentElement.scrollHeight));
+{const y=location.hash.match(/^#y=(\d+)$/);if(y)scrollTo(0,+y[1]);}
+</script>
+</body>
+</html>
