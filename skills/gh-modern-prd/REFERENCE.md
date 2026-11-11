@@ -13,6 +13,9 @@ All helpers live in `assets/shell.js`; all classes in `assets/base.css`. The dat
 | `ph(title, subtitle, actionsHtml)` | PageHeader. |
 | `kpi(label, value, delta)` | Stat card. |
 | `browser(url, innerHtml)` | A page outside the app (public pages, Stripe, Gmail, a provider's consent screen). |
+| `mob(id, html, why?)` | The phone view of screen `id`, shown beside it on index.html. `html` = `mobile(...)`; pass `null` + `why` for a desktop-only screen. Required for every screen (`--check`). |
+| `mobile(body, {nav=true, on, head, h=760})` | A 390px phone frame. `nav` adds the app's MobileBottomNav (Home, CRM, My Tasks, Chat, Profile) with `on` active; set `nav:false` for public pages and full-screen routes. `head` is usually `mHead(title, actions, back)`. Body padding is 12px 16px. |
+| `mHead(title, actionsHtml, back)` | Mobile page header (the app hides PageHeader chrome on phones). |
 | `ic(name, attrs)` | Inline lucide-style icon. Names: see `const P` in shell.js. Add a path there if one is missing; don't substitute a wrong icon. |
 | `AIBTN` | The ✦ AI button. |
 
@@ -82,3 +85,6 @@ add('Contacts','c2','Saved filter chips','CRM › Contacts','CHANGED',html,{
 - User or third-party HTML renders only through `lib/sanitizeHtml.ts`. CSV export through `lib/exportCsv.ts` (formula injection).
 - Public pages rate-limit (`enforceRateLimit`) and show no internal ids. Signed upload URLs carry a size cap. Destructive actions use `ConfirmDialog`.
 - Outbound calls never run inside a `withUser` transaction. Slow work goes to `job_outbox`, shown in the UI as a pending state.
+
+## Mobile views
+`example/marketing` predates mobile views, so its `screens.js` has no `mob(...)` calls and `--check` reports them as missing. Copy its data shape, not that gap. `example`-style app screens on phones: `mobile(body,{on:"CRM",head:mHead("Contacts")})`; public pages: `mobile(body,{nav:false,head:siteHeaderHtml})`.

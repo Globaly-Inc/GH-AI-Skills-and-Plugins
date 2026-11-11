@@ -1,6 +1,8 @@
 
 
 const P={
+home:'<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
+menu:'<path d="M4 6h16M4 12h16M4 18h16"/>',
 ticket:'<path d="M2 9a3 3 0 0 1 0 6v3a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-3a3 3 0 0 1 0-6V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/>',
 map:'<path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15"/><path d="M9 3.236v15"/>',
 scan:'<path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M7 12h10"/>',
@@ -120,3 +122,16 @@ const browser=(url,inner)=>`<div class="frame"><div class="scroll"><div class="s
 const setApp=(on,body,overlay='')=>app({mod:'settings',label:'Settings',items:SET,on,proj:false,wallet:false,body,overlay});
 const S=[];const add=(g,id,title,where,st,html,notes)=>S.push({g,id,title,where,st,html,notes});
 
+
+/* ---------- Mobile (390px) ----------
+   Every screen in screens.js gets a phone view: mob(id, html) after its add(...).
+   A screen that truly has no phone version: mob(id, null, 'why'), shown as a note.
+   App screens: on phones the top bar, rail and submenu are hidden and MobileBottomNav
+   (apps/web/src/components/MobileBottomNav.tsx: Home, CRM, My Tasks, Chat, Profile) is the nav. */
+const M={};const mob=(id,html,why='')=>{M[id]={html,why};};
+const MNAV=[['home','Home'],['users','CRM'],['checksq','My Tasks'],['msg','Chat']];
+const mHead=(title,actions='',back=false)=>`<div class="mhd">${back?ic('chev','style="transform:rotate(90deg)"'):''}<b>${title}</b><div class="sp"></div>${actions}</div>`;
+/* mobile(body, {nav, on, head}): nav = the app's bottom bar (off for public pages and full-screen routes), on = its active label. */
+function mobile(body,{nav=true,on='',head='',h=760}={}){
+  return `<div class="mframe" style="height:${h}px"><div class="mstat"><b>9:41</b><span class="sp"></span><span>▂▄▆ ▮</span></div>${head}<div class="mbody">${body}</div>${nav?`<div class="mnav">${MNAV.map(([i,l])=>`<span class="${l===on?'on':''}">${ic(i)}${l}</span>`).join('')}<span><span class="avatar" style="width:20px;height:20px;font-size:9px">AR</span>Profile</span></div>`:''}</div>`;
+}

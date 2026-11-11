@@ -30,11 +30,12 @@ One local bundle of HTML pages, generated from four data files, so the founder c
    - **CHANGED screen:** find its route (`apps/web/src/App.tsx` and the module's route file), open the page component and the children it renders, and copy what is really there: tabs, filters, column headers, button labels and order, empty and loading states, dialogs. Draw only the delta as new. Never invent a column or a button the page doesn't have.
    - **NEW screen:** build it only from blocks the app already has (the reuse table in `apps/web/CLAUDE.md` plus the shared blocks in the root `CLAUDE.md`: `PageHeader`, `DataTable`, `ColumnPicker`, `BulkActionBar`, `EmptyState`, `ListSkeleton`, `ConfirmDialog`, `Sheet`, `Tabs`). If the screen needs something no component gives, say so in its notes as a new component.
    - When the dev server or prod is reachable, screenshot the live page and compare it with the mockup. Never open Events scanner or camera pages in Playwright (it streams the real webcam).
+   - **Draw every screen on mobile too.** Each `add(...)` is followed by `mob(id, mobile(body, opts))`: the same screen at 390px, rendered beside the desktop one. Copy the real phone behaviour: app screens lose the top bar, rail and submenu and get `MobileBottomNav` (`mobile(body,{on:'CRM'})`); public and full-screen pages use `{nav:false}`; tables become cards or a list, side panels move below or into a sheet, multi-column forms stack, wide grids wrap to 2 columns. A screen that has no phone version says why: `mob(id, null, 'Desktop only: …')`. `--check` fails while any screen has neither.
    - **Make every screen build-ready.** Its notes carry these keys, so the implementation plan can point each task at a screen (`index.html#<id>`) and the implementer reads `screens.js` as the spec:
      `Source` (files read today, files to change) · `Build` (components and hooks to reuse) · `Data` (endpoint, query-key factory, `usePagedList` or bootstrap) · `Perf` · `Security`. What goes in the last two is in REFERENCE.md, "Build-ready notes".
 6. **Write the data files** in `~/GlobalyHub/ai-outputs/plans/<YYYY-MM-DD>-<topic>/data/`. Copy the shape from `example/marketing/` (a complete, real bundle):
    - `prd.js`: `DOC` (brand, module rail id, status, title, lead, links, decisions, bet), `STATUS` (phases → tasks `[text, todo|doing|review|done|live|blocked, note]`), `SECTIONS` (typed blocks below).
-   - `screens.js`: `add(group, id, title, where, 'NEW'|'CHANGED', html, notes)`. Draw with `mod(moduleId, activeItem, body, opts)` (real submenus) or `app({...})`, plus `ph()`, `kpi()`, `browser()`, `ic()`.
+   - `screens.js`: `add(group, id, title, where, 'NEW'|'CHANGED', html, notes)`, then `mob(id, mobile(body, {nav, on, head}))` for its phone view. Draw with `mod(moduleId, activeItem, body, opts)` (real submenus) or `app({...})`, plus `ph()`, `kpi()`, `browser()`, `ic()`.
    - `flows.js`: `X.<id>=…` for in-between steps, then `const F=[[group,id,title,who,goal,[[screenId,caption,alt?],…]],…]`.
    - `options.js`: `opt(id,title,tag,html,notes)` per alternative, then `const OPT={title,eyebrow,intro,cmp:[[row…]],pick}`.
    **REQUIRED:** read `REFERENCE.md` (helper signatures and defaults, every CSS class, data contracts, NEW vs CHANGED) before writing screens.
@@ -59,6 +60,7 @@ Usual order: status, problem, existing (the audit table), market (the market sca
 - A screen drawn inside the app shell when the real route is full-screen.
 - A CHANGED screen drawn from memory instead of from its page component: labels, columns and tabs drift from the real app.
 - A screen with no `Build`/`Data` notes: it can't be handed to implementation.
+- A screen with no mobile view, or a mobile view that is just the desktop squeezed: redraw the layout for 390px (stack, cards, bottom nav).
 - An apostrophe inside a single-quoted JS string: escape it (`\'`) or `--check` fails.
 - Raw hex or palette classes inside screen chrome: use the token classes from `base.css`. Content that is truly brand colour (an email body, a social post) may use hex.
 - Copy that uses em-dashes or jargon: write plain sentences.
