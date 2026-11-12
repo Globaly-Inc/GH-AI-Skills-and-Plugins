@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/*CSS*/
+/* ---------- prototype page ---------- */
+.pt-top{position:sticky;top:0;z-index:20;display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:10px 0 12px;background:hsl(var(--background));border-bottom:1px solid hsl(var(--border));margin-bottom:18px}
+.pt-top h1{font:600 1.05rem "Space Grotesk";margin:0}
+.pt-top .where{color:hsl(var(--muted-fg));font-size:.82rem}
+.pt-seg{display:inline-flex;border:1px solid hsl(var(--border));border-radius:999px;padding:2px}
+.pt-seg button{border:0;background:none;padding:5px 12px;border-radius:999px;font:inherit;font-size:.8rem;color:hsl(var(--muted-fg));cursor:pointer}
+.pt-seg button[aria-pressed="true"]{background:hsl(var(--muted));color:hsl(var(--foreground))}
+.pt-btn{border:1px solid hsl(var(--border));background:hsl(var(--card));border-radius:8px;padding:5px 10px;font:inherit;font-size:.8rem;cursor:pointer;color:hsl(var(--foreground))}
+.pt-btn:disabled{opacity:.4;cursor:default}
+.pt-stage{display:flex;justify-content:center;overflow:auto;padding-bottom:40px}
+.pt-stage [data-go]{cursor:pointer}
+body.pt-hs .pt-stage [data-go],.pt-stage.pt-flash [data-go]{outline:2px solid hsl(var(--primary));outline-offset:2px;border-radius:6px;background-image:linear-gradient(hsl(var(--primary)/.1),hsl(var(--primary)/.1))}
+.pt-flow{display:flex;gap:10px;align-items:center;padding:10px 14px;border:1px solid hsl(var(--primary)/.35);background:hsl(var(--primary)/.06);border-radius:10px;margin-bottom:14px;font-size:.88rem}
+.pt-toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:hsl(var(--foreground));color:hsl(var(--background));padding:10px 16px;border-radius:10px;font-size:.85rem;opacity:0;transition:opacity .2s;pointer-events:none;z-index:50}
+.pt-toast.on{opacity:1}
+nav.toc a.on{background:hsl(var(--primary)/.1);color:hsl(var(--foreground))}
+nav.toc .cnt{float:right;color:hsl(var(--muted-fg));font-size:.72rem}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc" id="toc"></nav>
+<main class="doc">
+  <div class="pagenav" id="pn"></div>
+  <div class="pt-top">
+    <button class="pt-btn" id="back" title="Back (Backspace)">← Back</button>
+    <div><h1 id="ttl"></h1><div class="where" id="where"></div></div>
+    <span class="sp" style="flex:1"></span>
+    <div class="pt-seg" role="group" aria-label="Device"><button id="vd" aria-pressed="true">Desktop</button><button id="vp" aria-pressed="false">Phone</button></div>
+    <button class="pt-btn" id="hs" title="Show hotspots (H)">Hotspots</button>
+    <a class="pt-btn" id="spec" href="index.html">Spec ↗</a>
+    <button class="pt-btn" onclick="const r=document.documentElement;r.dataset.theme=r.dataset.theme==='dark'?'light':'dark'">Light / dark</button>
+  </div>
+  <div id="flowbar"></div>
+  <div class="pt-stage" id="stage"></div>
+</main>
+</div>
+<div class="pt-toast" id="toast"></div>
+<script>
+/*RAIL*/
+/*SHELL*/
+/*PAGES*/
+/*DATA*/
+/* Clickable prototype: every element with data-go (shell.js go('id')) navigates.
+   go('id') -> screen or flow step X[id]; go('back') -> history; go('!Label') -> not drawn, shows a toast. */
+(()=>{
+const XS=(typeof X!=='undefined')?X:{};
+const FL=(typeof F!=='undefined')?F:[];
+const byId=id=>S.find(s=>s.id===id);
+const exists=id=>!!(id&&(byId(id)||XS[id]));
+const htmlFor=(id,view)=>{
+ const s=byId(id);
+ if(view==='phone'&&M[id]&&M[id].html)return M[id].html;
+ if(s)return s.html;
+ return XS[id]||'';
+};
+/* App-shell menus wire themselves: a rail or submenu item (data-nav="Settings › Domains") opens the
+   first screen whose `where` is that path or starts with it; nothing drawn there -> a toast. */
+const navTarget=nav=>{const k=nav.toLowerCase();const hit=S.find(s=>s.where.toLowerCase()===k)||S.find(s=>s.where.toLowerCase().startsWith(k+' ›'));return hit?hit.id:'!'+nav;};
+const wire=root=>{root.querySelectorAll('[data-nav]:not([data-go])').forEach(e=>{e.dataset.go=navTarget(e.dataset.nav);});return root;};
+const st={id:null,view:'desktop',hist:[],flow:null,step:0};
+const $=id=>document.getElementById(id);
+function toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),1800);}
+function setHash(){const p=[`s=${st.id}`];if(st.view==='phone')p.push('v=phone');if(st.flow)p.push(`f=${st.flow}`,`n=${st.step}`);history.replaceState(null,'','#'+p.join('&'));}
+function render(){
+ const s=byId(st.id);
+ $('ttl').textContent=s?`${s.id.toUpperCase()} · ${s.title}`:(st.id||'');
+ $('where').textContent=s?s.where:'Flow step';
+ $('spec').href=s?`index.html#${s.id}`:'flows.html';
+ $('back').disabled=!st.hist.length;
+ const noPhone=st.view==='phone'&&!(M[st.id]&&M[st.id].html);
+ $('stage').innerHTML=noPhone?`<div class="mmiss"><b>No phone view.</b> ${(M[st.id]||{}).why||''}</div>${htmlFor(st.id,'desktop')}`:htmlFor(st.id,st.view);
+ wire($('stage'));
+ $('vd').setAttribute('aria-pressed',String(st.view==='desktop'));$('vp').setAttribute('aria-pressed',String(st.view==='phone'));
+ document.querySelectorAll('#toc a[data-id]').forEach(a=>a.classList.toggle('on',a.dataset.id===st.id));
+ renderFlowBar();setHash();scrollTo(0,0);
+}
+function open(id,push=true){
+ if(!exists(id)){toast(`No screen "${id}" in this prototype`);return;}
+ if(push&&st.id)st.hist.push(st.id);
+ st.id=id;render();
+}
+function renderFlowBar(){
+ const f=FL.find(x=>x[1]===st.flow);
+ if(!f){$('flowbar').innerHTML='';return;}
+ const steps=f[5],cur=steps[st.step]||[];
+ $('flowbar').innerHTML=`<div class="pt-flow"><b>${f[1].toUpperCase()} · ${f[2]}</b><span class="muted">Step ${st.step+1} of ${steps.length}: ${cur[1]||''}</span><span style="flex:1"></span>
+  <button class="pt-btn" ${st.step?'':'disabled'} onclick="PT.flowStep(-1)">Prev</button><button class="pt-btn" ${st.step<steps.length-1?'':'disabled'} onclick="PT.flowStep(1)">Next step</button><button class="pt-btn" onclick="PT.exitFlow()">Exit flow</button></div>`;
+}
+function playFlow(fid){const f=FL.find(x=>x[1]===fid);if(!f)return;st.flow=fid;st.step=0;open(f[5][0][0]);}
+function flowStep(d){const f=FL.find(x=>x[1]===st.flow);st.step=Math.max(0,Math.min(f[5].length-1,st.step+d));open(f[5][st.step][0]);}
+$('stage').addEventListener('click',e=>{
+ const t=e.target.closest('[data-go]');
+ if(!t){const s=$('stage');s.classList.add('pt-flash');setTimeout(()=>s.classList.remove('pt-flash'),500);return;}
+ e.preventDefault();
+ const g=t.dataset.go;
+ if(g==='back'){goBack();return;}
+ if(g.startsWith('!')){toast(`${g.slice(1)}: not part of this prototype`);return;}
+ open(g);
+});
+function goBack(){if(!st.hist.length)return;st.id=st.hist.pop();render();}
+$('back').onclick=goBack;
+$('vd').onclick=()=>{st.view='desktop';render();};
+$('vp').onclick=()=>{st.view='phone';render();};
+$('hs').onclick=()=>document.body.classList.toggle('pt-hs');
+document.addEventListener('keydown',e=>{if(e.target.closest('input,textarea'))return;if(e.key==='h'||e.key==='H')document.body.classList.toggle('pt-hs');if(e.key==='Backspace'){e.preventDefault();goBack();}});
+
+/* Sidebar: screens by group + flows to play. */
+let g='',th=`<div style="font:600 14px Space Grotesk;padding:0 8px 6px">Prototype</div><a href="plan.html">← Plan</a>`;
+const outs=id=>{const d=document.createElement('div');d.innerHTML=htmlFor(id,'desktop')+((M[id]&&M[id].html)||'');wire(d);return [...d.querySelectorAll('[data-go]')].map(e=>e.dataset.go).filter(t=>!t.startsWith('!')&&t!==id);};
+S.forEach(s=>{if(s.g!==g){g=s.g;th+=`<div class="g">${g}</div>`;}th+=`<a href="#s=${s.id}" data-id="${s.id}">${s.id.toUpperCase()} · ${s.title}<span class="cnt">${outs(s.id).length}</span></a>`;});
+if(FL.length){th+=`<div class="g">Play a flow</div>`+FL.map(f=>`<a href="#s=${f[5][0][0]}&f=${f[1]}&n=0" onclick="PT.playFlow('${f[1]}');return false">▶ ${f[1].toUpperCase()} · ${f[2]}</a>`).join('');}
+$('toc').innerHTML=th;
+$('toc').addEventListener('click',e=>{const a=e.target.closest('a[data-id]');if(!a)return;e.preventDefault();open(a.dataset.id);});
+$('pn').innerHTML=navHtml('prototype.html');
+document.title=`${DOC.brand}: prototype`;
+
+/* Link audit for build.py --check: broken targets fail; dead ends fail unless notes.End says why. */
+let broken=[],dead=[],unlinked=0;
+S.forEach(s=>{
+ const o=outs(s.id);
+ o.forEach(t=>{if(t!=='back'&&!t.startsWith('!')&&!exists(t))broken.push(`${s.id}->${t}`);});
+ if(!o.length&&!(s.notes&&s.notes.End))dead.push(s.id);
+ const d=document.createElement('div');d.innerHTML=s.html;unlinked+=[...d.querySelectorAll('.btn,button,a')].filter(b=>!b.closest('[data-go]')).length;
+});
+Object.entries(XS).forEach(([k,h])=>{const d=document.createElement('div');d.innerHTML=h;[...d.querySelectorAll('[data-go]')].forEach(e=>{const t=e.dataset.go;if(t!=='back'&&!t.startsWith('!')&&!exists(t))broken.push(`${k}->${t}`);});});
+document.body.setAttribute('data-broken-links',broken.join(' '));
+document.body.setAttribute('data-dead-ends',dead.join(' '));
+document.body.setAttribute('data-unlinked',String(unlinked));
+
+const h=Object.fromEntries(location.hash.slice(1).split('&').filter(Boolean).map(p=>p.split('=')));
+st.view=h.v==='phone'?'phone':'desktop';
+if(h.f&&FL.find(f=>f[1]===h.f)){st.flow=h.f;st.step=+h.n||0;}
+st.id=exists(h.s)?h.s:(S[0]&&S[0].id);
+render();
+document.body.setAttribute('data-rendered',String($('stage').innerHTML.trim()?S.length:0));
+document.body.setAttribute('data-h',String(document.documentElement.scrollHeight));
+window.PT={flowStep,playFlow,exitFlow:()=>{st.flow=null;render();},open};
+})();
+</script>
+</body>
+</html>

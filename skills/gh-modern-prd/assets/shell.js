@@ -83,12 +83,12 @@ const MKT=[['chart','Overview'],['send','Campaigns'],['share','Social','NEW'],['
 const SET=[['building','Organization'],['shield','Users & Roles'],['globe','Domains'],['share','Channels','NEW'],['zap','Credits','NEW'],['cal','Leave'],['flow','Workflows'],['users','Hiring'],['grid','Projects'],['users','CRM'],['inbox','Inbox'],['phone','Telephony'],['spark','AI'],['card','Billing']];
 const EVT=[];
 function railHtml(active){
-  const r=(l)=>l.map(([k,n])=>`<div class="ri ${k===active?'on':''}"><img alt="" src="${RAIL[k]||''}">${n}</div>`).join('');
+  const r=(l)=>l.map(([k,n])=>`<div class="ri ${k===active?'on':''}" data-nav="${n}"><img alt="" src="${RAIL[k]||''}">${n}</div>`).join('');
   return `<div class="rail"><div class="grp1">${r(RAILMODS)}</div><div class="grp2">${r(RAILBOT)}</div></div>`;
 }
 function subHtml(label,items,on,{proj=false,wallet=false}={}){
   if(!items.length) return '';
-  return `<div class="sub"><div class="lbl">${label}</div>${proj?`<div class="projsw"><span class="dotp"></span>All projects<span class="sp"></span>${ic('chev')}</div>`:''}<nav>${items.map(([i,n,nw])=>`<div class="si ${n===on?'on':''}">${ic(i)}${n}${nw?`<span class="nw">${nw}</span>`:''}</div>`).join('')}</nav>${wallet?`<div class="wallets"><div class="muted" style="margin-bottom:4px">Credits</div><div class="r"><span>${ic('mail','style="width:13px;height:13px"')} Email</span><b>41,250</b></div><div class="r"><span>${ic('wa','style="width:13px;height:13px"')} WhatsApp</span><b>3,200</b></div><div class="r"><span>${ic('sms','style="width:13px;height:13px"')} SMS</span><b class="dn">180</b></div><div style="margin-top:6px"><span class="btn sm">${ic('plus')}Top up</span></div></div>`:''}</div>`;
+  return `<div class="sub"><div class="lbl">${label}</div>${proj?`<div class="projsw"><span class="dotp"></span>All projects<span class="sp"></span>${ic('chev')}</div>`:''}<nav>${items.map(([i,n,nw])=>`<div class="si ${n===on?'on':''}" data-nav="${label} › ${n}">${ic(i)}${n}${nw?`<span class="nw">${nw}</span>`:''}</div>`).join('')}</nav>${wallet?`<div class="wallets"><div class="muted" style="margin-bottom:4px">Credits</div><div class="r"><span>${ic('mail','style="width:13px;height:13px"')} Email</span><b>41,250</b></div><div class="r"><span>${ic('wa','style="width:13px;height:13px"')} WhatsApp</span><b>3,200</b></div><div class="r"><span>${ic('sms','style="width:13px;height:13px"')} SMS</span><b class="dn">180</b></div><div style="margin-top:6px"><span class="btn sm">${ic('plus')}Top up</span></div></div>`:''}</div>`;
 }
 
 /* Real submenus (apps/web/src/components/layout/sidebarRegistry.ts, origin/main 2026-10-23). Item: [icon, label, badge?]. */
@@ -120,6 +120,11 @@ const kpi=(l,v,d='')=>`<div class="card kpi"><div class="l">${l}</div><div class
 const AIBTN=`<span class="btn ai">${ic('spark')}AI</span>`;
 const browser=(url,inner)=>`<div class="frame"><div class="scroll"><div class="screen" style="height:720px"><div class="browserbar"><span class="dot mu" style="margin:0"></span><span class="dot mu" style="margin:0"></span><span class="dot mu" style="margin:0"></span><div class="u">🔒 ${url}</div></div><div style="flex:1;background:#f4f2ee;overflow:hidden;padding:28px">${inner}</div></div></div></div>`;
 const setApp=(on,body,overlay='')=>app({mod:'settings',label:'Settings',items:SET,on,proj:false,wallet:false,body,overlay});
+/* Prototype links: put ${go('id')} inside any clickable element's opening tag, e.g. `<span class="btn p"${go('s2')}>Connect</span>`.
+   go('id') opens a screen (or a flows.js X step); go('back') goes back; go('!Export CSV') marks a control that leads somewhere not drawn (shows a toast). */
+const go=id=>` data-go="${id}"`;
+/* hot(left, top, width, height, id): a clickable region over a screenshot-based screen (position is in screen px). */
+const hot=(l,t,w,h,id)=>`<a class="hot" style="left:${l}px;top:${t}px;width:${w}px;height:${h}px"${go(id)} aria-label="${id}"></a>`;
 const S=[];const add=(g,id,title,where,st,html,notes)=>S.push({g,id,title,where,st,html,notes});
 
 

@@ -6,7 +6,7 @@ description: Use when the user asks for a PRD, product plan, feature plan or pro
 # GH Modern PRD
 
 ## Overview
-One local bundle of HTML pages, generated from four data files, so the founder can read the audit, market scan and decisions, check every screen and flow, and see live build status in one place. Pages render on the **real GlobalyOS shell** (index.css tokens, 3D rail icons, 64px header, 200px submenu), never a generic wireframe.
+One local bundle of HTML pages, including a clickable prototype,, generated from four data files, so the founder can read the audit, market scan and decisions, check every screen and flow, and see live build status in one place. Pages render on the **real GlobalyOS shell** (index.css tokens, 3D rail icons, 64px header, 200px submenu), never a generic wireframe.
 
 | Page | Built from | Shows |
 |---|---|---|
@@ -14,6 +14,7 @@ One local bundle of HTML pages, generated from four data files, so the founder c
 | `index.html` | `screens.js` | every screen full-size, tagged NEW / CHANGED |
 | `flows.html` | `flows.js` | each journey as scaled steps; click to zoom |
 | `options.html` | `options.js` | design alternatives for one screen + comparison |
+| `prototype.html` | `screens.js` (+ `flows.js`) | one screen at a time; every button, tab, row and menu item is clickable; Back, desktop/phone switch, hotspots (H), play any flow step by step |
 
 ## Workflow
 1. **Audit what already exists, before any screen.** For each part of the feature, find whether the app already does it (pages, menus, filters and saved views, settings, tables, APIs, background jobs). Write an "Already in the app" table: part · exists today? · where · extend or new. A new page or builder needs a reason why the existing one can't carry it.
@@ -31,6 +32,8 @@ One local bundle of HTML pages, generated from four data files, so the founder c
    - **NEW screen:** build it only from blocks the app already has (the reuse table in `apps/web/CLAUDE.md` plus the shared blocks in the root `CLAUDE.md`: `PageHeader`, `DataTable`, `ColumnPicker`, `BulkActionBar`, `EmptyState`, `ListSkeleton`, `ConfirmDialog`, `Sheet`, `Tabs`). If the screen needs something no component gives, say so in its notes as a new component.
    - When the dev server or prod is reachable, screenshot the live page and compare it with the mockup. Never open Events scanner or camera pages in Playwright (it streams the real webcam).
    - **Draw every screen on mobile too.** Each `add(...)` is followed by `mob(id, mobile(body, opts))`: the same screen at 390px, rendered beside the desktop one. Copy the real phone behaviour: app screens lose the top bar, rail and submenu and get `MobileBottomNav` (`mobile(body,{on:'CRM'})`); public and full-screen pages use `{nav:false}`; tables become cards or a list, side panels move below or into a sheet, multi-column forms stack, wide grids wrap to 2 columns. A screen that has no phone version says why: `mob(id, null, 'Desktop only: …')`. `--check` fails while any screen has neither.
+   - **Connect every screen (the prototype).** Every control you draw does what it would do in the product. Put `${go('<screenId>')}` in the opening tag of each button, tab, row, card, link and menu item that leads to another drawn screen or flow step (`X.<id>`); `go('back')` for Cancel/Close/back arrows; `go('!Export CSV')` for a control that leads somewhere not drawn (the prototype shows a toast instead of a dead click). Rail and submenu items wire themselves to the first screen whose `where` starts with that menu path, so give screens real `where` paths (`Settings › Domains`). Dialogs and sheets are their own screen or `X` step, opened by the button that opens them. Draw the in-between states that a click produces (open dialog, filled form, success toast) so a reviewer can click from the first screen to the last of every flow. A screen with no way out (a public confirmation page, a diagram) says why in `notes.End`. On screenshot-based screens, use `hot(left, top, width, height, id)` for clickable regions. Phone views (`mob`) carry the same links.
+   - **Real-build prototypes.** When the feature is built straight into a running product (theming, a marketing site), the prototype is that build: run it, export a local copy, put it in the bundle and link it from `DOC.links` (`['Live prototype','proto/index.html','primary']`); the screens then are screenshots of that build, with `hot()` regions linking them.
    - **Make every screen build-ready.** Its notes carry these keys, so the implementation plan can point each task at a screen (`index.html#<id>`) and the implementer reads `screens.js` as the spec:
      `Source` (files read today, files to change) · `Build` (components and hooks to reuse) · `Data` (endpoint, query-key factory, `usePagedList` or bootstrap) · `Perf` · `Security`. What goes in the last two is in REFERENCE.md, "Build-ready notes".
 6. **Write the data files** in `~/GlobalyHub/ai-outputs/plans/<YYYY-MM-DD>-<topic>/data/`. Copy the shape from `example/marketing/` (a complete, real bundle):
@@ -44,7 +47,9 @@ One local bundle of HTML pages, generated from four data files, so the founder c
    `python3 <skill>/scripts/build.py <data_dir> <bundle_dir> --repo <GlobalyOS-V2 checkout> --check --shot`
    `<skill>` is wherever this SKILL.md lives: `<checkout>/.claude/skills/gh-modern-prd` (in the repo), `~/.claude/skills/gh-modern-prd` (global copy) or the `globaly-skills` plugin folder.
    Fix until every page prints `ok`, then open `_shots/*.png` and fix what looks wrong; `--check` can't see layout bugs.
-8. **Hand over** the `file://` path to `plan.html`. Never publish an Artifact.
+   `--check` also fails on a `go()` link to a screen that doesn't exist and on a dead-end screen (no link out and no `notes.End`), and warns with the count of drawn buttons and links that have no `go()`. Get that warning to zero or explain the remainder.
+   Then click through `prototype.html` yourself: open the first screen of each flow, press **H** to see every hotspot, and use **Play a flow** to walk each flow end to end on desktop and phone.
+8. **Hand over** the `file://` paths to `plan.html` and `prototype.html`. Never publish an Artifact.
 9. **Status updates:** edit `STATUS` in `prd.js` and rebuild. The roll-up, progress bars and badges recompute.
    - Before writing, read the real state from GitHub and CI/CD. Use `gh pr view <n> --json state,baseRefName,mergeCommit,headRefOid`, `gh pr checks <n>`, and `gh run list` for the CI, CD (staging) and production-promotion runs. Never write a state from memory.
    - Move each code task through `review` (PR open) → `merged` (in main) → `staging` (CD deployed) → `live` (promoted to production). Use `done` only for work that isn't code, such as research, decisions and sign-offs.
@@ -66,6 +71,8 @@ Usual order: status, problem, existing (the audit table), market (the market sca
 - A screen drawn inside the app shell when the real route is full-screen.
 - A CHANGED screen drawn from memory instead of from its page component: labels, columns and tabs drift from the real app.
 - A screen with no `Build`/`Data` notes: it can't be handed to implementation.
+- A button, tab or row drawn with no `go()`: the reviewer clicks it and nothing happens. Link it, or mark it `go('!Label')`.
+- A flow that can't be clicked from its first step to its last in `prototype.html` because a dialog or success state was never drawn.
 - A screen with no mobile view, or a mobile view that is just the desktop squeezed: redraw the layout for 390px (stack, cards, bottom nav).
 - An apostrophe inside a single-quoted JS string: escape it (`\'`) or `--check` fails.
 - Raw hex or palette classes inside screen chrome: use the token classes from `base.css`. Content that is truly brand colour (an email body, a social post) may use hex.
