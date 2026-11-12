@@ -10,7 +10,7 @@ Usage:
   flows.js    optional  X (extra step screens) + F flows -> flows.html
   options.js  optional  opt(...) alternatives + OPT      -> options.html
 --repo   refresh the 3D rail icons + logo from <repo> origin/main instead of the bundled snapshot.
---check  render every page in headless Chrome and fail on a JS error or an empty page.
+--check  render every page in headless Chrome and fail on a JS error, an empty page, or a screen with no mobile view.
 --shot   also save a 1800px-wide full-page screenshot of each page to <out_dir>/_shots/<page>.png, tiled as <page>-N.png past 16000px (look at them:
          --check cannot see layout bugs).
 """
@@ -143,8 +143,11 @@ def check(paths):
         # stamp means the renderer died or the data produced nothing; page size alone can't tell (CSS+JS are big).
         m = re.search(r'data-rendered="(\d+)"', r.stdout)
         rendered = int(m.group(1)) if m else 0
-        fail = bool(errs) or rendered == 0
-        print(f"{'FAIL' if fail else 'ok  '} {os.path.basename(p)} rendered={rendered}" + (f" {errs[0][:160]}" if errs else ""))
+        mm = re.search(r'data-mobile-missing="(\d+)"', r.stdout)
+        missing = int(mm.group(1)) if mm else 0  # screens with no mob(id, …) phone view
+        fail = bool(errs) or rendered == 0 or missing > 0
+        note = f" {errs[0][:160]}" if errs else (f" {missing} screen(s) have no mobile view: add mob(id, html) or mob(id, null, 'why')" if missing else "")
+        print(f"{'FAIL' if fail else 'ok  '} {os.path.basename(p)} rendered={rendered}" + note)
         bad |= fail
     if bad:
         sys.exit(1)
