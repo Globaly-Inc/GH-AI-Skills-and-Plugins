@@ -16,6 +16,8 @@ All helpers live in `assets/shell.js`; all classes in `assets/base.css`. The dat
 | `mob(id, html, why?)` | The phone view of screen `id`, shown beside it on index.html. `html` = `mobile(...)`; pass `null` + `why` for a desktop-only screen. Required for every screen (`--check`). |
 | `mobile(body, {nav=true, on, head, h=760})` | A 390px phone frame. `nav` adds the app's MobileBottomNav (Home, CRM, My Tasks, Chat, Profile) with `on` active; set `nav:false` for public pages and full-screen routes. `head` is usually `mHead(title, actions, back)`. Body padding is 12px 16px. |
 | `mHead(title, actionsHtml, back)` | Mobile page header (the app hides PageHeader chrome on phones). |
+| `go(id)` | Prototype link: returns ` data-go="id"` for an element's opening tag. `id` = a screen id or a flows.js `X` key; `'back'` = previous screen; `'!Label'` = leads somewhere not drawn (toast). Rail and submenu items link themselves through `where`. |
+| `hot(left, top, w, h, id)` | A transparent clickable region (screen px) over a screenshot-based screen. |
 | `ic(name, attrs)` | Inline lucide-style icon. Names: see `const P` in shell.js. Add a path there if one is missing; don't substitute a wrong icon. |
 | `AIBTN` | The ✦ AI button. |
 
@@ -55,6 +57,9 @@ Tokens: `hsl(var(--background|foreground|card|primary|primary-fg|primary-light|m
 ## Delivery log section
 
 Once code ships, add a section `{id:'delivery', title:'Delivery log: GitHub and CI/CD', nav:'Delivery', …}` before `build`. It has one `table` with these columns: `PR` (linked) · `Change` · `Base` · `Review` · `Full suite (final commit)` · `State` (open / merged <sha> · CI · CD · prod). Below it, a `cards` block for migrations (numbers and order), the deploy path (how main reaches staging and production, and which flags stay dark in production) and any incidents during the build. Refresh it with every status update, using `gh pr view`, `gh pr checks` and `gh run list`.
+
+- **notes.End:** `'why'` for a screen with no way out (diagram, public confirmation). Without it a screen with no `go()` fails `--check`.
+- **prototype.html:** built from `screens.js` (+ `flows.js` for **Play a flow**). URL state `#s=<id>&v=phone&f=<flow>&n=<step>`, so a link can open any screen, view or flow step. Keys: **H** hotspots, **Backspace** back.
 
 ## Tagging
 

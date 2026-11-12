@@ -46,7 +46,7 @@ let missingMobile=0;
 S.forEach(s=>{
  if(s.g!==g){g=s.g;th+=`<div class="g">${g}</div>`;out.insertAdjacentHTML('beforeend',`<h2 style="font-size:1.4rem;margin-top:56px;padding-top:12px;border-top:1px solid hsl(var(--border))">${g}</h2>`);}
  th+=`<a href="#${s.id}">${s.id.toUpperCase()} · ${s.title}</a>`;
- out.insertAdjacentHTML('beforeend',`<section class="shot" id="${s.id}"><div class="shot-h"><span class="num">${s.id.toUpperCase()}</span><h3>${s.title}</h3><span class="st ${s.st==='NEW'?'new':'chg'}">${s.st}</span><span class="where">${s.where}</span></div>${s.html}<div class="mrow">${mobCell(s.id)}<div class="notes">${Object.entries(s.notes||{}).map(([k,v])=>`<div><b>${k}</b>${v}</div>`).join('')}</div></div></section>`);
+ out.insertAdjacentHTML('beforeend',`<section class="shot" id="${s.id}"><div class="shot-h"><span class="num">${s.id.toUpperCase()}</span><h3>${s.title}</h3><span class="st ${s.st==='NEW'?'new':'chg'}">${s.st}</span><span class="where">${s.where}</span><a class="where" style="margin-left:auto" href="prototype.html#s=${s.id}">Open in prototype ↗</a></div>${s.html}<div class="mrow">${mobCell(s.id)}<div class="notes">${Object.entries(s.notes||{}).map(([k,v])=>`<div><b>${k}</b>${v}</div>`).join('')}</div></div></section>`);
 });
 toc.innerHTML=th;
 document.body.setAttribute('data-mobile-missing',String(missingMobile));

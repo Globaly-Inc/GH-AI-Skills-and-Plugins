@@ -9,8 +9,10 @@ Usage:
   screens.js  optional  add(...) screen calls            -> index.html (and thumbnails in plan.html)
   flows.js    optional  X (extra step screens) + F flows -> flows.html
   options.js  optional  opt(...) alternatives + OPT      -> options.html
+  (screens.js also builds prototype.html: one screen at a time, every go('id') hotspot clickable)
 --repo   refresh the 3D rail icons + logo from <repo> origin/main instead of the bundled snapshot.
---check  render every page in headless Chrome and fail on a JS error, an empty page, or a screen with no mobile view.
+--check  render every page in headless Chrome and fail on a JS error, an empty page, a screen with no mobile view,
+         a go('id') link to a screen that doesn't exist, or a dead-end screen (no go() out, and no notes.End saying why).
 --shot   also save a 1800px-wide full-page screenshot of each page to <out_dir>/_shots/<page>.png, tiled as <page>-N.png past 16000px (look at them:
          --check cannot see layout bugs).
 """
@@ -23,6 +25,7 @@ PAGES = [  # (template, output, data file that enables it, nav label)
     ("index.html", "index.html", "screens.js", "Screens"),
     ("flows.html", "flows.html", "flows.js", "User flows"),
     ("options.html", "options.html", "options.js", "Options"),
+    ("prototype.html", "prototype.html", "screens.js", "Prototype"),
 ]
 
 
@@ -145,8 +148,17 @@ def check(paths):
         rendered = int(m.group(1)) if m else 0
         mm = re.search(r'data-mobile-missing="(\d+)"', r.stdout)
         missing = int(mm.group(1)) if mm else 0  # screens with no mob(id, …) phone view
-        fail = bool(errs) or rendered == 0 or missing > 0
+        broken = (re.search(r'data-broken-links="([^"]*)"', r.stdout) or [None, ""])[1].split()
+        dead = (re.search(r'data-dead-ends="([^"]*)"', r.stdout) or [None, ""])[1].split()
+        unlinked = int((re.search(r'data-unlinked="(\d+)"', r.stdout) or [None, "0"])[1])
+        fail = bool(errs) or rendered == 0 or missing > 0 or bool(broken) or bool(dead)
         note = f" {errs[0][:160]}" if errs else (f" {missing} screen(s) have no mobile view: add mob(id, html) or mob(id, null, 'why')" if missing else "")
+        if broken:
+            note += f" broken go() links: {' '.join(broken[:12])}"
+        if dead:
+            note += f" dead-end screens (add a go() out, or notes.End: 'why'): {' '.join(dead[:12])}"
+        if unlinked and not fail:
+            note += f" (warning: {unlinked} drawn buttons/links have no go(); link them or mark go('!Label'))"
         print(f"{'FAIL' if fail else 'ok  '} {os.path.basename(p)} rendered={rendered}" + note)
         bad |= fail
     if bad:
