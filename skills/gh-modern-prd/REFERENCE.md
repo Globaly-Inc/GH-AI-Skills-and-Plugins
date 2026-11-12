@@ -40,10 +40,21 @@ Tokens: `hsl(var(--background|foreground|card|primary|primary-fg|primary-light|m
 ## Data contracts
 
 - **DOC:** `brand`, `module` (rail id, used for the 3D icon), `status: [label, ok|warn|info|bad|ai]`, `date`, `title`, `lead`, `links: [[text, href, primary|ghost|'']]`, `decisions: [[bold, text]]`, `bet: [statement, footnote]`, and optionally `screensLead` and `footer`.
-- **STATUS:** `updated`, `phases: [{id, name, when, exit, tasks: [[text, state, note]]}]`. States: `todo` `doing` `review` `done` `live` `blocked`; put the PR number or the blocker in `note`.
+- **STATUS:** `updated`, `phases: [{id, name, when, exit, tasks: [[text, state, note]]}]`. States, in delivery order:
+  - `todo` (Not started) · `doing` (In progress) · `review` (In review: a PR is open)
+  - `done` (Done: finished work that is not code, e.g. research, a decision, an owner sign-off)
+  - `merged` (Merged: the PR is in main) · `staging` (On staging: CD deployed it) · `live` (Live: promoted to production)
+  - `blocked` (Blocked: put the blocker and who owns it in `note`, e.g. `owner: GitHub settings`)
+
+  `done`, `merged`, `staging` and `live` count as finished in the progress bars. An unknown state renders its own name in amber instead of breaking the page.
+- **Task notes for code tasks** carry the delivery facts, in this order: `PR #n` · base branch if not main · `review: N findings fixed` · `suite P pass / F fail at <sha>` (the full suite on the PR's final commit) · `merged <merge sha>` · `CI ✓` / `CD (staging) <state>` · `prod <date>`. Write what you checked, not what you expect; if a check was skipped or failed, say so.
 - **lanes:** `[id, title, steps[], aiIdx[], extIdx[]]`. `aiIdx`/`extIdx` are arrays of step indexes (dashed = AI proposes; grey = outside the product). `id` must match a flow id in `flows.js` (`'F7'` ↔ `'f7'`): boxes link to `flows.html#f7`.
 - **services:** `{title, tag, text}` or `{title, tag, list:[…]}`.
 - **flows.js:** each step id resolves to `X[id]` first, then to a screen id from `screens.js`. An unknown id throws "missing screen".
+
+## Delivery log section
+
+Once code ships, add a section `{id:'delivery', title:'Delivery log: GitHub and CI/CD', nav:'Delivery', …}` before `build`. It has one `table` with these columns: `PR` (linked) · `Change` · `Base` · `Review` · `Full suite (final commit)` · `State` (open / merged <sha> · CI · CD · prod). Below it, a `cards` block for migrations (numbers and order), the deploy path (how main reaches staging and production, and which flags stay dark in production) and any incidents during the build. Refresh it with every status update, using `gh pr view`, `gh pr checks` and `gh run list`.
 
 ## Tagging
 

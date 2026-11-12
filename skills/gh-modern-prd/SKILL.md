@@ -45,7 +45,13 @@ One local bundle of HTML pages, generated from four data files, so the founder c
    `<skill>` is wherever this SKILL.md lives: `<checkout>/.claude/skills/gh-modern-prd` (in the repo), `~/.claude/skills/gh-modern-prd` (global copy) or the `globaly-skills` plugin folder.
    Fix until every page prints `ok`, then open `_shots/*.png` and fix what looks wrong; `--check` can't see layout bugs.
 8. **Hand over** the `file://` path to `plan.html`. Never publish an Artifact.
-9. **Status updates:** edit `STATUS` in `prd.js` (task state + PR number in the note, `updated` date) and rebuild. The roll-up, progress bars and badges recompute.
+9. **Status updates:** edit `STATUS` in `prd.js` and rebuild. The roll-up, progress bars and badges recompute.
+   - Before writing, read the real state from GitHub and CI/CD. Use `gh pr view <n> --json state,baseRefName,mergeCommit,headRefOid`, `gh pr checks <n>`, and `gh run list` for the CI, CD (staging) and production-promotion runs. Never write a state from memory.
+   - Move each code task through `review` (PR open) → `merged` (in main) → `staging` (CD deployed) → `live` (promoted to production). Use `done` only for work that isn't code, such as research, decisions and sign-offs.
+   - Put the delivery facts in the task note, in the order REFERENCE.md gives: PR, review findings fixed, full-suite result on the final commit, merge commit, CI/CD state. Set `updated` to the date and time, plus what is happening now (e.g. "merging; staging deploys running").
+   - Owner actions (settings, keys, approvals, purchases) are `blocked` tasks with `owner: …` in the note, so they show as blockers instead of disappearing.
+   - Keep the Delivery log section current (REFERENCE.md, "Delivery log section"). Record failing checks that aren't code failures (e.g. a scanner out of quota, a runner network outage) as owner blockers or incidents, not as passes.
+   - Don't edit the skill inside `~/.claude/plugins/marketplaces/…`: the plugin auto-sync re-clones it and drops local commits. Work in a separate clone.
 
 ## SECTIONS block types
 Each section is `{id, title, nav?, intro?, blocks:[…]}`.
