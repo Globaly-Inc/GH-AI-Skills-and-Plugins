@@ -71,6 +71,7 @@ Usual order: status, problem, existing (the audit table), market (the market sca
 - A screen drawn inside the app shell when the real route is full-screen.
 - A CHANGED screen drawn from memory instead of from its page component: labels, columns and tabs drift from the real app.
 - A screen with no `Build`/`Data` notes: it can't be handed to implementation.
+- An `<a>` inside a screen: plan.html wraps every screen thumbnail in a link, and a nested `<a>` breaks the page. Draw links as `<span>` with `go()` (as `hot()` does).
 - A button, tab or row drawn with no `go()`: the reviewer clicks it and nothing happens. Link it, or mark it `go('!Label')`.
 - A flow that can't be clicked from its first step to its last in `prototype.html` because a dialog or success state was never drawn.
 - A screen with no mobile view, or a mobile view that is just the desktop squeezed: redraw the layout for 390px (stack, cards, bottom nav).

@@ -124,7 +124,8 @@ const setApp=(on,body,overlay='')=>app({mod:'settings',label:'Settings',items:SE
    go('id') opens a screen (or a flows.js X step); go('back') goes back; go('!Export CSV') marks a control that leads somewhere not drawn (shows a toast). */
 const go=id=>` data-go="${id}"`;
 /* hot(left, top, width, height, id): a clickable region over a screenshot-based screen (position is in screen px). */
-const hot=(l,t,w,h,id)=>`<a class="hot" style="left:${l}px;top:${t}px;width:${w}px;height:${h}px"${go(id)} aria-label="${id}"></a>`;
+// A span, not <a>: screens sit inside plan.html thumbnail links, and a nested <a> breaks the page.
+const hot=(l,t,w,h,id)=>`<span class="hot" role="link" style="left:${l}px;top:${t}px;width:${w}px;height:${h}px"${go(id)} aria-label="${id}"></span>`;
 const S=[];const add=(g,id,title,where,st,html,notes)=>S.push({g,id,title,where,st,html,notes});
 
 
