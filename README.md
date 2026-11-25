@@ -69,6 +69,7 @@ flowchart LR
 | 4 | `gh-design-direction` | Design | frontend design direction + component plan before components are built |
 | 5 | `gh-implementation-plan` | Engineering | step-by-step implementation plan gate before any code is written |
 | 6 | `gh-full-dev-implementation` | Engineering | implementing a feature or improving architecture end-to-end (React + TS + Supabase) |
+| 7 | `gh-code-review` | Engineering | read-only merge gate: reviews the full feature branch against the plan, runs tsc / vitest / secret / RLS gates, emits file:line findings + Approve / Block verdict |
 | — | `gh-parallel-subagents` | Engineering | fan independent tasks out to parallel subagents on separate git worktrees |
 | — | `gh-repo-docs` | Docs | generate a shareable team reference guide for any GitHub repo from its URL |
 

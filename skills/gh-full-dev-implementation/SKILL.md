@@ -141,7 +141,7 @@ After the final `tsc` passes, diff your own work:
 ```
 git diff <base-branch>...HEAD
 ```
-Review the diff exactly as `eng-code-review` would. Emit findings as:
+Review the diff exactly as `gh-code-review` would. Emit findings as:
 ```
 [SEVERITY] file:line — issue → suggested fix
 ```

@@ -35,6 +35,8 @@ gh-design-direction       ← produces Figma / UI direction
 ► gh-implementation-plan  ← YOU ARE HERE (plan gate)
       ↓
 gh-full-dev-implementation ← code is written here
+      ↓
+gh-code-review            ← merge gate
 ```
 
 ---
