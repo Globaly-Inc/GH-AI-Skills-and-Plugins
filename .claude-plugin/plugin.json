@@ -1,7 +1,7 @@
 {
   "name": "globaly-skills",
-  "version": "0.9.0",
-  "description": "All Globaly company skills in one plugin — brainstorming, product deep-research, PRD generation, architecture docs, implementation planning, parallel subagent dispatch, the Globaly design system, and full-dev implementation. Auto-syncs on each session.",
+  "version": "0.10.0",
+  "description": "All Globaly company skills in one plugin — brainstorming, product deep-research, PRD generation, architecture docs, implementation planning, parallel subagent dispatch, the Globaly design system, full-dev implementation, and the code-review merge gate. Auto-syncs on each session.",
   "author": {
     "name": "Globaly Inc",
     "email": "amit@globalyhub.com",
